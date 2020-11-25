@@ -1,0 +1,34 @@
+[character]
+symbol = "➜"
+use_symbol_for_status = true
+
+[time]
+disabled = false
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+
+[[battery.display]]
+threshold = 25
+style = "bold red"
+
+[memory_usage]
+disabled = false
+threshold = 80
+show_swap = false
+
+[directory]
+truncation_length = 3
+#suffix = "▶"
+#style = "white bold bg:#00819e"
+style = "bold #00819e"
+fish_style_pwd_dir_length = 1
+
+#[git_branch]
+#style = "bg:purple bold"
+#suffix = "▶"
+
+#[git_status]
+#style = "bg:purple bold "
+#suffix = "\ue0b0"
