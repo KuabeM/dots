@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
-#export RUST_SRC_PATH=/usr/local/src/rust/src
 
 # haskell
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
@@ -8,27 +7,26 @@ export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
 # Path to your oh-my-zsh installation.
 export ZSH="/home/korbinian/.oh-my-zsh"
 
-
 # https://github.com/caiogondim/bullet-train.zsh
-BULLETTRAIN_STATUS_EXIT_SHOW=true
-BULLETTRAIN_CONTEXT_DEFAULT_USER="korbinian"
-BULLETTRAIN_IS_SSH_CLIENT=true
-BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-BULLETTRAIN_GIT_BG=30 #147
-BULLETTRAIN_TIME_BG=238 #67 #31 #22
-BULLETTRAIN_TIME_FG=252
-BULLETTRAIN_GIT_DIRTY=""
-BULLETTRAIN_GIT_UNTRACKED="%F{black} ●%F{black}"
-BULLETTRAIN_GIT_MODIFIED="%F{blue} 🟆%F{black}"
-BULLETTRAIN_DIR_EXTENDED=2
-BULLETTRAIN_PROMPT_CHAR="%F{green}🠶%F{black}"
+# BULLETTRAIN_STATUS_EXIT_SHOW=true
+# BULLETTRAIN_CONTEXT_DEFAULT_USER="korbinian"
+# BULLETTRAIN_IS_SSH_CLIENT=true
+# BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+# BULLETTRAIN_GIT_BG=30 #147
+# BULLETTRAIN_TIME_BG=238 #67 #31 #22
+# BULLETTRAIN_TIME_FG=252
+# BULLETTRAIN_GIT_DIRTY=""
+# BULLETTRAIN_GIT_UNTRACKED="%F{black} ●%F{black}"
+# BULLETTRAIN_GIT_MODIFIED="%F{blue} 🟆%F{black}"
+# BULLETTRAIN_DIR_EXTENDED=2
+# BULLETTRAIN_PROMPT_CHAR="%F{green}🠶%F{black}"
 
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bullet-train"
+# ZSH_THEME="bullet-train"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
