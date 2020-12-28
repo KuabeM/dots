@@ -1,11 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$PATH:$HOME/.cargo/bin:$HOME/.local/bin
+export PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.cabal/bin"
+export GTEST_COLOR=1
 
-# haskell
-[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+export PATH="$PATH:$HOME/.config/sway/scripts"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/korbinian/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+
+# CMake use all cores
+CMAKE_BUILD_PARALLEL_LEVEL=8
 
 # https://github.com/caiogondim/bullet-train.zsh
 # BULLETTRAIN_STATUS_EXIT_SHOW=true
@@ -25,7 +28,7 @@ export ZSH="/home/korbinian/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="bullet-train"
 
 # Set list of themes to pick from when loading at random
@@ -44,8 +47,14 @@ export ZSH="/home/korbinian/.oh-my-zsh"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -58,9 +67,6 @@ export ZSH="/home/korbinian/.oh-my-zsh"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
-
-# Disable verfification of insecure directories
-ZSH_DISABLE_COMPFIX="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -84,8 +90,8 @@ ZSH_DISABLE_COMPFIX="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git
-	colored-man-pages
+        git
+        colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -109,33 +115,21 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-## CUSTOM
-#DEFAULT_USER=korbinian
-
-# set ll aliases to exa
-alias l="exa -lag --git"
+# aliases
 alias ll="exa -l --git"
-# git log
-alias gll="git log --graph --pretty='%Cred%h%Creset - %Cgreen(%ad) %C(bold blue)<%an>%Creset%C(auto)%d%Creset %s' --date=iso"
-# cmake
-alias cm="cd build && cmake .. && cmake --build .; cd .."
-alias cb="cd build && cmake --build .; cd .."
-alias ct="cd build && cmake --build . && ctest --output-on-failure; cd .."
+alias l="exa -lag --git"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export CMAKE_BUILD_PARALLEL_LEVEL=4
-# mics
+# use neovim
 alias vim="nvim"
 alias batp="bat --plain"
 alias ec="emacs"
@@ -143,8 +137,7 @@ alias ec="emacs"
 # sccache
 export RUSTC_WRAPPER=sccache
 
-#nvm
-source /usr/share/nvm/init-nvm.sh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # starship prompt
 eval "$(starship init zsh)"
