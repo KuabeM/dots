@@ -1,0 +1,6 @@
+#!/bin/sh
+google-chrome-stable \
+	--password-storage=kwallet \
+	--enable-webrtc-pipewire-capturer \
+	--enable-features=UseOzonePlatform \
+	--ozone-platform=wayland
