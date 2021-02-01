@@ -59,6 +59,7 @@ This function should only modify configuration layer settings."
      rust
      spell-checking
      syntax-checking
+     tabs
      treemacs
      version-control
      yaml)
