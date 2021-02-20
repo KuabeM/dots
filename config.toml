@@ -1,0 +1,27 @@
+
+# Fallback icon
+default_icon = "•"
+
+# Format string for determining the new workspace name. Placeholders are
+# %n  number of the workspace
+# %i  icon from the map below
+format_str = "%n %i "
+
+# Separator between workspace icons
+icon_separator = " "
+
+[icons]
+"firefox" = ""
+"chrome" = ""
+"alacritty" = ""
+"emacs" = ""
+"thunar" = ""
+"code" = ""
+"spotify" = ""
+"tm" = ""
+"pm" = ""
+"libreoffice" = ""
+"evince" = ""
+"signal" = ""
+"teams" = ""
+"thunderbird" = ""
