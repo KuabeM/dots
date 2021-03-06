@@ -143,3 +143,6 @@ alias colorpick='grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0
 
 # starship prompt
 eval "$(starship init zsh)"
+
+# ghcup & Haskell
+[ -f "/home/korbinian/.ghcup/env" ] && source "/home/korbinian/.ghcup/env" # ghcup-env
