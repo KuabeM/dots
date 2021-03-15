@@ -41,7 +41,8 @@ This function should only modify configuration layer settings."
      auto-completion
      better-defaults
      colors
-     c-c++
+     (c-c++ :variables c-c++-backend 'lsp-clangd)
+     (cmake :variables cmake-backend 'lsp)
      emacs-lisp
      evil-commentary
      git
