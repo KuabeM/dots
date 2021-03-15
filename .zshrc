@@ -136,6 +136,8 @@ alias ec="emacs"
 
 # sccache
 export RUSTC_WRAPPER=sccache
+# color picker with grim
+alias colorpick='grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0,0}]" txt:-'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
