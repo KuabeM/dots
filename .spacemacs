@@ -46,7 +46,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      evil-commentary
      git
-     haskell
+     (haskell :variables haskell-completion-backend 'lsp)
      helm
      (javascript :variables
                  javascript-fmt-tool 'prettier
