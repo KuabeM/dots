@@ -52,8 +52,9 @@ This function should only modify configuration layer settings."
                  javascript-fmt-tool 'prettier
                  javascript-backend 'lsp)
      (lsp :variables lsp-rust-server 'rust-analyzer)
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     markdown
      multiple-cursors
+     neotree
      org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -75,7 +76,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(all-the-icons)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -233,7 +234,9 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   ;; dotspacemacs-mode-line-theme '(vim-powerline :separator wave)
+   dotspacemacs-mode-line-theme '(doom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -410,7 +413,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis 't
+   dotspacemacs-smart-closing-parenthesis nil
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -454,7 +457,7 @@ It should only modify the values of Spacemacs settings."
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%I@%t"
+   dotspacemacs-frame-title-format "%I@%S"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
@@ -528,6 +531,7 @@ before packages are loaded."
   )
   (add-hook 'text-mode-hook 'spacemacs/toggle-auto-fill-mode-on)
   (add-hook 'text-mode-hook 'spacemacs/toggle-fill-column-indicator-on)
+  (use-package all-the-icons)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
