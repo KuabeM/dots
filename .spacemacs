@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
                  javascript-fmt-tool 'prettier
                  javascript-backend 'lsp)
      (lsp :variables lsp-rust-server 'rust-analyzer)
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      multiple-cursors
      neotree
      org
@@ -457,7 +457,7 @@ It should only modify the values of Spacemacs settings."
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-frame-title-format "%I@%t"
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
