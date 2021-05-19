@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
      (javascript :variables
                  javascript-fmt-tool 'prettier
                  javascript-backend 'lsp)
+     (latex :variables latex-backend 'lsp)
      (lsp :variables lsp-rust-server 'rust-analyzer)
      (markdown :variables markdown-live-preview-engine 'vmd)
      multiple-cursors
