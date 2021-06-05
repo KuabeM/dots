@@ -119,9 +119,9 @@
         "max-length": 30,
         "interval": 1,
         "format-wifi": "  ({signalStrength}%) {essid}",
-        "format-ethernet": "🖧  {ipaddr}/{cidr}",
+        "format-ethernet": "  {ipaddr}/{cidr}",
         "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected ⚠",
+        "format-disconnected": "✕ Disconnected",
         "format": "🔒 {ifname}",
         "format-alt": "Down: {bandwidthDownBits}, Up: {bandwidthUpBits}",
         "tooltip-format": "{ifname} | Down: {bandwidthDownBits}, Up: {bandwidthUpBits}"
