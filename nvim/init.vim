@@ -55,7 +55,7 @@ set colorcolumn=100         " Show colorcolumn at 100
 set textwidth=100           " auto-wrap text
 
 set list                    " show tabs and whitespace
-set listchars=tab:»\ ,trail:␣,extends:↲,precedes:↳,nbsp:·
+set listchars=tab:»\ ,trail:␣,extends:↲,precedes:↳,nbsp:·,lead:·,conceal:·
 
 set splitright              " Create vertical splits on the right
 
@@ -99,11 +99,18 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#dockerls for a list of LSPs
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({
     capabilities=capabilities,
     on_attach=on_attach
 })
+-- Enable clangd
+require'lspconfig'.clangd.setup{}
+-- Enable cmake: pip install cmake-language-server
+require'lspconfig'.cmake.setup{}
+-- Enable docker: npm install -g dockerfile-language-server-nodejs
+require'lspconfig'.dockerls.setup{}
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
