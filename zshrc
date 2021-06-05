@@ -3,8 +3,6 @@ export PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.cabal/bin"
 
 export PATH="$PATH:$HOME/.config/sway/scripts"
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-export $(gnome-keyring-daemon --daemonize --start)
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -122,13 +120,16 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
+# Gnome ssh agent integration
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export $(gnome-keyring-daemon --daemonize --start)
 
 # MC7 configuration
 export E2_CONFIG=$HOME/repos/mc7/e2.conf
 
 # use clang instead of gcc
-export CC=clang-11
-export CXX=clang++-11
+export CC=clang
+export CXX=clang++
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
