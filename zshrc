@@ -7,7 +7,7 @@ export PATH="$PATH:$HOME/.config/sway/scripts"
 export ZSH="$HOME/.oh-my-zsh"
 
 # CMake use all cores
-CMAKE_BUILD_PARALLEL_LEVEL=4
+CMAKE_BUILD_PARALLEL_LEVEL=8
 export GTEST_COLOR=1
 
 # https://github.com/caiogondim/bullet-train.zsh
@@ -120,22 +120,38 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-# aliases
-alias ll="exa -l --git"
-alias l="exa -lag --git"
+# Gnome ssh agent integration
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export $(gnome-keyring-daemon --daemonize --start)
+
+# MC7 configuration
+export E2_CONFIG=$HOME/repos/mc7/e2.conf
+
+# use clang instead of gcc
+export CC=clang
+export CXX=clang++
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # Nodejs version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# use neovim
+# aliases
+alias ll="exa -l --git"
+alias l="exa -lag --git"
 alias vim="nvim"
-alias vi="nvim"
 alias batp="bat --plain"
+alias tt="alacritty&!"
+alias spotify="flatpak run com.spotify.Client"
+
+alias reboot="echo 'Are you sure?' If so, run /sbin/reboot" 
+alias shutdown="echo 'Are you sure?' If so, run /sbin/shutdown"
 
 # sccache
-export RUSTC_WRAPPER=sccache
+#export RUSTC_WRAPPER=sccache
+
 # color picker with grim
 alias colorpick='grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0,0}]" txt:-'
 
@@ -143,6 +159,3 @@ alias colorpick='grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0
 
 # starship prompt
 eval "$(starship init zsh)"
-
-# ghcup & Haskell
-[ -f "/home/korbinian/.ghcup/env" ] && source "/home/korbinian/.ghcup/env" # ghcup-env

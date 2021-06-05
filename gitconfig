@@ -1,7 +1,8 @@
 [user]
 	name = Korbinian Maier
-	email = korbinian.maier@posteo.de
+	email = korbinian.maier@franka.de
 [core]
+	excludesfile = /home/maie_ko/.gitignore_global
 	editor = nvim
 	autocrlf = input
 [push]
