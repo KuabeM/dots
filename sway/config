@@ -23,8 +23,8 @@ set $term alacritty
 set $menu $HOME/.cargo/bin/yofi
 
 # Include proper settings
-include thinkpad.config
-#include dell.config
+#include thinkpad.config
+include dell.config
 
 # Disable screen if lid is closed, enable if opened
 set $laptop eDP-1
