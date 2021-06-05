@@ -3,7 +3,14 @@
 	email = korbinian.maier@posteo.de
 [core]
 	editor = nvim
+	autocrlf = input
+[push]
+	default = simple
 [pull]
 	rebase = true
 [sequence]
 	editor = interactive-rebase-tool
+[submodule]
+	recurse = false
+[color]
+	ui = auto

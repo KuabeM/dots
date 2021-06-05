@@ -414,7 +414,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis nil
+   dotspacemacs-smart-closing-parenthesis 't
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -527,8 +527,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (setq-default fill-column 100)
   (setq-default
-   fill-column 100
+     org-latex-listings 'minted
+     org-latex-packages-alist '(("" "minted"))
   )
   (add-hook 'text-mode-hook 'spacemacs/toggle-auto-fill-mode-on)
   (add-hook 'text-mode-hook 'spacemacs/toggle-fill-column-indicator-on)
