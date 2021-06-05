@@ -1,0 +1,9 @@
+[user]
+	name = Korbinian Maier
+	email = korbinian.maier@posteo.de
+[core]
+	editor = nvim
+[pull]
+	rebase = true
+[sequence]
+	editor = interactive-rebase-tool
