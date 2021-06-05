@@ -121,11 +121,11 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 # Gnome ssh agent integration
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-export $(gnome-keyring-daemon --daemonize --start)
+#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+#export $(gnome-keyring-daemon --daemonize --start)
 
 # MC7 configuration
-export E2_CONFIG=$HOME/repos/mc7/e2.conf
+#export E2_CONFIG=$HOME/repos/mc7/e2.conf
 
 # use clang instead of gcc
 export CC=clang
