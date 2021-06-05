@@ -92,11 +92,11 @@ export GTEST_COLOR=1
 plugins=(
         git
         colored-man-pages
+        zsh-autosuggestions
+        zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
