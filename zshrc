@@ -1,6 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$PATH:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.cabal/bin"
-export GTEST_COLOR=1
 
 export PATH="$PATH:$HOME/.config/sway/scripts"
 
@@ -8,7 +7,8 @@ export PATH="$PATH:$HOME/.config/sway/scripts"
 export ZSH="$HOME/.oh-my-zsh"
 
 # CMake use all cores
-CMAKE_BUILD_PARALLEL_LEVEL=8
+CMAKE_BUILD_PARALLEL_LEVEL=4
+export GTEST_COLOR=1
 
 # https://github.com/caiogondim/bullet-train.zsh
 # BULLETTRAIN_STATUS_EXIT_SHOW=true
@@ -124,15 +124,15 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 alias ll="exa -l --git"
 alias l="exa -lag --git"
 
+# Nodejs version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export CMAKE_BUILD_PARALLEL_LEVEL=4
 # use neovim
 alias vim="nvim"
+alias vi="nvim"
 alias batp="bat --plain"
-alias ec="emacs"
 
 # sccache
 export RUSTC_WRAPPER=sccache
