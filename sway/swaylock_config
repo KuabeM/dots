@@ -1,0 +1,10 @@
+screenshots
+clock
+datestr=%a, %d/%m/%Y
+indicator
+indicator-radius=100
+indicator-thickness=5
+grace=5
+effect-blur=7x3
+ignore-empty-password
+fade-in=0.2

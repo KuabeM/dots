@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pidof /usr/lib/polkit-kde-authentication-agent-1
+
+if [[ "$?" -ne 0 ]]; then
+  echo "starting polkit"
+  exec /usr/lib/polkit-kde-authentication-agent-1 &!
+else
+  echo "Polkit already there"
+fi

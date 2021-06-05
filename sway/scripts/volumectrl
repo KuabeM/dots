@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SINK=$(pactl list sinks short | rg '(RUNNING|IDLE)' | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
+SOURCE=$(pactl list sources short | rg '(RUNNING|IDLE)' | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
+
+
+if [[ "$1" == "mute" ]]; then
+  pactl set-sink-mute $SINK toggle
+elif [[ "$1" == "mute-mic" ]]; then
+  pactl set-source-mute $SOURCE toggle
+else
+  echo $SINK
+  pactl set-sink-volume $SINK $1
+fi
+
