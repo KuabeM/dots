@@ -8,6 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # CMake use all cores
 CMAKE_BUILD_PARALLEL_LEVEL=8
+export CMAKE_EXPORT_COMPILE_COMMANDS
 export GTEST_COLOR=1
 
 # https://github.com/caiogondim/bullet-train.zsh
