@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'                       " Fzf integration
   Plug 'wellle/targets.vim'                     " Give more target to operate on
   Plug 'kopischke/vim-fetch'                    " Handle line numbers when opening files
+  Plug 'scrooloose/nerdcommenter'               " Comment lines or selections
 call plug#end()
 
 " Set leader key to space
@@ -31,10 +32,9 @@ colorscheme material
 set spelllang=en_us,de      " Spell checking
 
 " Set completeopt to have a better completion experience
-"set completeopt=menuone,noinsert,noselect
-set completeopt=menuone,preview
+set completeopt=menuone,noinsert,noselect,preview
 set complete=.,w,b,u,t,i,kspell
-set updatetime=100          " Set updatetime for CursorHold
+set updatetime=300          " Set updatetime for CursorHold
 
 " Avoid showing extra messages when using completion
 set shortmess+=c
@@ -43,6 +43,7 @@ set termguicolors           " show colors
 set number                  " show line numbers
 set showmatch               " show matching brackets.
 set cursorline              " Highlight current line
+set nowrap                  " Do not wrap lines
 
 set incsearch               " Incremental search
 set hlsearch                " Highlight search words
@@ -81,7 +82,8 @@ highlight link GitGutterChangeDeleteLine DiffAdd
 
 
 if executable('rg')
-  set grepprg=rg\ --vimgrep 	" use ripgrep
+  set grepprg=rg\ --vimgrep\ --no-heading " use ripgrep
+  set grepformat=%f:%l:%c:%m
 endif
 
 " Configure lsp
@@ -106,11 +108,20 @@ nvim_lsp.rust_analyzer.setup({
     on_attach=on_attach
 })
 -- Enable clangd
-require'lspconfig'.clangd.setup{}
+nvim_lsp.clangd.setup({
+    capabilities=capabilities,
+    on_attach=on_attach
+})
 -- Enable cmake: pip install cmake-language-server
-require'lspconfig'.cmake.setup{}
+nvim_lsp.cmake.setup({
+    capabilities=capabilities,
+    on_attach=on_attach
+})
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
-require'lspconfig'.dockerls.setup{}
+nvim_lsp.dockerls.setup({
+    capabilities=capabilities,
+    on_attach=on_attach
+})
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -129,7 +140,7 @@ EOF
 " Code navigation shortcuts
 " -------------------------
 " as found in :help lsp
-nnoremap <silent> <F12> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <F12> :tab split<CR><cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
@@ -139,11 +150,10 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gT  <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <c-,>  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gT    <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> <F11>  <cmd>lua vim.lsp.buf.code_action()<CR>
 " rust-analyzer does not yet support goto declaration
 " re-mapped `gd` to definition
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 " Goto previous/next diagnostic warning/error
@@ -153,8 +163,8 @@ nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 " Trigger completion with <tab>
 " found in :help completion
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " use <Tab> as trigger keys
 imap <Tab> <Plug>(completion_smart_tab)
@@ -166,4 +176,12 @@ autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+\ lua require'lsp_extensions'.inlay_hints{
+\    prefix = ' > ',
+\    highlight = "Comment",
+\    enabled = {
+\      "TypeHint",
+\      "ChainingHint",
+\      "ParameterHint"
+\    }
+\}
