@@ -261,12 +261,13 @@ default_floating_border normal 4
 # floating windows
 For_window [app_id="thunar"] move scratchpad; scratchpad show; resize set 1000px 800px
 For_window [app_id="pavucontrol"] floating enable; resize set 800px 600px
-For_window [app_id="gnome-calculator"] move scratchpad; scratchpad show; resize set 800px 600px
+#For_window [app_id="gnome-calculator"] move scratchpad; scratchpad show; resize set 800px 600px
+For_window [app_id="gnome-calculator"] floating enable;
 For_window [app_id="org.kde.polkit-kde-authentication-agent-1"] floating enable; resize set 800px 600px
 for_window [app_id="nm-connection-editor"] floating enable; resize set 800px 600px
 for_window [app_id="zoom"] floating enable
 for_window [app_id="thunderbird"] floating enable
 no_focus [title="Microsoft Teams Notification"]
-for_window [window_type="notification"] move absolute position 31 px 10 px
+for_window [window_type="notification"] move absolute position 20 px 30 px
 
 include /etc/sway/config.d/*
