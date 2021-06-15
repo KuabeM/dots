@@ -118,10 +118,10 @@ nvim_lsp.cmake.setup({
     on_attach=on_attach
 })
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
-nvim_lsp.dockerls.setup({
-    capabilities=capabilities,
-    on_attach=on_attach
-})
+-- nvim_lsp.dockerls.setup({
+--     capabilities=capabilities,
+--     on_attach=on_attach
+--})
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
