@@ -1,6 +1,6 @@
 [character]
-symbol = "➜"
-use_symbol_for_status = true
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
 
 [time]
 disabled = false
@@ -16,7 +16,6 @@ style = "bold red"
 [memory_usage]
 disabled = false
 threshold = 80
-show_swap = false
 
 [directory]
 truncation_length = 3
