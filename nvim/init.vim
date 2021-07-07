@@ -112,6 +112,16 @@ nvim_lsp.clangd.setup({
     capabilities=capabilities,
     on_attach=on_attach
 })
+-- Enable json ls
+nvim_lsp.jsonls.setup({
+ commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+})
 -- Enable cmake: pip install cmake-language-server
 nvim_lsp.cmake.setup({
     capabilities=capabilities,
@@ -133,7 +143,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- autoformatting on save
-vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+--vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 EOF
 
 " -------------------------
