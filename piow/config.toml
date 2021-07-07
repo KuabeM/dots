@@ -13,6 +13,7 @@ icon_separator = " "
 [icons]
 "firefox" = ""
 "chrome" = " "
+"chromium" = " "
 "alacritty" = ""
 "terminator" = ""
 "emacs" = " "
