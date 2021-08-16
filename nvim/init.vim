@@ -86,6 +86,13 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
+" Configure ctrl-p
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|build-(.*)|build)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': '',
+  \ }
+
 " Configure lsp
 " https://github.com/neovim/nvim-lspconfig#rust_analyzer
 lua <<EOF
@@ -132,6 +139,10 @@ nvim_lsp.cmake.setup({
 --     capabilities=capabilities,
 --     on_attach=on_attach
 --})
+-- Groovy language server: https://github.com/GroovyLanguageServer/groovy-language-server
+nvim_lsp.groovyls.setup{
+    cmd = { "java", "-jar", "/home/maie_ko/.local/bin/groovy-language-server-all.jar" },
+}
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
