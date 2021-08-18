@@ -91,7 +91,7 @@ endif
 
 " Configure ctrl-p
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|build-(.*)|build)$',
+  \ 'dir':  '\v[\/](\.git|build-(.*)|build|target)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': '',
   \ }
