@@ -67,6 +67,8 @@ set softtabstop=-1          " Use shiftwidth
 set expandtab               " Use spaces instead of tabs
 set backspace=indent,eol,start " Backspacing over everything
 
+set switchbuf+=usetab,newtab " quickfix list: open in newtab or reuse already open tab
+
 let g:tex_conceal = ""      " dont conceal chars in latex
 
 " have a fixed column for the diagnostics to appear in
@@ -223,9 +225,6 @@ let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be up
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
-let g:nvim_tree_auto_resize = 0 "1 by default, will resize the tree to its saved width when opening a file
-let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
-let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
 let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
 "let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
