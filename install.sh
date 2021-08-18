@@ -7,6 +7,7 @@ for target in $targets; do
 done
 
 echo 'Setup config folders in .config'
+mkdir -p $HOME/.config
 folders=(alacritty htop mako piow sway waybar)
 for folder in $folders; do
   ln -nfs $HOME/.dots/$folder $HOME/.config/$folder
