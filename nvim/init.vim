@@ -178,7 +178,7 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gT    <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gh    <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> <F11>  <cmd>lua vim.lsp.buf.code_action()<CR>
 " rust-analyzer does not yet support goto declaration
 " re-mapped `gd` to definition
