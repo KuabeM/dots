@@ -46,6 +46,12 @@ if [ "$#" -eq 1 ]; then
     swaymsg "output DP-2 enable"
     swaymsg "output DP-2 pos 0 0"
     exit 0
+  elif [ "$1" = "x1-alt" ]; then
+    swaymsg "output eDP-1 enable"
+    swaymsg "output eDP-1 pos 1920 0"
+    swaymsg "output HDMI-A-1 enable"
+    swaymsg "output HDMI-A-1 pos 0 0"
+    exit 0
   elif [ "$1" = "alone" ]; then
     swaymsg "output * disable"
     swaymsg "output eDP-1 enable"
@@ -66,6 +72,8 @@ echo "office      DP-3     DP-4"
 echo "home        HDMI-A-2 eDP1"
 echo "alone       eDP1"
 echo "office-alt  DP-5     DP6"
+echo "x1          DP-1     eDP-1"
+echo "x1-alt      HDMI-A-1 eDP-1"
 echo " "
 echo "<left> <right>"
 echo " "
