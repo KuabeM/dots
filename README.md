@@ -1,3 +1,3 @@
 # dots
 
-all configuration files without directory located in plain .config of even ~
+Configuration files for a lot of stuff. Just run `./install.sh` and hope you have all the deps.
