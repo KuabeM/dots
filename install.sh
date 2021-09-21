@@ -23,6 +23,6 @@ echo 'Install neovim plugin manager'
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 echo 'Install vim plugins'
-nvim +PlugUpgrade +PlugUpdate +qall
+nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +qall
 
 echo 'Done!'
