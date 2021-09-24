@@ -170,6 +170,17 @@ nvim_lsp.groovyls.setup{
     cmd = { "java", "-jar", "/home/korbinian/.local/bin/groovy-language-server-all.jar" },
 }
 
+-- https://github.com/latex-lsp/texlab
+nvim_lsp.texlab.setup{
+  settings = { texlab = { build = {
+    executable = "tectonic",
+      args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" }
+  }}}
+}
+
+-- npm install -g vim-language-server
+nvim_lsp.vimls.setup{}
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
