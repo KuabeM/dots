@@ -160,10 +160,7 @@ nvim_lsp.cmake.setup({
 })
 
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
--- nvim_lsp.dockerls.setup({
---     capabilities=capabilities,
---     on_attach=on_attach
---})
+nvim_lsp.dockerls.setup{}
 
 -- Groovy language server: https://github.com/GroovyLanguageServer/groovy-language-server
 nvim_lsp.groovyls.setup{
@@ -256,7 +253,11 @@ cmp.setup({
 EOF
 
 " Show diagnostic popup on cursor hover
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold *.cpp lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold *.rs lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold *.c lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold *.h lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd CursorHold *.hpp lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
