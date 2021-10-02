@@ -24,6 +24,7 @@ if [ "$#" -eq 1 ]; then
     done
     exit 0
   fi
+  swaymsg "output * disable"
   echo "Using predefined config $1"
   if  [ "$1" = "office" ]; then
     swaymsg "output DP-3 enable"
@@ -33,6 +34,13 @@ if [ "$#" -eq 1 ]; then
     swaymsg "output DP-4 pos 3840 0"
     exit 0
   elif [ "$1" = "home" ]; then
+    swaymsg "output eDP-1 disable"
+    swaymsg "output HDMI-A-1 enable"
+    swaymsg "output DP-2 enable"
+    swaymsg "output HDMI-A-1 pos 1920 0"
+    swaymsg "output DP-2 pos 0 0"
+    exit 0
+  elif [ "$1" = "home-alt" ]; then
     swaymsg "output eDP-1 enable"
     swaymsg "output HDMI-A-2 enable"
     swaymsg "output HDMI-A-2 pos 0 0"
@@ -80,6 +88,5 @@ echo " "
 echo "show        Print connected monitors"
 exit 1
 
-# TODO: print current setup
 # TODO: automatically determine inputs from swaymsg -t output -raw
 
