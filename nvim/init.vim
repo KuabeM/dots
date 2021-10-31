@@ -155,8 +155,8 @@ nvim_lsp.jsonls.setup({
 })
 -- Enable cmake: pip install cmake-language-server
 nvim_lsp.cmake.setup({
-    capabilities=capabilities,
-    on_attach=on_attach
+    -- capabilities=capabilities,
+    -- on_attach=on_attach
 })
 
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
