@@ -6,10 +6,10 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'hrsh7th/nvim-cmp'                       " Autocompletion framework
   Plug 'hrsh7th/cmp-nvim-lsp'                   " cmd LSP completion
-  Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/cmp-path'                       " cmd Path completion
   Plug 'hrsh7th/cmp-buffer'                     " cmd Buffer completion
   " See hrsh7th other plugins for more great completion sources!
+  Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
 
   Plug 'ctrlpvim/ctrlp.vim'                     " Fuzzy finder
@@ -119,7 +119,46 @@ local on_attach = function(client)
     require'completion'.on_attach(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- Setup Completion
+-- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    -- Add tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item( { behavior = cmp.SelectBehavior.Insert } ),
+    ['<Tab>'] = cmp.mapping.select_next_item( { behavior = cmp.SelectBehavior.Insert } ),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping.complete(cmp.mapping.complete(), { 'i' , 'c' }),
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  },
+
+  -- Installed sources
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  }),
+
+  -- use buffer source for '/'
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+      }
+    })
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
@@ -216,8 +255,6 @@ nnoremap <silent> <F11>  <cmd>lua vim.lsp.buf.code_action()<CR>
 nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 
-" Setup Completion
-" See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 lua <<EOF
 local cmp = require'cmp'
 cmp.setup({
@@ -230,25 +267,32 @@ cmp.setup({
     -- ['<C-p>'] = cmp.mapping.select_prev_item(),
     -- ['<C-n>'] = cmp.mapping.select_next_item(),
     -- Add tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
-    })
+    -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    -- ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping.complete(cmp.mapping.complete(), { 'i' , 'c' }),
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
   },
 
   -- Installed sources
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'path' },
     { name = 'buffer' },
-  },
+  }),
+  
+  -- use buffer source for '/'
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+      }
+    })
 })
 EOF
 
