@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
 
-  Plug 'ctrlpvim/ctrlp.vim'                     " Fuzzy finder
   Plug 'kaicataldo/material.vim', { 'branch': 'main' }  " color theme
   Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
@@ -70,7 +69,7 @@ set listchars=tab:»\ ,trail:␣,extends:↲,precedes:↳,nbsp:·,lead:·,concea
 
 set splitright              " Create vertical splits on the right
 
-set tabstop=2               " 2 spaces equal one tab
+set tabstop=4               " 2 spaces equal one tab
 set shiftwidth=0            " Use tabstop for auto-indentation
 set softtabstop=-1          " Use shiftwidth
 set expandtab               " Use spaces instead of tabs
@@ -97,13 +96,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading " use ripgrep
   set grepformat=%f:%l:%c:%m
 endif
-
-" Configure ctrl-p
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.git|build-(.*)|build|target)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': '',
-  \ }
 
 " Configure lsp
 lua <<EOF
@@ -316,23 +308,8 @@ autocmd CursorHold *.hpp lua vim.lsp.diagnostic.show_line_diagnostics()
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
-" File explorer
-"nnoremap <C-n> :NvimTreeToggle<CR>
-"nnoremap <leader>r :NvimTreeRefresh<CR>
-"nnoremap <leader>n :NvimTreeFindFile<CR>
-
-"let g:nvim_tree_gitignore = 1 "0 by default
-"let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-"let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-"let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
-"let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
-"let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
-"let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
-"let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
-"let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
-"let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
-"let g:nvim_tree_hijack_cursor = 0 "1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
-"let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
-"let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
-"let g:nvim_tree_update_cwd = 1 "0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
-"let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+" Telescope finder for everything: https://github.com/nvim-telescope/telescope.nvim
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
