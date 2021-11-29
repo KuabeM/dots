@@ -158,5 +158,7 @@ alias colorpick='grim -g "$(slurp -p)" -t ppm - | convert - -format "%[pixel:p{0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# zoxide: smart cd
+eval "$(zoxide init zsh)"
 # starship prompt
 eval "$(starship init zsh)"
