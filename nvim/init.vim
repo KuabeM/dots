@@ -22,6 +22,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim'                     " Give more target to operate on
   Plug 'kopischke/vim-fetch'                    " Handle line numbers when opening files
   Plug 'scrooloose/nerdcommenter'               " Comment lines or selections
+
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'          " Fuzzy finder for everything
 call plug#end()
 
 " Set leader key to space
