@@ -25,6 +25,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'          " Fuzzy finder for everything
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
 call plug#end()
 
 " Set leader key to space
@@ -36,7 +38,7 @@ filetype plugin indent on
 
 colorscheme material
 
-set spelllang=en_us,de      " Spell checking
+set spell spelllang=en_us,de      " Spell checking
 
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -316,3 +318,14 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').registers()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').spell_suggest()<cr>
+
+nnoremap <leader>lr <cmd>lua require('telescope.builtin').lsp_references()<cr>
+nnoremap <leader>la <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
+nnoremap <leader>ld <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
+
+nnoremap <leader>gst <cmd>lua require('telescope.builtin').git_status()<cr>
+nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
+nnoremap <leader>gsta <cmd>lua require('telescope.builtin').git_stash()<cr>
