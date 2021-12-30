@@ -11,32 +11,11 @@ CMAKE_BUILD_PARALLEL_LEVEL=8
 export CMAKE_EXPORT_COMPILE_COMMANDS
 export GTEST_COLOR=1
 
-# https://github.com/caiogondim/bullet-train.zsh
-# BULLETTRAIN_STATUS_EXIT_SHOW=true
-# BULLETTRAIN_CONTEXT_DEFAULT_USER="korbinian"
-# BULLETTRAIN_IS_SSH_CLIENT=true
-# BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-# BULLETTRAIN_GIT_BG=30 #147
-# BULLETTRAIN_TIME_BG=238 #67 #31 #22
-# BULLETTRAIN_TIME_FG=252
-# BULLETTRAIN_GIT_DIRTY=""
-# BULLETTRAIN_GIT_UNTRACKED="%F{black} ●%F{black}"
-# BULLETTRAIN_GIT_MODIFIED="%F{blue} 🟆%F{black}"
-# BULLETTRAIN_DIR_EXTENDED=2
-# BULLETTRAIN_PROMPT_CHAR="%F{green}🠶%F{black}"
-
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="bullet-train"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -128,16 +107,11 @@ source $ZSH/oh-my-zsh.sh
 # MC7 configuration
 #export E2_CONFIG=$HOME/repos/mc7/e2.conf
 
-# use clang instead of gcc
-export CC=clang
-export CXX=clang++
-
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # Nodejs version manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # aliases
 alias ll="exa -l --git"
