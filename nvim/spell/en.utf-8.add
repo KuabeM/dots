@@ -4,3 +4,4 @@ XDG
 CONFIG
 config
 usr
+cmake
