@@ -1,6 +1,6 @@
 [user]
 	name = Korbinian Maier
-	email = korbinian.maier@franka.de
+	email = korbinian.maier@tum.de
 [core]
 	excludesfile = /home/maie_ko/.gitignore_global
 	editor = nvim
