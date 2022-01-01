@@ -7,8 +7,8 @@ export PATH="$PATH:$HOME/.config/sway/scripts"
 export ZSH="$HOME/.oh-my-zsh"
 
 # CMake use all cores
-CMAKE_BUILD_PARALLEL_LEVEL=8
-export CMAKE_EXPORT_COMPILE_COMMANDS
+export CMAKE_BUILD_PARALLEL_LEVEL=8
+export CMAKE_EXPORT_COMPILE_COMMANDS=1
 export GTEST_COLOR=1
 
 # Set name of the theme to load --- if set to "random", it will
@@ -22,7 +22,7 @@ export GTEST_COLOR=1
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -86,11 +86,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG="en_US.UTF-8"
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
