@@ -303,15 +303,15 @@ cmp.setup({
 EOF
 
 " Show diagnostic popup on cursor hover
-autocmd CursorHold *.cpp lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorHold *.rs lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorHold *.c lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorHold *.h lua vim.lsp.diagnostic.show_line_diagnostics()
-autocmd CursorHold *.hpp lua vim.lsp.diagnostic.show_line_diagnostics()
+autocmd cursorhold *.cpp lua vim.diagnostic.open_float()
+autocmd CursorHold *.rs lua vim.diagnostic.open_float()
+autocmd CursorHold *.c lua vim.diagnostic.open_float()
+autocmd CursorHold *.h lua vim.diagnostic.open_float()
+autocmd CursorHold *.hpp lua vim.diagnostic.open_float()
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+ \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Telescope finder for everything: https://github.com/nvim-telescope/telescope.nvim
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
