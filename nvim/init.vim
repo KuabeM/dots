@@ -39,6 +39,7 @@ filetype plugin indent on
 colorscheme material
 
 set spell spelllang=en_us,de      " Spell checking
+set nospell
 
 " Set completeopt to have a better completion experience
 " :help completeopt
