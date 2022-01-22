@@ -40,7 +40,7 @@ exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 #
 exec swayidle -w \
          timeout 300 'swaylock -f -C $HOME/.config/sway/swaylock_config' \
-         timeout 320 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -C $HOME/.config/sway/swaylock_config'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
