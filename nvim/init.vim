@@ -27,6 +27,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'          " Fuzzy finder for everything
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
+
+  Plug 'chaoren/vim-wordmotion'                 " move through words in all kinds of styles
 call plug#end()
 
 " Set leader key to space
