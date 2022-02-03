@@ -31,9 +31,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'chaoren/vim-wordmotion'                 " move through words in all kinds of styles
 call plug#end()
 
-" Set leader key to space
-nnoremap <SPACE> <Nop>
-let mapleader=" "
 
 syntax enable
 filetype plugin indent on
