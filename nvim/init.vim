@@ -232,6 +232,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+nvim_lsp.html.setup {}
+
 -- autoformatting on save
 --vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 EOF
