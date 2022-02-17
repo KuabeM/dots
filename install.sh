@@ -8,7 +8,7 @@ done
 
 echo 'Setup config folders in .config'
 mkdir -p $HOME/.config
-folders=(alacritty htop mako piow sway waybar)
+folders=(alacritty htop mako piow sway waybar wofi)
 for folder in $folders; do
   ln -nfs $HOME/.dots/$folder $HOME/.config/$folder
 done
