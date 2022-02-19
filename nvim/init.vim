@@ -232,6 +232,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+-- npm install -g vscode-langservers-extracted
 nvim_lsp.html.setup {}
 
 -- autoformatting on save
