@@ -32,6 +32,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'szw/vim-maximizer'                      " Maximize a split window
 call plug#end()
 
+" change the leader key from "\" to ";"
+let mapleader=";"
 
 syntax enable
 filetype plugin indent on
