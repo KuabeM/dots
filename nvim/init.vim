@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
 
   Plug 'chaoren/vim-wordmotion'                 " move through words in all kinds of styles
+  Plug 'szw/vim-maximizer'                      " Maximize a split window
 call plug#end()
 
 
@@ -333,3 +334,9 @@ nnoremap <leader>ld <cmd>lua require('telescope.builtin').lsp_type_definitions()
 nnoremap <leader>gst <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <leader>gsta <cmd>lua require('telescope.builtin').git_stash()<cr>
+
+" vim-maximizer
+nnoremap <silent><C-f> :MaximizerToggle<CR>
+vnoremap <silent><C-f> :MaximizerToggle<CR>gv
+inoremap <silent><C-f> <C-o>:MaximizerToggle<CR>
+
