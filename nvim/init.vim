@@ -342,3 +342,11 @@ nnoremap <silent><C-f> :MaximizerToggle<CR>
 vnoremap <silent><C-f> :MaximizerToggle<CR>gv
 inoremap <silent><C-f> <C-o>:MaximizerToggle<CR>
 
+" vim-airline
+" if theres only one tab display buffers
+let g:airline#extensions#tabline#enabled = 1
+" get the godd symbols
+let g:airline_powerline_fonts = 1
+" separators for tabline
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
