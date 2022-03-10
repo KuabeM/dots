@@ -598,7 +598,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/Documents/Notes/system-software/interview.org" "~/Documents/Notes/personal.org" "~/Documents/Notes/saco-taskforce/testrunner.org" "~/Documents/Notes/saco-taskforce/component_coordinator.org" "~/Documents/Notes/saco-taskforce/meetings.org" "~/Documents/Notes/saco-taskforce/weekly.org" "~/Documents/Notes/saco-taskforce/daily.org")))
+    ("~/Documents/Notes/system-software/interview.org" "~/Documents/Notes/personal.org" "~/Documents/Notes/saco-taskforce/meetings.org" "~/Documents/Notes/saco-taskforce/weekly.org" "~/Documents/Notes/saco-taskforce/daily.org")))
  '(org-html-inline-images nil)
  '(package-selected-packages
    (quote
