@@ -13,6 +13,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
 
   Plug 'kaicataldo/material.vim', { 'branch': 'main' }  " color theme
+  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+  Plug 'rafamadriz/neon'
+
   Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
   Plug 'vim-airline/vim-airline'                " powerline-like statusbar/tabline
@@ -38,7 +41,9 @@ let mapleader=";"
 syntax enable
 filetype plugin indent on
 
-colorscheme material
+"colorscheme material
+"colorscheme tokyonight
+colorscheme neon
 
 set spell spelllang=en_us,de      " Spell checking
 set nospell
@@ -52,7 +57,7 @@ set completeopt=menuone,noinsert,noselect
 
 " Set type of completion and places to scan
 set complete=.,w,b,u,t,i,kspell
-set updatetime=300          " Set updatetime for CursorHold
+set updatetime=800          " Set updatetime for CursorHold
 
 set shortmess+=c            " Avoid showing extra messages when using completion
 
@@ -264,8 +269,8 @@ nnoremap <silent> <F11>  <cmd>lua vim.lsp.buf.code_action()<CR>
 "nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
 
 lua <<EOF
 local cmp = require'cmp'
@@ -350,3 +355,7 @@ let g:airline_powerline_fonts = 1
 " separators for tabline
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" move through tabs with H L
+nnoremap H gT
+nnoremap L gt
