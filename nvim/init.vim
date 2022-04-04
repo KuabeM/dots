@@ -45,7 +45,7 @@ filetype plugin indent on
 "colorscheme tokyonight
 colorscheme neon
 
-set spell spelllang=en_us,de      " Spell checking
+set spell spelllang=en_us   " Spell checking
 set nospell
 
 " Set completeopt to have a better completion experience
