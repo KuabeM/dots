@@ -33,3 +33,9 @@ fish_style_pwd_dir_length = 1
 #[git_status]
 #style = "bg:purple bold "
 #suffix = "\ue0b0"
+
+[git_commit]
+tag_disabled = false
+
+[container]
+disabled = true
