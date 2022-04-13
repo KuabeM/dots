@@ -359,3 +359,5 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 " move through tabs with H L
 nnoremap H gT
 nnoremap L gt
+nnoremap m :bn<CR>
+nnoremap M :bp<CR>
