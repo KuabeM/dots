@@ -20,6 +20,8 @@ ln -nfs $src_dir/starship.toml $HOME/.config/starship.toml
 # Move nvim separately
 mkdir -p $HOME/.config/nvim
 ln -nfs $src_dir/nvim/init.vim $HOME/.config/nvim/init.vim
+ln -nfs $src_dir/nvim/lua $HOME/.config/nvim/lua
+ln -nfs $src_dir/nvim/lua $HOME/.config/nvim/spell
 
 echo 'Install neovim plugin manager'
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
