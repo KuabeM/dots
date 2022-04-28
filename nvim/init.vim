@@ -12,9 +12,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
 
-  Plug 'kaicataldo/material.vim', { 'branch': 'main' }  " color theme
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'rafamadriz/neon'
+  Plug 'marko-cerovac/material.nvim'            " Material color theme
 
   Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
@@ -41,9 +41,8 @@ let mapleader=";"
 syntax enable
 filetype plugin indent on
 
-"colorscheme material
-"colorscheme tokyonight
-colorscheme neon
+let g:material_style = "oceanic"
+colorscheme material
 
 set spell spelllang=en_us   " Spell checking
 set nospell
@@ -88,7 +87,7 @@ set softtabstop=-1          " Use shiftwidth
 set expandtab               " Use spaces instead of tabs
 set backspace=indent,eol,start " Backspacing over everything
 
-set switchbuf+=usetab,newtab " quickfix list: open in newtab or reuse already open tab
+set switchbuf+=usetab ",newtab " quickfix list: open in newtab or reuse already open tab
 
 let g:tex_conceal = ""      " dont conceal chars in latex
 
