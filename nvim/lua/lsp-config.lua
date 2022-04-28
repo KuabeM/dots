@@ -129,6 +129,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- npm install -g vscode-langservers-extracted
 nvim_lsp.html.setup {}
 
+-- python: pip install python-lsp-server
+nvim_lsp.pylsp.setup{}
+
 -- autoformatting on save
 --vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
 
