@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 if [ "$#" -eq 2 ]; then
   echo "Left screen: $1, right screen: $2"
@@ -13,63 +13,54 @@ if [ "$#" -eq 1 ]; then
   if [ "$1" = "show" ]; then
     outputs=$(swaymsg -t get_outputs)
     name=$(echo $outputs | jq -r '.[].name')
+    id=$(echo $outputs | jq -r '.[].id')
+    id=(${(f)id})
     enabled=$(echo $outputs | jq -r '.[].active')
     x=$(echo $outputs | jq -r '.[].rect.x')
-    name=($name)
-    enabled=($enabled)
-    x=($x)
-    for i in "${!name[@]}"
+    name=(${(f)name})
+    enabled=(${enabled:gs/true/enabled})
+    enabled=(${(f)enabled:gs/false/disabled})
+    x=(${(f)x})
+    for ((i = 1; i <= ${#name}; i++))
     do
-      echo "Output ${name[$i]}, enabled: ${enabled[$i]}, x: ${x[$i]}"
+      printf -- "Output %-2d %-9s %-9s x: %4d\n" "${id[$i]}" "${name[$i]}" "${enabled[$i]}" "$x[$i]"
+
     done
     exit 0
   fi
-  swaymsg "output * disable"
   echo "Using predefined config $1"
   if  [ "$1" = "office" ]; then
-    swaymsg "output DP-3 enable"
-    swaymsg "output DP-4 enable"
     swaymsg "output eDP-1 disable"
-    swaymsg "output DP-3 pos 1920 0"
-    swaymsg "output DP-4 pos 3840 0"
+    swaymsg "output DP-3 enable pos 0 0"
+    swaymsg "output DP-4 enable pos 1920 0"
     exit 0
   elif [ "$1" = "home" ]; then
     swaymsg "output eDP-1 disable"
-    swaymsg "output HDMI-A-2 enable"
-    swaymsg "output DP-1 enable"
-    swaymsg "output HDMI-A-2 pos 0 0"
-    swaymsg "output DP-1 pos 1920 0"
+    swaymsg "output DP-1 resolution 2560x1440 enable position 0 0"
+    swaymsg "output HDMI-A-2 pos 2560 0 enable"
     exit 0
   elif [ "$1" = "home-alt" ]; then
-    swaymsg "output eDP-1 enable"
-    swaymsg "output HDMI-A-2 enable"
-    swaymsg "output HDMI-A-2 pos 0 0"
-    swaymsg "output eDP-1 pos 1920 0"
+    swaymsg "output HDMI-A-2 enable pos 0 0"
+    swaymsg "output eDP-1 enable pos 1920 0"
     exit 0
   elif [ "$1" = "x1" ]; then
     swaymsg "output eDP-1 disable"
-    swaymsg "output DP-1 enable"
-    swaymsg "output DP-1 pos 1920 0"
-    swaymsg "output HDMI-A-1 enable"
-    swaymsg "output HDMI-A-1 pos 0 0"
+    swaymsg "output DP-1 resolution 2560x1440 enable pos 2560 0"
+    swaymsg "output HDMI-A-1 enable pos 0 0"
     exit 0
   elif [ "$1" = "x1-alt" ]; then
-    swaymsg "output * disable"
-    swaymsg "output DP-2 enable"
-    swaymsg "output DP-2 pos 1920 0"
-    swaymsg "output HDMI-A-1 enable"
-    swaymsg "output HDMI-A-1 pos 0 0"
+    swaymsg "output eDP-1 disable"
+    swaymsg "output DP-2 resolution 2560x1440 enable position 0 0"
+    swaymsg "output HDMI-A-1 pos 2560 0 enable"
     exit 0
   elif [ "$1" = "alone" ]; then
     swaymsg "output * disable"
     swaymsg "output eDP-1 enable"
     exit 0
   elif  [ "$1" = "office-alt" ]; then
-    swaymsg "output DP-5 enable"
-    swaymsg "output DP-6 enable"
     swaymsg "output eDP-1 disable"
-    swaymsg "output DP-5 pos 0 0"
-    swaymsg "output DP-6 pos 1920 0"
+    swaymsg "output DP-5 enable pos 0 0"
+    swaymsg "output DP-6 enable pos 1920 0"
     exit 0
   fi
 fi
@@ -77,12 +68,12 @@ fi
 echo "Unknown args '$1 $2'\n"
 echo "Usage:"
 echo "office      DP-3     DP-4"
-echo "home        DP-2     HDMI-A-2"
+echo "home        DP-1     HDMI-A-2"
 echo "alone       eDP1"
-echo "x1          DP-1/    eDP-1"
+echo "x1          DP-1/    HDMI-A-1"
 echo "office-alt  DP-5     DP6"
 echo "home-alt    eDP-1    HDMI-A-2"
-echo "x1-alt      HDMI-A-1 DP-2"
+echo "x1-alt      DP-2     HDMI-A-1"
 echo " "
 echo "<left> <right>"
 echo " "
