@@ -71,5 +71,9 @@
 	HEAD = 14 normal dim
 [diff]
 	colorMoved = zebra
+	tool = vimdiff
 [merge]
 	conflictstyle = diff3
+	tool = vimdiff
+[mergetool "vimdiff"]
+	path = nvim
