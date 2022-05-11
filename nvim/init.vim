@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   " See hrsh7th other plugins for more great completion sources!
   Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
+  Plug 'ray-x/cmp-treesitter'
 
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'rafamadriz/neon'
@@ -189,3 +190,6 @@ nnoremap H gT
 nnoremap L gt
 nnoremap m :bn<CR>
 nnoremap M :bp<CR>
+
+" completion in pattern
+"cnoremap <tab> <C-r><C-w>
