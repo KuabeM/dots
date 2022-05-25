@@ -105,6 +105,7 @@ nvim_lsp.rust_analyzer.setup({
       }
     }
 })
+--require('rust-tools').setup({})
 
 -- Enable clangd
 nvim_lsp.clangd.setup({

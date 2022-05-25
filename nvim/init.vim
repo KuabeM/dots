@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'neovim/nvim-lspconfig'                  " Common configurations for the Nvim LSP client
   Plug 'nvim-lua/lsp_extensions.nvim'           " Extensions to built-in LSP
+  Plug 'simrat39/rust-tools.nvim'               " Rust tooling
 
   Plug 'hrsh7th/nvim-cmp'                       " Autocompletion framework
   Plug 'hrsh7th/cmp-nvim-lsp'                   " cmd LSP completion
