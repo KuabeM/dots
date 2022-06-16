@@ -92,20 +92,51 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
--- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup({
-    capabilities=capabilities,
-    settings = {
-      -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-      ["rust-analyzer"] = {
-        -- enable clippy diagnostics on save
-        checkOnSave = {
-          command = "clippy"
+local opts = {
+    tools = {
+        autoSetHints = true,
+        hover_with_actions = true,
+        runnables = {
+            use_telescope = true
         },
-      }
-    }
-})
---require('rust-tools').setup({})
+        inlay_hints = {
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+        },
+    },
+
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
+    server = {
+        settings = {
+            -- to enable rust-analyzer settings visit:
+            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+            ["rust-analyzer"] = {
+                -- enable clippy on save
+                checkOnSave = {
+                    command = "clippy"
+                },
+            }
+        }
+    },
+}
+
+require('rust-tools').setup(opts)
+-- Enable rust_analyzer
+--nvim_lsp.rust_analyzer.setup({
+    --capabilities=capabilities,
+    --settings = {
+      ---- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+      --["rust-analyzer"] = {
+        ---- enable clippy diagnostics on save
+        --checkOnSave = {
+          --command = "clippy"
+        --},
+      --}
+    --}
+--})
 
 -- Enable clangd
 nvim_lsp.clangd.setup({

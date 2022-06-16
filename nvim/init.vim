@@ -122,37 +122,30 @@ EOF
 " Code navigation shortcuts
 " -------------------------
 " as found in :help lsp
-nnoremap <silent> <F12> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <leader><F12> :tab split<CR><cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <F4>  <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> <leader><F4>   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gf    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> <F2>  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> <F11>  <cmd>lua vim.lsp.buf.code_action()<CR>
-" rust-analyzer does not yet support goto declaration
-" re-mapped `gd` to definition
-"nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> fd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> <leader>fd :tab split<CR><cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K   <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> fd  <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> fu  <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> fs  <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> ft  <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> fr  <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0  <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW  <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gf  <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> fn  <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent> fa  <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent> g] <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <silent> fj <cmd>lua vim.diagnostic.goto_prev()<CR>
+nnoremap <silent> fk <cmd>lua vim.diagnostic.goto_next()<CR>
 
 " Show diagnostic popup on cursor hover
-autocmd cursorhold *.cpp lua vim.diagnostic.open_float()
-autocmd CursorHold *.rs lua vim.diagnostic.open_float()
-autocmd CursorHold *.c lua vim.diagnostic.open_float()
-autocmd CursorHold *.h lua vim.diagnostic.open_float()
-autocmd CursorHold *.hpp lua vim.diagnostic.open_float()
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 " Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
- \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+"autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
+" \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " Telescope finder for everything: https://github.com/nvim-telescope/telescope.nvim
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -165,7 +158,6 @@ nnoremap <leader>fr <cmd>lua require('telescope.builtin').registers()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').spell_suggest()<cr>
 
 nnoremap <leader>lr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-nnoremap <leader>la <cmd>lua require('telescope.builtin').lsp_code_actions()<cr>
 nnoremap <leader>ld <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
 
 nnoremap <leader>gst <cmd>lua require('telescope.builtin').git_status()<cr>
