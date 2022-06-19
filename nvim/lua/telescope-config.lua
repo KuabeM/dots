@@ -1,16 +1,18 @@
 -- Telescope finder for everything: https://github.com/nvim-telescope/telescope.nvim
 require('telescope').setup {
-  defaults = {
-  },
-  pickers = {
-    find_files = {
-      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+    defaults = {
     },
-  }
+    pickers = {
+        find_files = {
+            find_command = { "fd", "--type", "f", "--strip-cwd-prefix" }
+        },
+    }
 }
 
 local t = require('telescope.builtin')
 vim.keymap.set("n", "<leader>ff", t.find_files, { silent = true, desc = "telescope.find_files()" })
+vim.keymap.set("n", "<leader>ffh", function() t.find_files({ hidden = true }) end,
+    { desc = "telescope.find_files({ hidden = true })" })
 vim.keymap.set("n", "<leader>fg", t.live_grep, { silent = true, desc = "telescope.live_grep()" })
 vim.keymap.set("n", "<leader>sg", t.grep_string, { silent = true, desc = "telescope.grep_string()" })
 vim.keymap.set("n", "<leader>fb", t.buffers, { silent = true, desc = "telescope.buffers()" })
