@@ -120,27 +120,7 @@ require('lsp-config')
 -- Telescope
 require('telescope-config')
 
-" -------------------------
-" Code navigation shortcuts
-" -------------------------
-" as found in :help lsp
-nnoremap <silent> fd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <leader>fd :tab split<CR><cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K   <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> fd  <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> fu  <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> fs  <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> ft  <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> fr  <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0  <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW  <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gf  <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> fn  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> fa  <cmd>lua vim.lsp.buf.code_action()<CR>
-
-" Goto previous/next diagnostic warning/error
-nnoremap <silent> fj <cmd>lua vim.diagnostic.goto_prev()<CR>
-nnoremap <silent> fk <cmd>lua vim.diagnostic.goto_next()<CR>
+EOF
 
 " Show diagnostic popup on cursor hover
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
