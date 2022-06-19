@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'                  " Common configurations for the Nvim LSP client
   Plug 'nvim-lua/lsp_extensions.nvim'           " Extensions to built-in LSP
   Plug 'simrat39/rust-tools.nvim'               " Rust tooling
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
 
   Plug 'hrsh7th/nvim-cmp'                       " Autocompletion framework
   Plug 'hrsh7th/cmp-nvim-lsp'                   " cmd LSP completion
@@ -22,18 +23,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
   Plug 'vim-airline/vim-airline'                " powerline-like statusbar/tabline
   Plug 'kien/rainbow_parentheses.vim'           " colorize parentheses
-  Plug 'l04m33/vlime'                           " Lisp
 
   Plug 'wellle/targets.vim'                     " Give more target to operate on
   Plug 'kopischke/vim-fetch'                    " Handle line numbers when opening files
-  Plug 'scrooloose/nerdcommenter'               " Comment lines or selections
+
+  Plug 'numToStr/Comment.nvim'                  " Comments stuff
 
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'          " Fuzzy finder for everything
 
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
-
-  Plug 'chaoren/vim-wordmotion'                 " move through words in all kinds of styles
   Plug 'szw/vim-maximizer'                      " Maximize a split window
 call plug#end()
 
@@ -119,6 +117,9 @@ require('lsp-config')
 
 -- Telescope
 require('telescope-config')
+
+-- Plugin Comment.nvim
+require('Comment').setup{}
 
 EOF
 
