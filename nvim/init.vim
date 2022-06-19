@@ -111,12 +111,14 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m
 endif
 
-" Configure lsp
+" Load lua modules
 lua <<EOF
 
+-- LSP
 require('lsp-config')
 
-EOF
+-- Telescope
+require('telescope-config')
 
 " -------------------------
 " Code navigation shortcuts
@@ -146,23 +148,6 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 " Enable type inlay hints
 "autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs
 " \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-
-" Telescope finder for everything: https://github.com/nvim-telescope/telescope.nvim
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>sg <cmd>lua require('telescope.builtin').grep_string()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').registers()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').spell_suggest()<cr>
-
-nnoremap <leader>lr <cmd>lua require('telescope.builtin').lsp_references()<cr>
-nnoremap <leader>ld <cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>
-
-nnoremap <leader>gst <cmd>lua require('telescope.builtin').git_status()<cr>
-nnoremap <leader>gb <cmd>lua require('telescope.builtin').git_branches()<cr>
-nnoremap <leader>gsta <cmd>lua require('telescope.builtin').git_stash()<cr>
 
 " vim-maximizer
 nnoremap <silent><C-f> :MaximizerToggle<CR>
