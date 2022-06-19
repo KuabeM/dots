@@ -273,19 +273,19 @@ bar {
 }
 
 # idle inhiib
-For_window [app_id="^.*"] inhibit_idle fullscreen
-For_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+for_window [class="^.*"] inhibit_idle fullscreen
 
 # Borders
 default_border pixel 2
 default_floating_border normal 4
 
 # floating windows
-For_window [app_id="thunar"] floating enable
-For_window [app_id="pavucontrol"] floating enable; resize set 800px 600px
-#For_window [app_id="gnome-calculator"] move scratchpad; scratchpad show; resize set 800px 600px
-For_window [app_id="gnome-calculator"] floating enable;
-For_window [app_id="org.kde.polkit-kde-authentication-agent-1"] floating enable; resize set 800px 600px
+for_window [app_id="thunar"] floating enable
+for_window [app_id="pavucontrol"] floating enable; resize set 800px 600px
+for_window [app_id="gnome-calculator"] floating enable;
+for_window [app_id="gnome.Calculator"] floating enable;
+for_window [app_id="org.kde.polkit-kde-authentication-agent-1"] floating enable; resize set 800px 600px
 for_window [app_id="nm-connection-editor"] floating enable; resize set 800px 600px
 for_window [app_id="zoom"] floating enable
 for_window [app_id="thunderbird"] floating enable
