@@ -233,7 +233,7 @@ vim.keymap.set("n", "ft", b.type_definition, { silent = true, desc = "vim.lsp.bu
 vim.keymap.set("n", "fr", b.references, { silent = true, desc = "vim.lsp.buf.references" })
 vim.keymap.set("n", "g0", b.document_symbol, { silent = true, desc = "vim.lsp.buf.document_symbol" })
 vim.keymap.set("n", "gW", b.workspace_symbol, { silent = true, desc = "vim.lsp.buf.workspace_symbol" })
-vim.keymap.set("n", "gf", b.formatting, { silent = true, desc = "vim.lsp.buf.formatting" })
+vim.keymap.set("n", "gf", function() b.format({ async = true }) end, { silent = true, desc = "vim.lsp.buf.formatting" })
 vim.keymap.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
 vim.keymap.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
 
