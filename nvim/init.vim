@@ -112,6 +112,9 @@ endif
 " Load lua modules
 lua <<EOF
 
+-- Misc options
+require('options')
+
 -- LSP
 require('lsp-config')
 
@@ -121,6 +124,8 @@ require('telescope-config')
 -- Plugin Comment.nvim
 require('Comment').setup{}
 
+-- Misc keymaps
+require('keymaps')
 EOF
 
 " Show diagnostic popup on cursor hover
