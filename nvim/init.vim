@@ -20,6 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'marko-cerovac/material.nvim'            " Material color theme
 
   Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
+  Plug 'f-person/git-blame.nvim'                " show git blame messages
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
   Plug 'vim-airline/vim-airline'                " powerline-like statusbar/tabline
   Plug 'kien/rainbow_parentheses.vim'           " colorize parentheses
@@ -102,7 +103,9 @@ highlight link GitGutterAdd DiffAdd
 highlight link GitGutterChange DiffAdd
 highlight link GitGutterDelete DiffAdd
 highlight link GitGutterChangeDeleteLine DiffAdd
-
+" Configure Git blame
+let g:gitblame_enabled = 0
+let g:gitblame_message_template = '		<summary> • <date> • <author> • <sha> '
 
 if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading " use ripgrep
