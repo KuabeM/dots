@@ -29,4 +29,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 echo 'Install vim plugins'
 nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +qall
 
+echo 'Add git templates'
+git config --global init.templatedir $src_dir/git-templates
+
 echo 'Done!'

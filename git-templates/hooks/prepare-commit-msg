@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# A hook script to prepare the commit log message.
+# Called by "git commit" with the name of the file that has the
+# commit message, followed by the description of the commit
+# message's source.  The hook's purpose is to edit the commit
+# message file.  If the hook fails with a non-zero status,
+# the commit is aborted.
+
+# This hook parses the branch name and extracts a potential issue template in the format SYSSW-XXX
+# with XXX being any number.
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+# add ticket number to beginning of ticket
+PREFIX=$(git rev-parse --abbrev-ref HEAD | rg --only-matching 'SYSSW-([0-9]*)')
+
+firstLine=$(head -n1 $1)
+
+if [ -z "$firstLine" ]; then
+    if [ -z "$PREFIX" ]; then
+        echo
+    else
+        sed -i "1s/^/$PREFIX: /" $1
+    fi
+fi
