@@ -1,2 +1,18 @@
 default-timeout=10000
 ignore-timeout=0
+
+# style
+# material background color: #263238
+font=Hack Nerd Font Mono 10
+background-color=#6182B8FF
+text-color=#263238FF
+border-size=3
+border-radius=10
+border-color=#c4c4c4FF
+height=150
+padding=5,1,20
+
+format=<b>%s</b>\n%b\n<small>%a</small>
+
+[urgency=high]
+border-color=#ff5370
