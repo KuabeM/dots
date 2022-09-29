@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
   Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
   Plug 'ray-x/cmp-treesitter'
+  Plug 'mfussenegger/nvim-dap'                  " Debug Adapter Protocol
 
   Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
   Plug 'rafamadriz/neon'

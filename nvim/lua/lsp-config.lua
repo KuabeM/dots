@@ -77,20 +77,58 @@ cmp.setup({
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+  name = 'lldb'
+}
+dap.configurations.cpp = {
+  {
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+  }
+}
+dap.configurations.c = dap.configurations.cpp
+
+
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
 -- rust-tools
+local rust_tools = require('rust-tools')
 local opts = {
     tools = {
         autoSetHints = true,
-        hover_with_actions = true,
         runnables = {
             use_telescope = true
         },
         inlay_hints = {
-            show_parameter_hints = false,
             parameter_hints_prefix = "",
             other_hints_prefix = "",
+        },
+        hover_actions = {
+            -- the border that is used for the hover window
+            -- see vim.api.nvim_open_win()
+            border = {
+                { "╭", "FloatBorder" },
+                { "─", "FloatBorder" },
+                { "╮", "FloatBorder" },
+                { "│", "FloatBorder" },
+                { "╯", "FloatBorder" },
+                { "─", "FloatBorder" },
+                { "╰", "FloatBorder" },
+                { "│", "FloatBorder" },
+            },
+            -- whether the hover action window gets automatically focused
+            -- default: false
+            auto_focus = false,
         },
     },
 
@@ -107,10 +145,14 @@ local opts = {
                     command = "clippy"
                 },
             }
-        }
+        },
+        on_attach = function(_, buff_nr)
+            vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = buff_nr })
+            vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
+        end,
     },
 }
-require('rust-tools').setup(opts)
+rust_tools.setup(opts)
 
 -- Enable clangd
 nvim_lsp.clangd.setup({
