@@ -5,3 +5,4 @@ CONFIG
 config
 usr
 cmake
+ethercat
