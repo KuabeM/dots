@@ -64,6 +64,7 @@ set shortmess+=c            " Avoid showing extra messages when using completion
 
 set termguicolors           " show colors
 set number                  " show line numbers
+set relativenumber
 set showmatch               " show matching brackets.
 set cursorline              " Highlight current line
 set nowrap                  " Do not wrap lines
