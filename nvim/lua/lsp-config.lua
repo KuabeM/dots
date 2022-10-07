@@ -279,5 +279,5 @@ vim.keymap.set("n", "gf", function() b.format({ async = true }) end, { silent = 
 vim.keymap.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
 vim.keymap.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
 
-vim.keymap.set("n", "fj", vim.diagnostic.goto_prev, { silent = true, desc = "vim.diagnostics.goto_prev" })
-vim.keymap.set("n", "fk", vim.diagnostic.goto_next, { silent = true, desc = "vim.diagnostics.goto_next" })
+vim.keymap.set("n", "fj", vim.diagnostic.goto_next, { silent = true, desc = "vim.diagnostics.goto_next" })
+vim.keymap.set("n", "fk", vim.diagnostic.goto_prev, { silent = true, desc = "vim.diagnostics.goto_prev" })
