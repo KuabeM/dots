@@ -8,3 +8,4 @@ grace=5
 effect-blur=7x3
 ignore-empty-password
 fade-in=0.2
+hide-keyboard-layout
