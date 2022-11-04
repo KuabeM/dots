@@ -16,11 +16,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'ray-x/cmp-treesitter'
   Plug 'mfussenegger/nvim-dap'                  " Debug Adapter Protocol
 
-  Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-  Plug 'rafamadriz/neon'
-  Plug 'marko-cerovac/material.nvim'            " Material color theme
+  Plug 'hzchirs/vim-material'                   " Antoher material theme
 
-  Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
+  " Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
+  Plug 'lewis6991/gitsigns.nvim'                " git decorations
   Plug 'f-person/git-blame.nvim'                " show git blame messages
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
   Plug 'vim-airline/vim-airline'                " powerline-like statusbar/tabline
@@ -43,8 +42,8 @@ let mapleader=";"
 syntax enable
 filetype plugin indent on
 
-let g:material_style = "oceanic"
-colorscheme material
+set background=dark
+colorscheme vim-material
 
 set spell spelllang=en_us   " Spell checking
 set nospell
@@ -147,6 +146,7 @@ inoremap <silent><C-f> <C-o>:MaximizerToggle<CR>
 
 " vim-airline
 " if theres only one tab display buffers
+let g:airline_theme='material'
 let g:airline#extensions#tabline#enabled = 1
 " get the godd symbols
 let g:airline_powerline_fonts = 1
