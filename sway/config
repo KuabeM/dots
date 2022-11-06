@@ -35,7 +35,10 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 
 # set proper environment variables for xdg-desktop-portal
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
+     hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
+     systemctl restart wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
 
 ### Idle configuration
 #
