@@ -16,13 +16,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'ray-x/cmp-treesitter'
   Plug 'mfussenegger/nvim-dap'                  " Debug Adapter Protocol
 
-  Plug 'hzchirs/vim-material'                   " Antoher material theme
+  Plug 'marko-cerovac/material.nvim'
 
-  " Plug 'airblade/vim-gitgutter'                 " show git changes in gutter
+  Plug 'nvim-lualine/lualine.nvim'              " lualine statusbar
+  Plug 'kdheepak/tabline.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'lewis6991/gitsigns.nvim'                " git decorations
   Plug 'f-person/git-blame.nvim'                " show git blame messages
   Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
-  Plug 'vim-airline/vim-airline'                " powerline-like statusbar/tabline
   Plug 'kien/rainbow_parentheses.vim'           " colorize parentheses
 
   Plug 'wellle/targets.vim'                     " Give more target to operate on
@@ -36,14 +37,27 @@ call plug#begin('~/.vim/plugged')
   Plug 'szw/vim-maximizer'                      " Maximize a split window
 call plug#end()
 
-" change the leader key from "\" to ";"
-let mapleader=";"
-
 syntax enable
 filetype plugin indent on
 
-set background=dark
-colorscheme vim-material
+" Load lua modules
+lua <<EOF
+
+-- Misc options
+require('options')
+
+-- LSP
+require('lsp-config')
+
+-- Telescope
+require('telescope-config')
+
+-- Plugin Comment.nvim
+require('Comment').setup{}
+
+-- Misc keymaps
+require('keymaps')
+EOF
 
 set spell spelllang=en_us   " Spell checking
 set nospell
@@ -99,11 +113,6 @@ set signcolumn=yes
 
 highlight CursorLine term=bold cterm=bold gui=bold
 
-" Configure Git Gutter
-highlight link GitGutterAdd DiffAdd
-highlight link GitGutterChange DiffAdd
-highlight link GitGutterDelete DiffAdd
-highlight link GitGutterChangeDeleteLine DiffAdd
 " Configure Git blame
 let g:gitblame_enabled = 0
 let g:gitblame_message_template = '		<summary> • <date> • <author> • <sha> '
@@ -112,25 +121,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep\ --no-heading " use ripgrep
   set grepformat=%f:%l:%c:%m
 endif
-
-" Load lua modules
-lua <<EOF
-
--- Misc options
-require('options')
-
--- LSP
-require('lsp-config')
-
--- Telescope
-require('telescope-config')
-
--- Plugin Comment.nvim
-require('Comment').setup{}
-
--- Misc keymaps
-require('keymaps')
-EOF
 
 " Show diagnostic popup on cursor hover
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
@@ -143,16 +133,6 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 nnoremap <silent><C-f> :MaximizerToggle<CR>
 vnoremap <silent><C-f> :MaximizerToggle<CR>gv
 inoremap <silent><C-f> <C-o>:MaximizerToggle<CR>
-
-" vim-airline
-" if theres only one tab display buffers
-let g:airline_theme='material'
-let g:airline#extensions#tabline#enabled = 1
-" get the godd symbols
-let g:airline_powerline_fonts = 1
-" separators for tabline
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " move through tabs with H L
 nnoremap H gT

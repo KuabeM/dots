@@ -2,15 +2,29 @@
 vim.g.mapleader = ";"
 
 -- colorschemes
--- require('material').setup({
---     plugins = {
---         "gitsigns",
---         "nvim-cmp",
---         "telescope",
---     }
--- })
--- vim.g.material_style = "oceanic"
--- vim.cmd 'colorscheme material'
+require('material').setup({
+    contrast = {
+        terminal = false, -- Enable contrast for the built-in terminal
+        sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+        floating_windows = false, -- Enable contrast for floating windows
+        cursor_line = false, -- Enable darker background for the cursor line
+        non_current_windows = false, -- Enable darker background for non-current windows
+        filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+    },
+    plugins = {
+        "gitsigns",
+        "nvim-cmp",
+        "telescope",
+    },
+    lualine_style = 'default'
+})
+vim.g.material_style = "oceanic"
+vim.cmd 'colorscheme material'
+
+-- statusline with lualine
+require('lualine').setup({
+})
+require'tabline'.setup { }
 
 -- use tree style
 vim.g.netrw_liststyle = 3
