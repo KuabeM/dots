@@ -22,9 +22,22 @@ vim.g.material_style = "oceanic"
 vim.cmd 'colorscheme material'
 
 -- statusline with lualine
-require('lualine').setup({
-})
-require'tabline'.setup { }
+require('lualine').setup {
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'diff',
+            { 'diagnostics', sources = { 'nvim_lsp', 'nvim_diagnostic' } },
+            function()
+                local space = vim.fn.search([[\s\+$]], 'nwc')
+                return space ~= 0 and "trailing:" .. space or ""
+            end },
+        lualine_c = { { 'filename', path = 1, } },
+        lualine_x = { 'branch', 'filetype' }, -- default: 'encoding', 'fileformat'
+        lualine_y = { 'searchcount' }, -- default: 'progress'
+        lualine_z = { 'progress', 'location', 'filesize' }
+    },
+}
+require 'tabline'.setup {}
 
 -- use tree style
 vim.g.netrw_liststyle = 3
