@@ -296,5 +296,6 @@ no_focus [app_id="thunderbird"]
 for_window [app_id="org.kde.ark"] floating enable
 no_focus [title="Microsoft Teams Notification"]
 for_window [window_type="notification"] move absolute position 20 px 30 px
+for_window [app_id="^chrome-.*-.*$"] shortcuts_inhibitor disable
 
 include /etc/sway/config.d/*
