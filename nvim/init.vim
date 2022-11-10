@@ -43,6 +43,8 @@ filetype plugin indent on
 " Load lua modules
 lua <<EOF
 
+require('plugins')
+
 -- Misc options
 require('options')
 
@@ -57,6 +59,11 @@ require('Comment').setup{}
 
 -- Misc keymaps
 require('keymaps')
+
+
+-- Configure neorg
+require('neorg-nvim')
+
 EOF
 
 set spell spelllang=en_us   " Spell checking
