@@ -16,7 +16,7 @@ neorg.setup {
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
-                    work = "~/notes/work",
+                    work = "~/Documents/Notes",
                     home = "~/notes/home",
                 }
             }
@@ -24,6 +24,15 @@ neorg.setup {
         ["core.norg.completion"] = {
             config = { engine = 'nvim-cmp' }
         },
-        ["core.norg.concealer"] = {}
+        ["core.norg.concealer"] = {
+            config = {
+                icons = {
+                    todo = {
+                        undone = ' ',
+                        done = 'X'
+                    }
+                }
+            }
+        }
     }
 }
