@@ -190,7 +190,7 @@ nvim_lsp.dockerls.setup {}
 
 -- Groovy language server: https://github.com/GroovyLanguageServer/groovy-language-server
 nvim_lsp.groovyls.setup {
-    cmd = { "java", "-jar", "/home/korbinian/.local/bin/groovy-language-server-all.jar" },
+    cmd = { "java", "-jar", "/home/maie_ko/.local/bin/groovy-language-server-all.jar" },
 }
 
 -- https://github.com/latex-lsp/texlab

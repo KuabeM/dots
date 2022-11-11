@@ -39,20 +39,14 @@ exec systemctl stop --user wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
     systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
     hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
-    systemctl restart --user wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
+    systemctl restart --user wireplumber xdg-desktop-portal xdg-desktop-portal-wlr && \
+     dbus-update-activation-environment --all
 
-### Idle configuration
-#
-# Example configuration:
-#
+# Idle configuration
 exec swayidle -w \
          timeout 300 'swaylock -f -C $HOME/.config/sway/swaylock_config' \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -C $HOME/.config/sway/swaylock_config --grace=0'
-
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 # nm-applet
 exec nm-applet --indicator
