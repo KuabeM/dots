@@ -6,3 +6,7 @@ config
 usr
 cmake
 ethercat
+msg
+backtraces
+https
+TODO
