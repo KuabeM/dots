@@ -22,6 +22,7 @@ vim.g.material_style = "oceanic"
 vim.cmd 'colorscheme material'
 
 -- statusline with lualine
+local navic = require('nvim-navic')
 require('lualine').setup {
     sections = {
         lualine_a = { 'mode' },
@@ -31,7 +32,10 @@ require('lualine').setup {
                 local space = vim.fn.search([[\s\+$]], 'nwc')
                 return space ~= 0 and "trailing:" .. space or ""
             end },
-        lualine_c = { { 'filename', path = 1, } },
+        lualine_c = {
+            { 'filename', path = 1, },
+            { navic.get_location, cond = navic.is_available }
+        },
         lualine_x = { 'branch', 'filetype' }, -- default: 'encoding', 'fileformat'
         lualine_y = { 'searchcount' }, -- default: 'progress'
         lualine_z = { 'progress', 'location', 'filesize' }

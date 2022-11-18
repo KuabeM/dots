@@ -79,22 +79,22 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local dap = require('dap')
 dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-  name = 'lldb'
+    type = 'executable',
+    command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
+    name = 'lldb'
 }
 dap.configurations.cpp = {
-  {
-    name = 'Launch',
-    type = 'lldb',
-    request = 'launch',
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = {},
-  }
+    {
+        name = 'Launch',
+        type = 'lldb',
+        request = 'launch',
+        program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+    }
 }
 dap.configurations.c = dap.configurations.cpp
 
@@ -146,17 +146,26 @@ local opts = {
                 },
             }
         },
-        on_attach = function(_, buff_nr)
+        on_attach = function(client, buff_nr)
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = buff_nr })
             vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
+            -- if client.server_capabilities.documentSymbolProvider then
+                require('nvim-navic').attach(client, buff_nr)
+            -- end
         end,
     },
 }
 rust_tools.setup(opts)
 
+local on_attach = function(client, buff_nr)
+    if client.server_capabilities.documentSymbolProvider then
+        require('nvim-navic').attach(client, buff_nr)
+    end
+end
 -- Enable clangd
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
+    on_attach = on_attach
 })
 
 -- Enable json ls

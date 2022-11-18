@@ -1,66 +1,21 @@
-" plugins
-call plug#begin('~/.vim/plugged')
-
-  Plug 'neovim/nvim-lspconfig'                  " Common configurations for the Nvim LSP client
-  Plug 'nvim-lua/lsp_extensions.nvim'           " Extensions to built-in LSP
-  Plug 'simrat39/rust-tools.nvim'               " Rust tooling
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting
-
-  Plug 'hrsh7th/nvim-cmp'                       " Autocompletion framework
-  Plug 'hrsh7th/cmp-nvim-lsp'                   " cmd LSP completion
-  Plug 'hrsh7th/cmp-path'                       " cmd Path completion
-  Plug 'hrsh7th/cmp-buffer'                     " cmd Buffer completion
-  " See hrsh7th other plugins for more great completion sources!
-  Plug 'hrsh7th/cmp-vsnip'                      " cmd Snippet completion
-  Plug 'hrsh7th/vim-vsnip'                      " Snippet engine
-  Plug 'ray-x/cmp-treesitter'
-  Plug 'mfussenegger/nvim-dap'                  " Debug Adapter Protocol
-
-  Plug 'marko-cerovac/material.nvim'
-
-  Plug 'nvim-lualine/lualine.nvim'              " lualine statusbar
-  Plug 'kdheepak/tabline.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'lewis6991/gitsigns.nvim'                " git decorations
-  Plug 'f-person/git-blame.nvim'                " show git blame messages
-  Plug 'jiangmiao/auto-pairs'                   " auto-close brackets, quotes etc
-  Plug 'kien/rainbow_parentheses.vim'           " colorize parentheses
-
-  Plug 'wellle/targets.vim'                     " Give more target to operate on
-  Plug 'kopischke/vim-fetch'                    " Handle line numbers when opening files
-
-  Plug 'numToStr/Comment.nvim'                  " Comments stuff
-
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'          " Fuzzy finder for everything
-
-  Plug 'szw/vim-maximizer'                      " Maximize a split window
-call plug#end()
 
 syntax enable
 filetype plugin indent on
 
 " Load lua modules
 lua <<EOF
-
+-- load plugins with packer
 require('plugins')
-
 -- Misc options
 require('options')
-
 -- LSP
 require('lsp-config')
-
 -- Telescope
 require('telescope-config')
-
 -- Plugin Comment.nvim
 require('Comment').setup{}
-
 -- Misc keymaps
 require('keymaps')
-
-
 -- Configure neorg
 require('neorg-nvim')
 
