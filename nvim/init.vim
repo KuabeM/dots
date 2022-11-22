@@ -8,14 +8,14 @@ lua <<EOF
 require('plugins')
 -- Misc options
 require('options')
+-- Misc keymaps
+require('keymaps')
 -- LSP
 require('lsp-config')
 -- Telescope
 require('telescope-config')
 -- Plugin Comment.nvim
 require('Comment').setup{}
--- Misc keymaps
-require('keymaps')
 -- Configure neorg
 require('neorg-nvim')
 

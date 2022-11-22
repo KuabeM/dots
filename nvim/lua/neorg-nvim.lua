@@ -5,6 +5,7 @@ neorg.setup {
         ["core.defaults"] = {},
         ["core.keybinds"] = {
             config = {
+                default_keybinds = true,
                 hook = function(keybinds)
                     -- todo done
                     keybinds.remap_key("norg", "n", "gtd", "<Leader>cc")
@@ -40,5 +41,6 @@ neorg.setup {
                 extensions = "all",
             }
         },
-    }
+        ["core.integrations.telescope"] = {},
+    },
 }

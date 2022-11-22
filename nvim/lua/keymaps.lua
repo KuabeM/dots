@@ -1,3 +1,6 @@
+-- change mapleader from "\" to ";"
+vim.g.mapleader = ";"
+vim.g.maplocalleader = "\\"
 
 -- netrw
 vim.keymap.set("n", "<leader>fe", ":Explore<CR>", { silent = true, desc = ":Explore" })

@@ -1,5 +1,3 @@
--- change mapleader from "\" to ";"
-vim.g.mapleader = ";"
 
 -- colorschemes
 require('material').setup({

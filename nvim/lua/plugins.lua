@@ -43,7 +43,10 @@ return require('packer').startup(function(use)
     use {
         "nvim-neorg/neorg",
         run = ":Neorg sync-parsers",
-        requires = "nvim-lua/plenary.nvim"
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-neorg/neorg-telescope"
+        }
     }
 
     use {
