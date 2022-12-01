@@ -1,7 +1,4 @@
 
-syntax enable
-filetype plugin indent on
-
 " Load lua modules
 lua <<EOF
 -- load plugins with packer
@@ -20,6 +17,9 @@ require('Comment').setup{}
 require('neorg-nvim')
 
 EOF
+
+syntax enable
+filetype plugin indent on
 
 set spell spelllang=en_us   " Spell checking
 set nospell

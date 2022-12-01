@@ -149,9 +149,9 @@ local opts = {
         on_attach = function(client, buff_nr)
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = buff_nr })
             vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
-            -- if client.server_capabilities.documentSymbolProvider then
+            if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
-            -- end
+            end
         end,
     },
 }
