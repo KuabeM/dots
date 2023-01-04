@@ -35,10 +35,11 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 
 # set proper environment variables for xdg-desktop-portal
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
-     hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
-     systemctl restart wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
+exec systemctl stop --user wireplumber xdg-desktop-portal xdg-desktop-portal-wlr && \
+    systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
+    hash dbus-update-activation-environment 2>/dev/null && \
+    dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
+    systemctl restart --user wireplumber xdg-desktop-portal xdg-desktop-portal-wlr
 
 ### Idle configuration
 #
@@ -254,6 +255,11 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+p exec playerctl play-pause
 # Lock screen
 bindsym $mod+Ctrl+s exec swaylock -f -C $HOME/.config/sway/swaylock_config --grace=0
+# gestures
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+bindgesture swipe:4:left move left
+bindgesture swipe:4:right move right
 
 #
 # Status Bar:
