@@ -5,7 +5,7 @@ indicator
 indicator-radius=100
 indicator-thickness=5
 grace=5
-effect-blur=7x3
+effect-blur=7x10
 ignore-empty-password
-fade-in=0.2
+#fade-in=0.2
 hide-keyboard-layout
