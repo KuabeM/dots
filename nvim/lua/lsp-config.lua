@@ -4,6 +4,19 @@
 -- nvim_lsp object
 local nvim_lsp = require 'lspconfig'
 
+
+-- define border once
+local _border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local has_words_before = function()
@@ -116,16 +129,7 @@ local opts = {
         hover_actions = {
             -- the border that is used for the hover window
             -- see vim.api.nvim_open_win()
-            border = {
-                { "╭", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "╮", "FloatBorder" },
-                { "│", "FloatBorder" },
-                { "╯", "FloatBorder" },
-                { "─", "FloatBorder" },
-                { "╰", "FloatBorder" },
-                { "│", "FloatBorder" },
-            },
+            border = _border,
             -- whether the hover action window gets automatically focused
             -- default: false
             auto_focus = false,
@@ -273,20 +277,5 @@ cmp.setup({
     })
 })
 
-local b = vim.lsp.buf
--- Key mappings
-vim.keymap.set("n", "fd", b.definition, { silent = true, desc = "vim.lsp.buf.definition" })
-vim.keymap.set("n", "K", b.hover, { silent = true, desc = "vim.lsp.buf.hover" })
-vim.keymap.set("n", "fi", b.implementation, { silent = true, desc = "vim.lsp.buf.implementation" })
-vim.keymap.set("n", "fu", b.declaration, { silent = true, desc = "vim.lsp.buf.declaration" })
-vim.keymap.set("n", "fs", b.signature_help, { silent = true, desc = "vim.lsp.buf.signature_help" })
-vim.keymap.set("n", "ft", b.type_definition, { silent = true, desc = "vim.lsp.buf.type_definition" })
-vim.keymap.set("n", "fr", b.references, { silent = true, desc = "vim.lsp.buf.references" })
-vim.keymap.set("n", "g0", b.document_symbol, { silent = true, desc = "vim.lsp.buf.document_symbol" })
-vim.keymap.set("n", "gW", b.workspace_symbol, { silent = true, desc = "vim.lsp.buf.workspace_symbol" })
-vim.keymap.set("n", "gf", function() b.format({ async = true }) end, { silent = true, desc = "vim.lsp.buf.formatting" })
-vim.keymap.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
-vim.keymap.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
+vim.diagnostic.config { float = { border = _border } }
 
-vim.keymap.set("n", "fj", vim.diagnostic.goto_next, { silent = true, desc = "vim.diagnostics.goto_next" })
-vim.keymap.set("n", "fk", vim.diagnostic.goto_prev, { silent = true, desc = "vim.diagnostics.goto_prev" })
