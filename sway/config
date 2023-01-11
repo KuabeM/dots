@@ -255,11 +255,6 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+p exec playerctl play-pause
 # Lock screen
 bindsym $mod+Ctrl+s exec swaylock -f -C $HOME/.config/sway/swaylock_config --grace=0
-# gestures
-bindgesture swipe:3:right workspace prev
-bindgesture swipe:3:left workspace next
-bindgesture swipe:4:left move left
-bindgesture swipe:4:right move right
 
 #
 # Status Bar:
