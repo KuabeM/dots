@@ -66,3 +66,6 @@ key.set("n", "<leader>ld", t.lsp_type_definitions, { silent = true, desc = "tele
 key.set("n", "<leader>gst", t.git_status, { silent = true, desc = "telescope.git_status()" })
 key.set("n", "<leader>gb", t.git_branches, { silent = true, desc = "telescope.git_branches()" })
 key.set("n", "<leader>gsta", t.git_stash, { silent = true, desc = "telescope.git_stash()" })
+
+-- close current buffer but not the split
+key.set("n", "<leader>d", ":b#<bar>bd#<CR>", { silent = true, desc = "close current buffer" })
