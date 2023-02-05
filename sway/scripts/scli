@@ -46,9 +46,8 @@ if [ "$#" -eq 1 ]; then
     swaymsg "output eDP-1 enable pos 1920 0"
     exit 0
   elif [ "$1" = "x1" ]; then
-    swaymsg "output eDP-1 disable"
-    swaymsg "output DP-1 resolution 2560x1440 enable pos 2560 0"
-    swaymsg "output HDMI-A-1 enable pos 0 0"
+    swaymsg "output DP-1 resolution 2560x1440 enable pos 0 0"
+    swaymsg "output eDP-1 enable pos 2560 0"
     exit 0
   elif [ "$1" = "x1-alt" ]; then
     swaymsg "output eDP-1 disable"
