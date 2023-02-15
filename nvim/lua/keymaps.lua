@@ -71,4 +71,3 @@ key.set("n", "<leader>gsta", t.git_stash, { silent = true, desc = "telescope.git
 key.set("n", "<leader>d", ":b#<bar>bd#<CR>", { silent = true, desc = "close current buffer" })
 -- paste without losing it
 key.set("x", "<leader>p", [["_dP]], { desc = "Paste but don't loose register" })
-key.set({"n", "v"}, "<leader>d", [["_d]], { desc = "Delete but not to register" })

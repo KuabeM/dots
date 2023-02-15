@@ -58,4 +58,11 @@ return require('packer').startup(function(use)
     }
 
     use { 'ThePrimeagen/vim-be-good' }
+    use { 'folke/which-key.nvim',
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup {}
+        end
+    }
 end)
