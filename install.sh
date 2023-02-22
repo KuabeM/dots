@@ -3,14 +3,14 @@
 src_dir=${0:a:h}
 
 echo 'Setup config files in ~'
-targets=(gdbinit gitconfig zshrc spacemacs)
+targets=(gdbinit gitconfig)
 for target in $targets; do
   ln -nfs $src_dir/$target $HOME/.$target
 done
 
 echo 'Setup config folders in .config'
 mkdir -p $HOME/.config
-folders=(alacritty htop mako piow sway waybar wofi yofi)
+folders=(alacritty htop mako piow sway waybar yofi)
 for folder in $folders; do
   ln -nfs $src_dir/$folder $HOME/.config/$folder
 done

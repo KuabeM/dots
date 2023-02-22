@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway
+DesktopNames=sway
+Comment=An i3-compatible Wayland compositor
+Exec=env XDG_CURRENT_DESKTOP=sway QT_QPA_PLATFORMTHEME=qt5ct MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORMTHEME=qt5ct XDG_SESSION_TYPE=wayland dbus-run-session sway
+Type=Application
