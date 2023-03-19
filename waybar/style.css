@@ -201,6 +201,13 @@ label:focus {
     -gtk-icon-effect: dim;
 }
 
+#tray menu {
+    background: rgba(43, 48, 59, 1.0);
+    padding: 10px 10px;
+    border: 1px solid rgba(100, 114, 125, 1.0);
+    border-radius: 3px;
+}
+
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
