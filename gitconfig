@@ -1,6 +1,7 @@
 [user]
 	name = Korbinian Knott
-	email = korbinian.knott@posteo.de
+	email = korbinian.knott@brainlab.com
+	signingkey = 6ACF486262D19A7C
 [core]
 	excludesfile = /home/korbinian/.gitignore_global
 	editor = nvim
@@ -97,5 +98,7 @@
 	autoStash = true
 [rerere]
 	enabled = true
-[safe]
-	directory = /mnt/root/home/korbinian/home-assistant-cfg
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /home/korbinian/.ssh/allowed_signers
