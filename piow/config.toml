@@ -12,7 +12,7 @@ icon_separator = " "
 
 [icons]
 "firefox" = ""
-"chrome" = ""
+"google-chrome" = ""
 "chromium" = ""
 "alacritty" = ""
 "kitty" = ""
