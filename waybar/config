@@ -51,26 +51,9 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "interval": 1,
-        "tooltip-format": "<small>{calendar}</small>",
-        "format": "{:%H:%M:%S - %d/%m/%Y}",
-        "format-alt": "{:%H:%M:%S - %d/%m/%Y}",
-        "calendar": {
-                    "mode"          : "year",
-                    "mode-mon-col"  : 3,
-                    "weeks-pos"     : "right",
-                    "on-scroll"     : 0,
-                    "on-click": "mode",
-                    "format": {
-                              "weeks":      "<span color='#99ffdd'>{}</span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b>{}</b></span>"
-                              }
-                    },
-        "actions":  {
-                    "on-click-right": "mode",
-                    "on-click": "mode",
-                    }
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M:%S - %d-%m-%Y}",
+        "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "format": "{usage:2}% ",
