@@ -17,8 +17,8 @@ opt.spell = false -- disable spelling by default
 vim.g.netrw_liststyle = 3 -- use tree style
 vim.g.netrw_fastbrowse = 0 -- don't reuse buffers
 
-opt.colorcolumn = "100" -- show column at textwidth
-opt.textwidth = 100
+opt.colorcolumn = "80" -- show column at textwidth
+opt.textwidth = 80
 opt.signcolumn = "yes" -- fixed width for signcolumn
 
 -- completion
