@@ -43,14 +43,14 @@ return require('packer').startup(function(use)
 
     use { 'szw/vim-maximizer' } -- Maximize a split window
 
-    use {
-        "nvim-neorg/neorg",
-        run = ":Neorg sync-parsers",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-neorg/neorg-telescope"
-        }
-    }
+    -- use {
+    --     "nvim-neorg/neorg",
+    --     run = ":Neorg sync-parsers",
+    --     requires = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-neorg/neorg-telescope"
+    --     }
+    -- }
 
     use {
         "SmiteshP/nvim-navic",
