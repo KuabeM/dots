@@ -279,3 +279,16 @@ cmp.setup({
 
 vim.diagnostic.config { float = { border = _border } }
 
+local api = vim.api
+api.nvim_create_autocmd("CursorHold", {
+    pattern = "<buffer>",
+    command = "lua vim.lsp.buf.document_highlight()"
+})
+api.nvim_create_autocmd("CursorHoldI", {
+    pattern = "<buffer>",
+    command = "lua vim.lsp.buf.document_highlight()"
+})
+api.nvim_create_autocmd("CursorMoved", {
+    pattern = "<buffer>",
+    command = "lua vim.lsp.buf.clear_references()"
+})
