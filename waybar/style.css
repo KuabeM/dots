@@ -2,7 +2,7 @@
     all: unset;
     border: none;
     border-radius: 2px;
-    font-family: Cascadia Code;
+    font-family: "Hack Nerd Font";
     font-size: 12px;
     min-height: 0;
 }
