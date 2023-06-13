@@ -122,6 +122,12 @@ input * {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+    # Move the whole workspace around
+    bindsym $mod+Shift+Ctrl+Right move workspace to output right
+    bindsym $mod+Shift+Ctrl+Left move workspace to output left
+    bindsym $mod+Shift+Ctrl+Up move workspace to output up
+    bindsym $mod+Shift+Ctrl+Down move workspace to output down
 #
 # Workspaces:
 #
