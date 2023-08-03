@@ -4,10 +4,10 @@
     "height": 20, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": ["sway/window"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock"],
-    "modules-right": ["sway/scratchpad", "network", "pulseaudio", "cpu", "memory", "backlight", "battery", "battery#key", "clock", "idle_inhibitor", "tray"],
+    "modules-right": ["network", "pulseaudio", "cpu", "memory", "backlight", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/workspaces": {
       "disable-scroll": true,
@@ -107,21 +107,6 @@
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#key": {
-        "bat": "hid-dc:2c:26:28:5b:aa-battery",
-        "states": {
-            // "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "",
-        "format-alt": "{time} {icon}",
-        "format-good": "", // An empty format will hide the module
-        "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {

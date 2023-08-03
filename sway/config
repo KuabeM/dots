@@ -47,7 +47,7 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
         xdg-desktop-portal-wlr \
         wireplumber \
         pipewire && \
-     systemctl start --user pipewire xdg-desktop-portal
+     systemctl start --user pipewire xdg-desktop-portal xdg-desktop-portal-wlr
 
 # Idle configuration
 exec swayidle -w \
@@ -76,6 +76,8 @@ input * {
     xkb_layout "eu,de,us"
     xkb_options caps:super
 }
+
+input type:pointer scroll_factor 2.0
 
 
 ### Key bindings
