@@ -5,6 +5,7 @@
 	excludesfile = /home/maie_ko/.gitignore_global
 	editor = nvim
 	autocrlf = input
+	pager = delta
 [push]
 	default = simple
 [pull]
@@ -70,10 +71,20 @@
 	grafted = 1 normal italic
 	HEAD = 14 normal dim
 [diff]
-	colorMoved = zebra
-	tool = vimdiff
+	colorMoved = default
 [merge]
 	conflictstyle = diff3
-	tool = vimdiff
 [mergetool "vimdiff"]
 	path = nvim
+[interactive]
+	diffFilter = delta --color-only --features simple-color
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+[delta "simple-color"]
+	header = 8 normal bold
+	help = 8 normal
+	error = 1 normal italic
+	minus-style = 9 normal
+	plus-style = 10 normal

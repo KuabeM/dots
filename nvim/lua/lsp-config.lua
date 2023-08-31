@@ -114,6 +114,42 @@ dap.configurations.c = dap.configurations.cpp
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
+function get_project_rustanalyzer_settings()
+  local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
+  if not handle then
+    return {}
+  end
+  local out = handle:read("*a")
+  handle:close()
+  local config = vim.json.decode(out)
+  if type(config) == "table" then
+    return config
+  end
+  return {}
+end
+
+function add_document_highlight(client, bufnr)
+    if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_create_augroup('lsp_document_highlight', {
+            clear = false
+        })
+        vim.api.nvim_clear_autocmds({
+            buffer = bufnr,
+            group = 'lsp_document_highlight',
+        })
+        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+            group = 'lsp_document_highlight',
+            buffer = bufnr,
+            callback = vim.lsp.buf.document_highlight,
+        })
+        vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+            group = 'lsp_document_highlight',
+            buffer = bufnr,
+            callback = vim.lsp.buf.clear_references,
+        })
+    end
+end
+
 -- rust-tools
 local rust_tools = require('rust-tools')
 local opts = {
@@ -156,6 +192,7 @@ local opts = {
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
+            add_document_highlight(client, buff_nr)
         end,
     },
 }
@@ -165,6 +202,7 @@ local on_attach = function(client, buff_nr)
     if client.server_capabilities.documentSymbolProvider then
         require('nvim-navic').attach(client, buff_nr)
     end
+    add_document_highlight(client, buff_nr)
 end
 -- Enable clangd
 nvim_lsp.clangd.setup({
@@ -183,7 +221,11 @@ nvim_lsp.jsonls.setup({
     }
 })
 -- Enable cmake: pip install cmake-language-server
-nvim_lsp.cmake.setup {}
+nvim_lsp.cmake.setup {
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
+}
 
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
 nvim_lsp.dockerls.setup {}
@@ -202,13 +244,25 @@ nvim_lsp.texlab.setup {
 }
 
 -- npm install -g vim-language-server
-nvim_lsp.vimls.setup {}
+nvim_lsp.vimls.setup {
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
+}
 
 -- npm install -g vscode-langservers-extracted
-nvim_lsp.html.setup {}
+nvim_lsp.html.setup {
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
+}
 
 -- python: pip install python-lsp-server
-nvim_lsp.pylsp.setup {}
+nvim_lsp.pylsp.setup {
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
+}
 
 -- lua: https://github.com/sumneko/lua-language-server
 nvim_lsp.sumneko_lua.setup {
@@ -225,6 +279,9 @@ nvim_lsp.sumneko_lua.setup {
             },
         },
     },
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
 }
 
 -- Enable diagnostics
@@ -277,18 +334,18 @@ cmp.setup({
     })
 })
 
+-- add borders to all hover windows
 vim.diagnostic.config { float = { border = _border } }
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
+  options = options or {}
+  options.border = options.border or _border
+  return orig_util_open_floating_preview(contents, syntax, options, ...)
+end
 
-local api = vim.api
-api.nvim_create_autocmd("CursorHold", {
-    pattern = "<buffer>",
-    command = "lua vim.lsp.buf.document_highlight()"
-})
-api.nvim_create_autocmd("CursorHoldI", {
-    pattern = "<buffer>",
-    command = "lua vim.lsp.buf.document_highlight()"
-})
-api.nvim_create_autocmd("CursorMoved", {
-    pattern = "<buffer>",
-    command = "lua vim.lsp.buf.clear_references()"
-})
+-- customize diagnostic signs
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
