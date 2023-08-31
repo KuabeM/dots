@@ -264,8 +264,7 @@ nvim_lsp.pylsp.setup {
     end
 }
 
--- lua: https://github.com/sumneko/lua-language-server
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup {
     settings = {
         Lua = {
             runtime = { -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)

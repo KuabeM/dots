@@ -37,7 +37,7 @@ require("lazy").setup({
     { 'lewis6991/gitsigns.nvim' }, -- git decorations
     { 'f-person/git-blame.nvim', -- show git blame messages
         init = function()
-            vim.g.gitblame_message_template =  '<summary> • <date> • <author> • <sha>'
+            vim.g.gitblame_message_template =  '	<summary> • <date> • <author> • <sha>'
             vim.g.gitblame_enabled = 1
             vim.g.gitblame_virtual_text_column = 100
             vim.g.gitblame_delay = 1000
