@@ -14,6 +14,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ";"
 
 require("lazy").setup({
+    ui = {
+        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+        border = "single",
+    },
     'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
     'simrat39/rust-tools.nvim', -- rust lsp tooling
     {

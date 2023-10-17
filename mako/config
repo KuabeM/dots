@@ -12,6 +12,7 @@ border-color=#c4c4c4
 height=200
 padding=5,1,20
 anchor=bottom-right
+outer-margin=60,0
 
 format=<b>%s</b>\n%b\n<small>%a</small>
 

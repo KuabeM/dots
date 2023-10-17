@@ -15,8 +15,8 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-# set $term $HOME/.cargo/bin/alacritty
-set $term kitty
+set $term $HOME/.cargo/bin/alacritty
+# set $term kitty
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -37,7 +37,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 
 # set proper environment variables for xdg-desktop-portal
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK && \
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP && \
      dbus-update-activation-environment --systemd \
         MOZ_ENABLE_WAYLAND=1 \
         QT_QPA_PLATFORMTHEME=qt5ct \
@@ -57,6 +57,12 @@ exec swayidle -w \
 
 # nm-applet
 exec nm-applet --indicator
+
+# flameshot screenshot
+exec XDG_CURRENT_DESKTOP=sway flameshot
+
+# Start kde polkit service
+exec --no-startup-id $HOME/.config/sway/scripts/polkit
 
 ### Input configuration
 #
@@ -242,7 +248,7 @@ bindsym $mod+r mode "resize"
 
 ## CUSTOM SHORTCUTS
 # Screenshots
-bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/"$(date +'%Y%m%d-%H%M%S')"_grim.png
+bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/"$(date +'%Y-%m-%d_%H-%M-%S')"_grim.png
 bindsym Shift+Print exec grim ~/Pictures/Screenshots/"$(date +'%Y%m%d-%H%M%S')"_grim.png
 # Brightness
 bindsym XF86MonBrightnessUp exec brightnessctl s +10%
@@ -267,9 +273,10 @@ bindsym $mod+Ctrl+s exec swaylock -f -C $HOME/.config/sway/swaylock_config --gra
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    # swaybar_command waybar
     status_command waybar
     mode invisible
-    # position  
+    # position
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -304,5 +311,6 @@ no_focus [title="Microsoft Teams Notification"]
 for_window [window_type="notification"] move absolute position 20 px 30 px
 for_window [app_id="^chrome-.*-.*$"] shortcuts_inhibitor disable
 for_window [title="Firefox - Sharing Indicator"] floating enable
+for_window [app_id="flameshot"] floating enable, fullscreen disable, move absolute position 0 0, border pixel 0
 
 include /etc/sway/config.d/*

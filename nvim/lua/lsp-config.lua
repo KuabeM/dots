@@ -184,6 +184,12 @@ local opts = {
                 checkOnSave = {
                     command = "clippy"
                 },
+                cargo =  {
+                        -- features = {"ros-output"}
+                },
+                procMacro = {
+                    enable = true,
+                },
             }
         },
         on_attach = function(client, buff_nr)
