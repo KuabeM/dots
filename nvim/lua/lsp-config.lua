@@ -296,14 +296,20 @@ nvim_lsp.lua_ls.setup {
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-}
+        virtual_text = false,
+        signs = true,
+        update_in_insert = true,
+    }
 )
 
 -- autoformatting on save
---vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+vim.api.nvim_create_autocmd(
+    "BufWritePre",
+    {
+        pattern = { "*.rs", "*.c", "*.h", "CMakeLists.txt" },
+        callback = function() vim.lsp.buf.format() end,
+    }
+)
 
 cmp.setup({
     snippet = {
