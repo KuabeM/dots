@@ -115,17 +115,17 @@ dap.configurations.c = dap.configurations.cpp
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
 function get_project_rustanalyzer_settings()
-  local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
-  if not handle then
+    local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
+    if not handle then
+        return {}
+    end
+    local out = handle:read("*a")
+    handle:close()
+    local config = vim.json.decode(out)
+    if type(config) == "table" then
+        return config
+    end
     return {}
-  end
-  local out = handle:read("*a")
-  handle:close()
-  local config = vim.json.decode(out)
-  if type(config) == "table" then
-    return config
-  end
-  return {}
 end
 
 function add_document_highlight(client, bufnr)
@@ -184,8 +184,8 @@ local opts = {
                 checkOnSave = {
                     command = "clippy"
                 },
-                cargo =  {
-                        -- features = {"ros-output"}
+                cargo = {
+                    -- features = {"ros-output"}
                 },
                 procMacro = {
                     enable = true,
@@ -243,10 +243,14 @@ nvim_lsp.groovyls.setup {
 
 -- https://github.com/latex-lsp/texlab
 nvim_lsp.texlab.setup {
-    settings = { texlab = { build = {
-        executable = "tectonic",
-        args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" }
-    } } }
+    settings = {
+        texlab = {
+            build = {
+                executable = "tectonic",
+                args = { "%f", "--synctex", "--keep-logs", "--keep-intermediates" }
+            }
+        }
+    }
 }
 
 -- npm install -g vim-language-server
@@ -343,14 +347,14 @@ cmp.setup({
 vim.diagnostic.config { float = { border = _border } }
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
-  options = options or {}
-  options.border = options.border or _border
-  return orig_util_open_floating_preview(contents, syntax, options, ...)
+    options = options or {}
+    options.border = options.border or _border
+    return orig_util_open_floating_preview(contents, syntax, options, ...)
 end
 
 -- customize diagnostic signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
