@@ -37,7 +37,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 
 # set proper environment variables for xdg-desktop-portal
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP && \
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND && \
      dbus-update-activation-environment --systemd \
         MOZ_ENABLE_WAYLAND=1 \
         QT_QPA_PLATFORMTHEME=qt5ct \
