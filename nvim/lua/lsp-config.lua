@@ -128,7 +128,7 @@ function get_project_rustanalyzer_settings()
     return {}
 end
 
-function add_document_highlight(client, bufnr)
+local function add_document_highlight(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', {
             clear = false
@@ -151,27 +151,11 @@ function add_document_highlight(client, bufnr)
 end
 
 -- rust-tools
-local rust_tools = require('rust-tools')
 local opts = {
     tools = {
-        autoSetHints = true,
-        runnables = {
-            use_telescope = true
-        },
-        inlay_hints = {
-            parameter_hints_prefix = "",
-            other_hints_prefix = "",
-        },
-        hover_actions = {
-            -- the border that is used for the hover window
-            -- see vim.api.nvim_open_win()
-            border = _border,
-            -- whether the hover action window gets automatically focused
-            -- default: false
-            auto_focus = false,
-        },
+        -- see https://github.com/mrcjkb/rustaceanvim/blob/master/lua/rustaceanvim/config/internal.lua#L34C6-L34C6
+        -- for available options
     },
-
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
@@ -180,7 +164,6 @@ local opts = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
             ["rust-analyzer"] = {
-                -- enable clippy on save
                 checkOnSave = {
                     command = "clippy"
                 },
@@ -199,16 +182,20 @@ local opts = {
             }
         },
         on_attach = function(client, buff_nr)
-            vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = buff_nr })
-            vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
+            vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end, { silent = true })
+            vim.keymap.set("n", "<leader>p", function () vim.cmd.RustLsp('parentModule') end, { silent = true })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
+            end
+            if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(buff_nr, true)
+                vim.api.nvim_set_hl(0, 'LspInlayHint', { link = 'Comment' })
             end
             add_document_highlight(client, buff_nr)
         end,
     },
 }
-rust_tools.setup(opts)
+vim.g.rustaceanvim = opts
 
 local on_attach = function(client, buff_nr)
     if client.server_capabilities.documentSymbolProvider then
@@ -220,7 +207,8 @@ end
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
     on_attach = function(client, buff_nr)
-        vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
+        -- TODO: how to map the custom command?
+        -- vim.keymap.set("n", "<leader>p", function() nvim_lsp.clangd.switch_source_header(buff_nr) end, { silent = true })
         add_document_highlight(client, buff_nr)
     end
 })

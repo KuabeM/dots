@@ -18,8 +18,18 @@ require("lazy").setup({
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
         border = "single",
     },
-    'neovim/nvim-lspconfig',               -- Configurations for Nvim LSP
-    'simrat39/rust-tools.nvim',            -- rust lsp tooling
+    {
+        'neovim/nvim-lspconfig',               -- Configurations for Nvim LSP
+        -- opts = {
+        --     inlay_hints = { enabled = true },
+        -- },
+    },
+    -- 'simrat39/rust-tools.nvim',            -- rust lsp tooling
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^3',
+        ft = { 'rust' },
+    },
     {
         'nvim-treesitter/nvim-treesitter', -- syntax highlighting
         build = ':TSUpdate'
