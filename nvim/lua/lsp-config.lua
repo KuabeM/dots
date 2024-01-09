@@ -185,7 +185,13 @@ local opts = {
                     command = "clippy"
                 },
                 cargo = {
-                    -- features = {"ros-output"}
+                    -- features = { "master" },
+                    -- noDefaultFeatures = false
+                    unsetTest = {
+                        -- "system_master",
+                        -- "ethercat_master",
+                        -- "common"
+                    }
                 },
                 procMacro = {
                     enable = true,
@@ -213,7 +219,10 @@ end
 -- Enable clangd
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = function(client, buff_nr)
+        vim.keymap.set("n", "<leader>p", rust_tools.parent_module.parent_module, { silent = true })
+        add_document_highlight(client, buff_nr)
+    end
 })
 
 -- Enable json ls
@@ -306,7 +315,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     {
-        pattern = { "*.rs", "*.c", "*.h", "CMakeLists.txt" },
+        pattern = { "*.rs", "*.c", "*.h" },
         callback = function() vim.lsp.buf.format() end,
     }
 )
@@ -351,12 +360,15 @@ cmp.setup({
 
 -- add borders to all hover windows
 vim.diagnostic.config { float = { border = _border } }
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, options, ...)
-    options = options or {}
-    options.border = options.border or _border
-    return orig_util_open_floating_preview(contents, syntax, options, ...)
-end
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = _border
+})
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = _border
+})
+require('lspconfig.ui.windows').default_options = {
+    border = _border
+}
 
 -- customize diagnostic signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }

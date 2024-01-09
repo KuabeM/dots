@@ -1,13 +1,13 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -18,8 +18,8 @@ require("lazy").setup({
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
         border = "single",
     },
-    'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
-    'simrat39/rust-tools.nvim', -- rust lsp tooling
+    'neovim/nvim-lspconfig',               -- Configurations for Nvim LSP
+    'simrat39/rust-tools.nvim',            -- rust lsp tooling
     {
         'nvim-treesitter/nvim-treesitter', -- syntax highlighting
         build = ':TSUpdate'
@@ -39,21 +39,22 @@ require("lazy").setup({
     { 'kdheepak/tabline.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
     { 'lewis6991/gitsigns.nvim' }, -- git decorations
-    { 'f-person/git-blame.nvim', -- show git blame messages
+    {
+        'f-person/git-blame.nvim', -- show git blame messages
         init = function()
-            vim.g.gitblame_message_template =  '	<summary> • <date> • <author> • <sha>'
+            vim.g.gitblame_message_template = '	<summary> • <date> • <author> • <sha>'
             vim.g.gitblame_enabled = 1
             vim.g.gitblame_virtual_text_column = 100
             vim.g.gitblame_delay = 1000
         end,
     },
-    { 'jiangmiao/auto-pairs' }, -- auto-close brackets, quotes etc
+    { 'jiangmiao/auto-pairs' },         -- auto-close brackets, quotes etc
     { 'kien/rainbow_parentheses.vim' }, -- colorize parentheses
 
-    { 'wellle/targets.vim' }, -- Give more target to operate on
-    { 'kopischke/vim-fetch' }, -- Handle line numbers when opening files
+    { 'wellle/targets.vim' },           -- Give more target to operate on
+    { 'kopischke/vim-fetch' },          -- Handle line numbers when opening files
 
-    { 'numToStr/Comment.nvim' }, -- Comments stuff
+    { 'numToStr/Comment.nvim' },        -- Comments stuff
 
     { 'nvim-lua/plenary.nvim' },
 
@@ -63,7 +64,8 @@ require("lazy").setup({
     },
     {
         'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+        build =
+        'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     },
 
     { 'szw/vim-maximizer' }, -- Maximize a split window
@@ -74,13 +76,32 @@ require("lazy").setup({
     },
 
     { 'ThePrimeagen/vim-be-good' },
-    { 'folke/which-key.nvim',
+    {
+        'folke/which-key.nvim',
         event = "VeryLazy",
         init = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
         opts = {}
+    },
+    {
+        'cameron-wags/rainbow_csv.nvim',
+        config = true,
+        ft = {
+            'csv',
+            'tsv',
+            'csv_semicolon',
+            'csv_whitespace',
+            'csv_pipe',
+            'rfc_csv',
+            'rfc_semicolon'
+        },
+        cmd = {
+            'RainbowDelim',
+            'RainbowDelimSimple',
+            'RainbowDelimQuoted',
+            'RainbowMultiDelim'
+        }
     }
 })
-
