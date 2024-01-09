@@ -2,7 +2,7 @@
 	name = Korbinian Maier
 	email = korbinian.maier@posteo.de
 [core]
-	excludesfile = /home/maie_ko/.gitignore_global
+	excludesfile = /home/korbinian/.gitignore_global
 	editor = nvim
 	autocrlf = input
 	pager = delta
