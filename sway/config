@@ -273,9 +273,9 @@ bindsym $mod+Ctrl+s exec swaylock -f -C $HOME/.config/sway/swaylock_config --gra
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    # swaybar_command waybar
-    status_command waybar
-    mode invisible
+    swaybar_command waybar
+    # status_command waybar
+    # mode invisible
     # position
 
     # When the status_command prints a new line to stdout, swaybar updates.

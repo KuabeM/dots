@@ -2,7 +2,7 @@
     all: unset;
     border: none;
     border-radius: 2px;
-    font-family: "Hack Nerd Font Mono";
+    font-family: "Hack Nerd Font Mono", "Hack", "Noto Sans Mono";
     font-size: 12px;
     min-height: 0;
 }
