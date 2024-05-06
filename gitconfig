@@ -72,6 +72,7 @@
 	HEAD = 14 normal dim
 [diff]
 	colorMoved = default
+	submodule = log
 [merge]
 	conflictstyle = diff3
 	tool = vimdiff
@@ -89,3 +90,10 @@
 	error = 1 normal italic
 	minus-style = 9 normal
 	plus-style = 10 normal
+[branch]
+	sort = -committerdate
+[rebase]
+	autoSquash = true
+	autoStash = true
+[rerere]
+	enabled = true
