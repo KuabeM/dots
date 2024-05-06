@@ -1,13 +1,12 @@
-
 -- colorschemes
 require('material').setup({
     contrast = {
-        terminal = false, -- Enable contrast for the built-in terminal
-        sidebars = false, -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
-        floating_windows = false, -- Enable contrast for floating windows
-        cursor_line = false, -- Enable darker background for the cursor line
+        terminal = false,            -- Enable contrast for the built-in terminal
+        sidebars = false,            -- Enable contrast for sidebar-like windows ( for example Nvim-Tree )
+        floating_windows = false,    -- Enable contrast for floating windows
+        cursor_line = false,         -- Enable darker background for the cursor line
         non_current_windows = false, -- Enable darker background for non-current windows
-        filetypes = {}, -- Specify which filetypes get the contrasted (darker) background
+        filetypes = {},              -- Specify which filetypes get the contrasted (darker) background
     },
     plugins = {
         "gitsigns",
@@ -31,11 +30,11 @@ require('lualine').setup {
                 return space ~= 0 and "trailing:" .. space or ""
             end },
         lualine_c = {
-            { 'filename', path = 1, },
+            { 'filename',         path = 1, },
             { navic.get_location, cond = navic.is_available }
         },
         lualine_x = { 'branch', 'filetype' }, -- default: 'encoding', 'fileformat'
-        lualine_y = { 'searchcount' }, -- default: 'progress'
+        lualine_y = { 'searchcount' },        -- default: 'progress'
         lualine_z = { 'progress', 'location', 'filesize' }
     },
 }
@@ -52,3 +51,17 @@ require('gitsigns').setup {
     }
 }
 
+local carbon = require('carbon-now')
+carbon.setup({
+    options = {
+        bg = "white",
+        theme = "solarized dark",
+        width = "1080",
+        -- window_theme = "bw",
+        window_controls = false,
+    }
+})
+
+require('flash').setup({
+    continue = true
+})

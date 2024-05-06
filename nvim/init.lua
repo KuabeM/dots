@@ -12,5 +12,6 @@ require('lsp-config')
 require('telescope-config')
 -- Plugin Comment.nvim
 require('Comment').setup{}
+
 -- Configure neorg
 -- require('neorg-nvim')

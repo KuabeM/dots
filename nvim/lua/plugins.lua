@@ -19,7 +19,7 @@ require("lazy").setup({
         border = "single",
     },
     {
-        'neovim/nvim-lspconfig',               -- Configurations for Nvim LSP
+        'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
         -- opts = {
         --     inlay_hints = { enabled = true },
         -- },
@@ -27,7 +27,7 @@ require("lazy").setup({
     -- 'simrat39/rust-tools.nvim',            -- rust lsp tooling
     {
         'mrcjkb/rustaceanvim',
-        version = '^3',
+        version = '^4',
         ft = { 'rust' },
     },
     {
@@ -54,8 +54,9 @@ require("lazy").setup({
         init = function()
             vim.g.gitblame_message_template = '	<summary> • <date> • <author> • <sha>'
             vim.g.gitblame_enabled = 1
-            vim.g.gitblame_virtual_text_column = 100
+            vim.g.gitblame_virtual_text_column = 120
             vim.g.gitblame_delay = 1000
+            vim.g.gitblame_highlight_group = "CursorLine"
         end,
     },
     { 'jiangmiao/auto-pairs' },         -- auto-close brackets, quotes etc
@@ -113,5 +114,18 @@ require("lazy").setup({
             'RainbowDelimQuoted',
             'RainbowMultiDelim'
         }
+    },
+    {
+        "ellisonleao/carbon-now.nvim",
+        lazy = true,
+        cmd = "CarbonNow",
+    },
+    {
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
     }
 })

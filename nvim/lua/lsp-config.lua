@@ -160,6 +160,7 @@ local opts = {
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
     server = {
+        ---@param project_root string Path to the project root
         settings = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
@@ -179,16 +180,29 @@ local opts = {
                 procMacro = {
                     enable = true,
                 },
+                inlayHints = {
+                    maxLength = 5,
+                    parameterHints = {
+                        enable = true,
+                    },
+                },
             }
+      local ra = require('rustaceanvim.config.server')
+      return ra.load_rust_analyzer_settings(project_root, {
+        settings_file_pattern = 'rust-analyzer.json'
+      })
+    end,
+  },
         },
         on_attach = function(client, buff_nr)
             vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end, { silent = true })
             vim.keymap.set("n", "<leader>p", function () vim.cmd.RustLsp('parentModule') end, { silent = true })
+            vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end, { silent = true })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
             if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint.enable(buff_nr, true)
+                vim.lsp.inlay_hint.enable(true, { buffnr = buff_nr })
                 vim.api.nvim_set_hl(0, 'LspInlayHint', { link = 'Comment' })
             end
             add_document_highlight(client, buff_nr)
@@ -207,8 +221,7 @@ end
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
     on_attach = function(client, buff_nr)
-        -- TODO: how to map the custom command?
-        -- vim.keymap.set("n", "<leader>p", function() nvim_lsp.clangd.switch_source_header(buff_nr) end, { silent = true })
+        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader", { silent = true, desc = ":ClangdSwitchSourceHeader" })
         add_document_highlight(client, buff_nr)
     end
 })
@@ -303,7 +316,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     {
-        pattern = { "*.rs", "*.c", "*.h" },
+        pattern = { "*.rs" },
         callback = function() vim.lsp.buf.format() end,
     }
 )
