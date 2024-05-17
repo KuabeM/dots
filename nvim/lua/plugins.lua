@@ -124,8 +124,8 @@ require("lazy").setup({
         "kylechui/nvim-surround",
         event = "VeryLazy",
     },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-    }
+    -- {
+    --     "folke/flash.nvim",
+    --     event = "VeryLazy",
+    -- }
 })

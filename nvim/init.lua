@@ -1,5 +1,6 @@
 
--- load plugins with packer
+require('rust-cfg')
+-- load plugins with lazy
 require('plugins')
 require('plugin-cfg')
 -- Misc options
@@ -10,8 +11,6 @@ require('keymaps')
 require('lsp-config')
 -- Telescope
 require('telescope-config')
--- Plugin Comment.nvim
-require('Comment').setup{}
 
 -- Configure neorg
 -- require('neorg-nvim')

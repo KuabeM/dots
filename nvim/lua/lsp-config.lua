@@ -114,20 +114,6 @@ dap.configurations.c = dap.configurations.cpp
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
-function get_project_rustanalyzer_settings()
-    local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
-    if not handle then
-        return {}
-    end
-    local out = handle:read("*a")
-    handle:close()
-    local config = vim.json.decode(out)
-    if type(config) == "table" then
-        return config
-    end
-    return {}
-end
-
 local function add_document_highlight(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', {
@@ -150,67 +136,6 @@ local function add_document_highlight(client, bufnr)
     end
 end
 
--- rust-tools
-local opts = {
-    tools = {
-        -- see https://github.com/mrcjkb/rustaceanvim/blob/master/lua/rustaceanvim/config/internal.lua#L34C6-L34C6
-        -- for available options
-    },
-    -- all the opts to send to nvim-lspconfig
-    -- these override the defaults set by rust-tools.nvim
-    -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
-    server = {
-        ---@param project_root string Path to the project root
-        settings = {
-            -- to enable rust-analyzer settings visit:
-            -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
-            ["rust-analyzer"] = {
-                checkOnSave = {
-                    command = "clippy"
-                },
-                cargo = {
-                    -- features = { "master" },
-                    -- noDefaultFeatures = false
-                    unsetTest = {
-                        -- "system_master",
-                        -- "ethercat_master",
-                        -- "common"
-                    }
-                },
-                procMacro = {
-                    enable = true,
-                },
-                inlayHints = {
-                    maxLength = 5,
-                    parameterHints = {
-                        enable = true,
-                    },
-                },
-            }
-      local ra = require('rustaceanvim.config.server')
-      return ra.load_rust_analyzer_settings(project_root, {
-        settings_file_pattern = 'rust-analyzer.json'
-      })
-    end,
-  },
-        },
-        on_attach = function(client, buff_nr)
-            vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end, { silent = true })
-            vim.keymap.set("n", "<leader>p", function () vim.cmd.RustLsp('parentModule') end, { silent = true })
-            vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end, { silent = true })
-            if client.server_capabilities.documentSymbolProvider then
-                require('nvim-navic').attach(client, buff_nr)
-            end
-            if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint.enable(true, { buffnr = buff_nr })
-                vim.api.nvim_set_hl(0, 'LspInlayHint', { link = 'Comment' })
-            end
-            add_document_highlight(client, buff_nr)
-        end,
-    },
-}
-vim.g.rustaceanvim = opts
-
 local on_attach = function(client, buff_nr)
     if client.server_capabilities.documentSymbolProvider then
         require('nvim-navic').attach(client, buff_nr)
@@ -221,7 +146,8 @@ end
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
     on_attach = function(client, buff_nr)
-        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader", { silent = true, desc = ":ClangdSwitchSourceHeader" })
+        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader",
+            { silent = true, desc = ":ClangdSwitchSourceHeader" })
         add_document_highlight(client, buff_nr)
     end
 })
@@ -285,18 +211,34 @@ nvim_lsp.pylsp.setup {
 }
 
 nvim_lsp.lua_ls.setup {
+    on_init = function(client)
+        local path = client.workspace_folders[1].name
+        if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+            return
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT'
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME
+                    -- Depending on the usage, you might want to add additional paths here.
+                    -- "${3rd}/luv/library"
+                    -- "${3rd}/busted/library",
+                }
+                -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
+                -- library = vim.api.nvim_get_runtime_file("", true)
+            }
+        })
+    end,
     settings = {
-        Lua = {
-            runtime = { -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-            },
-            diagnostics = { -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
-            },
-            workspace = { -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-        },
+        Lua = {}
     },
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)

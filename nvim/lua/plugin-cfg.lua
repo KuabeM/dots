@@ -62,6 +62,9 @@ carbon.setup({
     }
 })
 
-require('flash').setup({
-    continue = true
-})
+-- require('flash').setup({
+--     continue = true
+-- })
+
+-- Plugin Comment.nvim
+require('Comment').setup{}
