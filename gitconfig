@@ -1,6 +1,7 @@
 [user]
 	name = Korbinian Maier
 	email = korbinian.maier@brainlab.com
+	signingkey = 6ACF486262D19A7C
 [core]
 	excludesfile = /home/korbinian/.gitignore_global
 	editor = nvim
