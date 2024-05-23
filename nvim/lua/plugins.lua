@@ -16,7 +16,7 @@ vim.g.mapleader = ";"
 require("lazy").setup({
     ui = {
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-        border = "single",
+        border = "rounded",
     },
     {
         'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
@@ -64,8 +64,6 @@ require("lazy").setup({
 
     { 'wellle/targets.vim' },           -- Give more target to operate on
     { 'kopischke/vim-fetch' },          -- Handle line numbers when opening files
-
-    { 'numToStr/Comment.nvim' },        -- Comments stuff
 
     { 'nvim-lua/plenary.nvim' },
 

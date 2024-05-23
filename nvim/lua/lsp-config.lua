@@ -4,22 +4,10 @@
 -- nvim_lsp object
 local nvim_lsp = require 'lspconfig'
 
-
--- define border once
-local _border = {
-    { "╭", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╮", "FloatBorder" },
-    { "│", "FloatBorder" },
-    { "╯", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╰", "FloatBorder" },
-    { "│", "FloatBorder" },
-}
-
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local has_words_before = function()
+    unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
@@ -34,6 +22,10 @@ cmp.setup({
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
         end,
+    },
+    window = {
+        -- completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     mapping = {
         -- Add tab support, previous mapping
@@ -155,6 +147,9 @@ local opts = {
     tools = {
         -- see https://github.com/mrcjkb/rustaceanvim/blob/master/lua/rustaceanvim/config/internal.lua#L34C6-L34C6
         -- for available options
+        float_win_config = {
+            border = "rounded"
+        }
     },
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
@@ -195,7 +190,6 @@ local opts = {
             -- },
         },
         on_attach = function(client, buff_nr)
-            vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end, { silent = true })
             vim.keymap.set("n", "<leader>p", function() vim.cmd.RustLsp('parentModule') end, { silent = true })
             vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end, { silent = true })
             if client.server_capabilities.documentSymbolProvider then
@@ -379,20 +373,37 @@ cmp.setup({
 })
 
 -- add borders to all hover windows
-vim.diagnostic.config { float = { border = _border } }
+vim.diagnostic.config { float = { border = "rounded" } }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = _border
+    border = "rounded"
 })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = _border
+    border = "rounded"
 })
 require('lspconfig.ui.windows').default_options = {
-    border = _border
+    border = "rounded"
 }
 
 -- customize diagnostic signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- for type, icon in pairs(signs) do
+--     local hl = "DiagnosticSign" .. type
+--     -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+--     local cfg = vim.diagnostic.config()
+    vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = ' ',
+            [vim.diagnostic.severity.WARN] = ' ',
+            [vim.diagnostic.severity.HINT] = ' ',
+            [vim.diagnostic.severity.INFO] = ' ',
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = 'DiagnosticSignError',
+            [vim.diagnostic.severity.WARN] = 'DiagnosticSignWarn',
+            [vim.diagnostic.severity.HINT] = 'DiagnosticSignHint',
+            [vim.diagnostic.severity.INFO] = 'DiagnosticSignInfo',
+        },
+    },
+})
+-- end
