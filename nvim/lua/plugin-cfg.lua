@@ -20,7 +20,11 @@ vim.cmd 'colorscheme material'
 
 -- statusline with lualine
 local navic = require('nvim-navic')
+local custom_auto = require'lualine.themes.auto'
+custom_auto.inactive.c.bg = custom_auto.normal.c.bg
+custom_auto.inactive.c.fg = custom_auto.normal.c.fg
 require('lualine').setup {
+    options = { theme = custom_auto },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'diff',
