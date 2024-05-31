@@ -329,7 +329,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     {
-        pattern = { "*.rs" },
+        pattern = { "*.rs", "*.py", "*.cmake", "CMakeLists.txt" },
         callback = function() vim.lsp.buf.format() end,
     }
 )
@@ -390,7 +390,7 @@ local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 --     local hl = "DiagnosticSign" .. type
 --     -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 --     local cfg = vim.diagnostic.config()
-    vim.diagnostic.config({
+vim.diagnostic.config({
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = ' ',
