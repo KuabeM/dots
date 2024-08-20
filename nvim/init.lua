@@ -1,5 +1,5 @@
 
-require('rust-cfg')
+-- require('rust-cfg')
 -- load plugins with lazy
 require('plugins')
 require('plugin-cfg')
