@@ -1,0 +1,76 @@
+[colors.bright]
+black = "#4e4e4e"
+blue = "#82aaff"
+cyan = "#89ddff"
+green = "#c3e88d"
+magenta = "#f07178"
+red = "#ff5370"
+white = "#ffffff"
+yellow = "#ffcb6b"
+
+[colors.normal]
+black = "#000000"
+blue = "#6182b8"
+cyan = "#39adb5"
+green = "#91b859"
+magenta = "#ff5370"
+red = "#e53935"
+white = "#a0a0a0"
+yellow = "#ffb62c"
+
+[colors.primary]
+background = "#263238"
+foreground = "#eeffff"
+
+[cursor.style]
+shape = "Beam"
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "hack"
+style = "Bold"
+
+[font.bold_italic]
+family = "hack"
+style = "Bold Italic"
+
+[font.italic]
+family = "hack"
+style = "Italic"
+
+[font.normal]
+family = "hack"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Space"
+mode = "~Search"
+mods = "Shift|Control"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "NumpadAdd"
+mods = "Control"
+
+[scrolling]
+history = 100000
+
+[selection]
+save_to_clipboard = true
+
+[window.padding]
+x = 2
+y = 2
