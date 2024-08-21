@@ -20,11 +20,7 @@ require("lazy").setup({
     },
     {
         'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
-        -- opts = {
-        --     inlay_hints = { enabled = true },
-        -- },
     },
-    -- 'simrat39/rust-tools.nvim',            -- rust lsp tooling
     {
         'mrcjkb/rustaceanvim',
         version = '^4',
@@ -53,7 +49,7 @@ require("lazy").setup({
         'f-person/git-blame.nvim', -- show git blame messages
         init = function()
             vim.g.gitblame_message_template = '	<summary> • <date> • <author> • <sha>'
-            vim.g.gitblame_enabled = 1
+            vim.g.gitblame_enabled = 0
             vim.g.gitblame_virtual_text_column = 120
             vim.g.gitblame_delay = 1000
             vim.g.gitblame_highlight_group = "CursorLine"
@@ -66,7 +62,6 @@ require("lazy").setup({
     { 'kopischke/vim-fetch' },          -- Handle line numbers when opening files
 
     { 'nvim-lua/plenary.nvim' },
-
     {
         'nvim-telescope/telescope.nvim',
         dependencies = { { 'nvim-lua/plenary.nvim' } }
@@ -83,8 +78,6 @@ require("lazy").setup({
         "SmiteshP/nvim-navic",
         dependencies = "neovim/nvim-lspconfig"
     },
-
-    { 'ThePrimeagen/vim-be-good' },
     {
         'folke/which-key.nvim',
         event = "VeryLazy",
@@ -114,19 +107,28 @@ require("lazy").setup({
         }
     },
     {
-        "ellisonleao/carbon-now.nvim",
-        lazy = true,
-        cmd = "CarbonNow",
-    },
-    {
         "kylechui/nvim-surround",
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({})
         end
     },
+    'mei28/qfc.nvim',
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                -- See the configuration section for more details
+                -- Load luvit types when the `vim.uv` word is found
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
     -- {
-    --     "folke/flash.nvim",
-    --     event = "VeryLazy",
-    -- }
+    --     "chrisgrieser/nvim-lsp-endhints",
+    --     event = "LspAttach",
+    --     opts = {}, -- required, even if empty
+    -- },
 })

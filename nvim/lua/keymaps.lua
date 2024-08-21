@@ -43,8 +43,11 @@ key.set("n", "gf", function() b.format({ async = true }) end, { silent = true, d
 key.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
 key.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
 
-key.set("n", "fj", vim.diagnostic.goto_next, { silent = true, desc = "vim.diagnostics.goto_next" })
-key.set("n", "fk", vim.diagnostic.goto_prev, { silent = true, desc = "vim.diagnostics.goto_prev" })
+key.set("n", "fj", function() vim.diagnostic.jump({ count = 1 }) end,
+    { silent = true, desc = "vim.diagnostics.goto_next" })
+key.set("n", "fk", function()
+    vim.diagnostic.jump({ count = -1 })
+end, { silent = true, desc = "vim.diagnostics.goto_prev" })
 key.set("n", "J", vim.diagnostic.open_float, { silent = true, desc = "vim.diagnostics.open_float" })
 
 -- telescope

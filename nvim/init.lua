@@ -11,6 +11,3 @@ require('keymaps')
 require('lsp-config')
 -- Telescope
 require('telescope-config')
-
--- Configure neorg
--- require('neorg-nvim')

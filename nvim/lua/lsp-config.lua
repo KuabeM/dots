@@ -68,6 +68,10 @@ cmp.setup({
         { name = 'vsnip' },
         { name = 'path' },
         { name = 'buffer' },
+        {
+            name = "lazydev",
+            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        }
     }),
 
     -- use buffer source for '/'
@@ -102,7 +106,6 @@ dap.configurations.cpp = {
     }
 }
 dap.configurations.c = dap.configurations.cpp
-
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
@@ -176,7 +179,7 @@ local opts = {
                     enable = true,
                 },
                 inlayHints = {
-                    maxLength = 5,
+                    maxLength = 10,
                     parameterHints = {
                         enable = true,
                     },
@@ -190,8 +193,14 @@ local opts = {
             -- },
         },
         on_attach = function(client, buff_nr)
-            vim.keymap.set("n", "<leader>p", function() vim.cmd.RustLsp('parentModule') end, { silent = true })
-            vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end, { silent = true })
+            vim.keymap.set("n", "<leader>p", function() vim.cmd.RustLsp('parentModule') end,
+                { silent = true, desc = "parentModule" })
+            vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end,
+                { silent = true, desc = "codeAction" })
+            vim.keymap.set("n", "<leader>rm",
+                function()
+                    vim.cmd.RustLsp('rebuildProcMacros'); vim.cmd.RustLsp('expandMacro')
+                end, { silent = true, desc = "Rebuild and expand macro" })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
@@ -217,10 +226,21 @@ end
 nvim_lsp.clangd.setup({
     capabilities = capabilities,
     on_attach = function(client, buff_nr)
-        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader",
-            { silent = true, desc = ":ClangdSwitchSourceHeader" })
+        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader<CR>",
+            { silent = true, desc = ":ClangdSwitchSourceHeader<CR>" })
         add_document_highlight(client, buff_nr)
-    end
+    end,
+    settings = {
+        clangd = {
+            InlayHints = {
+                Designators = true,
+                Enabled = true,
+                ParameterNames = true,
+                DeducedTypes = true,
+            },
+            fallbackFlags = { "-std=c++20" },
+        },
+    },
 })
 
 -- Enable json ls
@@ -315,6 +335,16 @@ nvim_lsp.lua_ls.setup {
         add_document_highlight(client, bufnr)
     end
 }
+
+-- bashls
+nvim_lsp.bashls.setup {
+    on_attach = function(client, bufnr)
+        add_document_highlight(client, bufnr)
+    end
+}
+
+-- yaml https://github.com/redhat-developer/yaml-language-server
+require'lspconfig'.yamlls.setup{}
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
