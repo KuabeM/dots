@@ -17,3 +17,10 @@ workspace
 Testability
 setpoints
 setpoint
+transceived
+transceive
+EtherCAT
+prio
+transceives
+datagram
+datagrams
