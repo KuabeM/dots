@@ -56,13 +56,12 @@
         "format": "{:%H:%M:%S - %d/%m/%Y}",
         "format-alt": "{:%H:%M:%S - %d/%m/%Y}",
         "calendar": {
-                    "mode"          : "year",
+                    "mode"          : "month",
                     "mode-mon-col"  : 3,
                     "weeks-pos"     : "right",
-                    "on-scroll"     : 0,
-                    "on-click": "mode",
+                    "on-scroll"     : 1,
                     "format": {
-                              "weeks":      "<span color='#99ffdd'>{}</span>",
+                              "weeks":      "<span color='#99ffdd'>W{:%W}</span>",
                               "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
                               "today":      "<span color='#ff6699'><b>{}</b></span>"
                               }
@@ -70,6 +69,10 @@
         "actions":  {
                     "on-click-right": "mode",
                     "on-click": "mode",
+                    "on-click-forward": "shift_up",
+                    "on-click-backward": "shift_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
                     }
     },
     "cpu": {
