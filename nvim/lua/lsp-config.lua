@@ -301,6 +301,8 @@ nvim_lsp.pylsp.setup {
     end
 }
 
+nvim_lsp.marksman.setup{}
+
 nvim_lsp.lua_ls.setup {
     on_init = function(client)
         local path = client.workspace_folders[1].name
