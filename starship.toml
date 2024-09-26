@@ -20,11 +20,13 @@ disabled = false
 threshold = 80
 
 [directory]
-truncation_length = 3
+truncation_length = 5
 #suffix = "▶"
 #style = "white bold bg:#00819e"
 style = "bold #00819e"
 fish_style_pwd_dir_length = 1
+# before_repo_root_style = "bold #AA1111"
+repo_root_style = "bold #62c1be"
 
 #[git_branch]
 #style = "bg:purple bold"
