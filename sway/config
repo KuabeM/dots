@@ -61,9 +61,6 @@ exec nm-applet --indicator
 # flameshot screenshot
 exec XDG_CURRENT_DESKTOP=sway flameshot
 
-# Start kde polkit service
-exec --no-startup-id $HOME/.config/sway/scripts/polkit
-
 ### Input configuration
 #
 # Example configuration:
