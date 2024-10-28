@@ -246,7 +246,8 @@ bindsym $mod+r mode "resize"
 ## CUSTOM SHORTCUTS
 # Screenshots
 bindsym Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/"$(date +'%Y-%m-%d_%H-%M-%S')"_grim.png
-bindsym Shift+Print exec grim ~/Pictures/Screenshots/"$(date +'%Y%m%d-%H%M%S')"_grim.png
+bindsym Shift+Print exec grim ~/Pictures/Screenshots/"$(date +'%Y-%m-%d_%H-%M-%S')"_grim.png
+bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 # Brightness
 bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-

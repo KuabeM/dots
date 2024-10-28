@@ -25,5 +25,6 @@ Configuration files for a lot of stuff. Just run `./install.sh` and hope you hav
 * ripgrep
 * neovim > 0.8.0
 * starship
+* swappy
 
 [Debian PPA]: https://pipewire-debian.github.io/pipewire-debian/
