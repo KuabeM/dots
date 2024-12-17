@@ -131,20 +131,6 @@ local function add_document_highlight(client, bufnr)
     end
 end
 
-function get_project_rustanalyzer_settings()
-    local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./.rust-analyzer.json'))
-    if not handle then
-        return {}
-    end
-    local out = handle:read("*a")
-    handle:close()
-    local config = vim.json.decode(out)
-    if type(config) == "table" then
-        return config
-    end
-    return {}
-end
-
 -- rust-tools
 local opts = {
     tools = {
@@ -185,12 +171,6 @@ local opts = {
                     },
                 },
             }
-            --   local ra = require('rustaceanvim.config.server')
-            --   return ra.load_rust_analyzer_settings(project_root, {
-            --     settings_file_pattern = 'rust-analyzer.json'
-            --   })
-            -- end,
-            -- },
         },
         on_attach = function(client, buff_nr)
             vim.keymap.set("n", "<leader>p", function() vim.cmd.RustLsp('parentModule') end,

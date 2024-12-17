@@ -194,8 +194,9 @@ label:focus {
 }
 
 #tray {
+    /* background-color: #062047; */
+    margin: 2px 2px 2px 2px;
     background-color: #3D577D;
-    /* background-color: #bd93f9 */
 }
 
 #tray > .passive {

@@ -12,8 +12,10 @@ require('material').setup({
         "gitsigns",
         "nvim-cmp",
         "telescope",
+        "nvim-web-devicons",
+        "which-key",
     },
-    lualine_style = 'default'
+    lualine_style = 'default',
 })
 vim.g.material_style = "oceanic"
 vim.cmd 'colorscheme material'
