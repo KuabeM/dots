@@ -126,10 +126,10 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{desc}  | {volume}% {icon}",
-        "format-bluetooth": "{desc} | {volume}% {icon}  {format_source}",
-        "format-bluetooth-muted": "{desc} | ✕ {icon}  {format_source}",
-        "format-muted": "{desc} | ✕ {format_source}",
+        "format": "{volume}% {icon} | {desc}",
+        "format-bluetooth": "{volume}% {icon}  {format_source} | {desc}",
+        "format-bluetooth-muted": "✕ {icon}  {format_source} | {desc}",
+        "format-muted": "✕ {format_source} | {desc}",
         "format-source": "| {volume}% ",
         "format-source-muted": "| ",
         "format-icons": {
@@ -141,7 +141,8 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "max-length": 30
     },
     "custom/media": {
         "format": "{icon} {}",
