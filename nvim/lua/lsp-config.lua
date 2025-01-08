@@ -181,6 +181,10 @@ local opts = {
                 function()
                     vim.cmd.RustLsp('rebuildProcMacros'); vim.cmd.RustLsp('expandMacro')
                 end, { silent = true, desc = "Rebuild and expand macro" })
+            vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end,
+                { silent = false, desc = "RustHoverAction" })
+            vim.keymap.set("n", "fl", function() vim.cmd.RustLsp('relatedDiagnostics') end,
+                { silent = false, desc = "RustHoverAction" })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
@@ -281,7 +285,7 @@ nvim_lsp.pylsp.setup {
     end
 }
 
-nvim_lsp.marksman.setup{}
+nvim_lsp.marksman.setup {}
 
 nvim_lsp.lua_ls.setup {
     on_init = function(client)
@@ -326,7 +330,7 @@ nvim_lsp.bashls.setup {
 }
 
 -- yaml https://github.com/redhat-developer/yaml-language-server
-require'lspconfig'.yamlls.setup{}
+require 'lspconfig'.yamlls.setup {}
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

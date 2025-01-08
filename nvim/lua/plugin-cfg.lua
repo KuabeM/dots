@@ -44,7 +44,7 @@ require('lualine').setup {
         lualine_z = { 'progress', 'location', 'filesize' }
     },
     inactive_sections = {
-        lualine_c = {{ 'filename', path = 1, }}
+        lualine_c = { { 'filename', path = 1, } }
     }
 }
 require 'tabline'.setup {}
