@@ -35,6 +35,8 @@ bindswitch --reload --locked lid:off output $laptop enable
 
 # rename workspace with programs running in them
 exec --no-startup-id $HOME/.cargo/bin/piow --syslog
+# scan outputs and apply config
+exec RUST_LOG=debug oswod --syslog
 
 # set proper environment variables for xdg-desktop-portal
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND && \
