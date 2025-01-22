@@ -17,6 +17,9 @@ done
 
 # Starship is directly in ~/.config
 ln -nfs $src_dir/starship.toml $HOME/.config/starship.toml
+# fish only allows config.fish
+mkdir -p $HOME/.config/fish
+ln -nfs $src_dir/fish/config.fish $HOME/.config/fish/config.fish
 # Move nvim separately
 mkdir -p $HOME/.config/nvim
 ln -nfs $src_dir/nvim/init.lua $HOME/.config/nvim/init.lua
