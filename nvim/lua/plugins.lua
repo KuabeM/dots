@@ -23,23 +23,89 @@ require("lazy").setup({
     },
     {
         'mrcjkb/rustaceanvim',
-        version = '^5',
+        version = '^6',
         ft = { 'rust' },
     },
     {
         'nvim-treesitter/nvim-treesitter', -- syntax highlighting
         build = ':TSUpdate'
     },
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-path' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-vsnip' },
-    { 'hrsh7th/vim-vsnip' },
-    { 'ray-x/cmp-treesitter' },
+    {
+        'windwp/nvim-autopairs', -- auto-close brackets, quotes etc
+        event = "InsertEnter",
+        config = true,
+    },
+    {
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+        version = '*',
+
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = {
+                preset = 'enter',
+                -- ['<Tab>'] = { 'select_next', 'fallback' },
+                ['<Tab>'] = {
+                    function(cmp)
+                        if cmp.snippet_active() then
+                            return cmp.snipet_forward()
+                        else
+                            return cmp.select_next()
+                        end
+                    end,
+                    'select_next', 'fallback'
+                },
+                ['<S-Tab>'] = { 'select_prev', 'fallback' },
+            },
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+            completion = {
+                -- menu = { border = 'rounded' },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
+                    window = { border = 'rounded' }
+                },
+                accept = {
+                    auto_brackets = {
+                        enabled = true,
+                    }
+                },
+                -- ghost_text = { enabled = true, },
+                list = {
+                    selection = {
+                        preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
+                        auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
+                    },
+                    cycle = { from_top = true, from_bottom = true }
+                }
+            },
+            signature = { enabled = true, window = { border = 'rounded' } },
+            -- Default list of enabled providers defined so that you can extend it
+            -- elsewhere in your config, without redefining it, due to `opts_extend`
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+        },
+        opts_extend = { "sources.default" }
+    },
+
     { 'mfussenegger/nvim-dap' }, -- Debug Adapter Protocol
 
     { 'marko-cerovac/material.nvim' },
+    {
+        'uloco/bluloco.nvim',
+        lazy = false,
+        priority = 1000,
+        dependencies = { 'rktjmp/lush.nvim' },
+        -- config = function()
+        --     style = "dark",
+        -- end,
+    },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     { 'nvim-lualine/lualine.nvim' },
     { 'kdheepak/tabline.nvim' },
@@ -55,7 +121,6 @@ require("lazy").setup({
             vim.g.gitblame_highlight_group = "CursorLine"
         end,
     },
-    { 'jiangmiao/auto-pairs' },         -- auto-close brackets, quotes etc
     { 'kien/rainbow_parentheses.vim' }, -- colorize parentheses
 
     { 'wellle/targets.vim' },           -- Give more target to operate on
@@ -126,6 +191,12 @@ require("lazy").setup({
         },
     },
     { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+    {
+        "chrisgrieser/nvim-early-retirement",
+        config = true,
+        event = "VeryLazy",
+        opts = { minimumBufferNum = 6, }
+    },
     -- {
     --     "chrisgrieser/nvim-lsp-endhints",
     --     event = "LspAttach",

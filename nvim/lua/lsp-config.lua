@@ -4,88 +4,6 @@
 -- nvim_lsp object
 local nvim_lsp = require 'lspconfig'
 
--- Setup Completion
--- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
-local has_words_before = function()
-    unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
-local cmp = require 'cmp'
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-        end,
-    },
-    window = {
-        -- completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-    },
-    mapping = {
-        -- Add tab support, previous mapping
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-                feedkey("<Plug>(vsnip-expand-or-jump)", "")
-            elseif has_words_before() then
-                cmp.complete()
-            else
-                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-            end
-        end, { "i", "s" }),
-
-        ["<S-Tab>"] = cmp.mapping(function()
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                feedkey("<Plug>(vsnip-jump-prev)", "")
-            end
-        end, { "i", "s" }),
-
-        ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-        ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { 'i' }),
-
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping.complete(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-e>'] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    },
-
-    -- Installed sources
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' },
-        { name = 'path' },
-        { name = 'buffer' },
-        {
-            name = "lazydev",
-            group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-        }
-    }),
-
-    -- use buffer source for '/'
-    cmp.setup.cmdline('/', {
-        sources = {
-            { name = 'buffer' }
-        }
-    })
-
-})
-
--- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
@@ -132,7 +50,7 @@ local function add_document_highlight(client, bufnr)
 end
 
 -- rust-tools
-local opts = {
+local rust_opts = {
     tools = {
         -- see https://github.com/mrcjkb/rustaceanvim/blob/master/lua/rustaceanvim/config/internal.lua#L34C6-L34C6
         -- for available options
@@ -184,7 +102,7 @@ local opts = {
             vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end,
                 { silent = false, desc = "RustHoverAction" })
             vim.keymap.set("n", "fl", function() vim.cmd.RustLsp('relatedDiagnostics') end,
-                { silent = false, desc = "RustHoverAction" })
+                { silent = false, desc = "relatedDiagnostics" })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
@@ -196,9 +114,7 @@ local opts = {
         end,
     },
 }
-vim.g.rustaceanvim = opts
-
-
+vim.g.rustaceanvim = rust_opts
 
 local on_attach = function(client, buff_nr)
     if client.server_capabilities.documentSymbolProvider then
@@ -206,9 +122,10 @@ local on_attach = function(client, buff_nr)
     end
     add_document_highlight(client, buff_nr)
 end
+
 -- Enable clangd
 nvim_lsp.clangd.setup({
-    capabilities = capabilities,
+    -- capabilities = capabilities,
     on_attach = function(client, buff_nr)
         vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader<CR>",
             { silent = true, desc = ":ClangdSwitchSourceHeader<CR>" })
@@ -237,6 +154,7 @@ nvim_lsp.jsonls.setup({
         }
     }
 })
+
 -- Enable cmake: pip install cmake-language-server
 nvim_lsp.cmake.setup {
     on_attach = function(client, bufnr)
@@ -280,6 +198,16 @@ nvim_lsp.html.setup {
 
 -- python: pip install python-lsp-server
 nvim_lsp.pylsp.setup {
+    settings = {
+        pylsp = {
+            plugins = {
+                yapf = { enabled = true },
+                pycodestyle = {
+                    maxLineLength = 100,
+                }
+            }
+        }
+    },
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
@@ -350,44 +278,6 @@ vim.api.nvim_create_autocmd(
     }
 )
 
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-        end,
-    },
-    mapping = {
-        -- ['<C-p>'] = cmp.mapping.select_prev_item(),
-        -- ['<C-n>'] = cmp.mapping.select_next_item(),
-        -- Add tab support
-        -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-        -- ['<Tab>'] = cmp.mapping.select_next_item(),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping.complete(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<C-e>'] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    },
-
-    -- Installed sources
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' },
-        { name = 'path' },
-        { name = 'buffer' },
-    }),
-
-    -- use buffer source for '/'
-    cmp.setup.cmdline('/', {
-        sources = {
-            { name = 'buffer' }
-        }
-    })
-})
-
 -- add borders to all hover windows
 vim.diagnostic.config { float = { border = "rounded" } }
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -399,6 +289,13 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 require('lspconfig.ui.windows').default_options = {
     border = "rounded"
 }
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or "rounded"
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 -- customize diagnostic signs
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
