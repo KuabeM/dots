@@ -1,26 +1,31 @@
-[colors.bright]
-black = "#4e4e4e"
-blue = "#82aaff"
-cyan = "#89ddff"
-green = "#c3e88d"
-magenta = "#f07178"
-red = "#ff5370"
-white = "#ffffff"
-yellow = "#ffcb6b"
+[general]
+import = [
+    "~/.dots/alacritty/catppuccin-macchiato.toml"
+]
 
-[colors.normal]
-black = "#000000"
-blue = "#6182b8"
-cyan = "#39adb5"
-green = "#91b859"
-magenta = "#ff5370"
-red = "#e53935"
-white = "#a0a0a0"
-yellow = "#ffb62c"
-
-[colors.primary]
-background = "#263238"
-foreground = "#eeffff"
+# [colors.bright]
+# black = "#4e4e4e"
+# blue = "#82aaff"
+# cyan = "#89ddff"
+# green = "#c3e88d"
+# magenta = "#f07178"
+# red = "#ff5370"
+# white = "#ffffff"
+# yellow = "#ffcb6b"
+#
+# [colors.normal]
+# black = "#000000"
+# blue = "#6182b8"
+# cyan = "#39adb5"
+# green = "#91b859"
+# magenta = "#ff5370"
+# red = "#e53935"
+# white = "#a0a0a0"
+# yellow = "#ffb62c"
+#
+# [colors.primary]
+# background = "#263238"
+# foreground = "#eeffff"
 
 [cursor.style]
 shape = "Beam"
@@ -72,5 +77,6 @@ history = 100000
 save_to_clipboard = true
 
 [window.padding]
-x = 2
-y = 2
+x = 0
+y = 0
+
