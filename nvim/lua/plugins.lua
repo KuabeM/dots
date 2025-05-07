@@ -108,7 +108,6 @@ require("lazy").setup({
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
     { 'nvim-lualine/lualine.nvim' },
-    { 'kdheepak/tabline.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
     { 'lewis6991/gitsigns.nvim' }, -- git decorations
     {
