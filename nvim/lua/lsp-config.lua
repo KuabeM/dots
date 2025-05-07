@@ -56,7 +56,8 @@ local rust_opts = {
         -- for available options
         float_win_config = {
             border = "rounded"
-        }
+        },
+        enable_clippy = true,
     },
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
@@ -67,9 +68,8 @@ local rust_opts = {
             -- to enable rust-analyzer settings visit:
             -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
             ["rust-analyzer"] = {
-                checkOnSave = {
-                    command = "clippy"
-                },
+                checkOnSave = true,
+                check = { command = "clippy", extraArgs = { '--no-deps' } },
                 cargo = {
                     -- features = { "master" },
                     -- noDefaultFeatures = false
