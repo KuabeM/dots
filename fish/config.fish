@@ -20,27 +20,27 @@ abbr g 'git'
 
 abbr ga 'git add'
 alias gaa 'git add --all'
-alias gapa 'git add --patch'
+abbr gapa 'git add --patch'
 
-alias gb 'git branch'
-alias gbd 'git branch -d'
-alias gbD 'git branch -D'
-alias gbl 'git blame -b -w'
-alias gbnm 'git branch --no-merged'
-alias gbr 'git branch --remote'
+abbr gb 'git branch'
+abbr gbd 'git branch -d'
+abbr gbD 'git branch -D'
+abbr gbl 'git blame -b -w'
+abbr gbnm 'git branch --no-merged'
+abbr gbr 'git branch --remote'
 
-alias gc 'git commit -v'
-alias gcb 'git checkout -b'
-alias gco 'git checkout'
-alias gcf 'git config --list'
+abbr gc 'git commit -v'
+abbr gcb 'git checkout -b'
+abbr gco 'git checkout'
+abbr gcf 'git config --list'
 
-alias gf 'git fetch'
-alias gl 'git pull'
-alias gp 'git push'
-alias grs 'git restore'
-alias gst 'git status'
-alias gr 'git remote --verbose'
-alias grt 'cd "$(git rev-parse --show-toplevel || echo .)"'
+abbr gf 'git fetch'
+abbr gl 'git pull'
+abbr gp 'git push'
+abbr grs 'git restore'
+abbr gst 'git status'
+abbr gr 'git remote --verbose'
+abbr grt 'cd "$(git rev-parse --show-toplevel || echo .)"'
 
 function _git_default_branch -d "Use init.defaultBranch if it's set and exists, otherwise use main if it exists. Falls back to master"
   command git rev-parse --git-dir &>/dev/null; or return
@@ -93,21 +93,14 @@ alias gpsup 'git push --set-upstream origin (_git_current_branch)'
 
 alias glg 'git log --stat'
 alias glgp 'git log --stat -p'
-alias glgg 'git log --graph'
-alias glgga 'git log --graph --decorate --all'
-alias glgm 'git log --graph --max-count 10'
-alias glo 'git log --oneline --decorate'
-alias glol "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
-alias glols "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat"
-alias glod "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
-alias glods="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date short"
-alias glola "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
-alias glog 'git log --oneline --decorate --graph'
-alias gloga 'git log --oneline --decorate --graph --all'
+alias glo "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'  --date short"
+alias glos "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat"
+alias gloa "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
 alias gcob "git branch | fzf --preview 'git show --color always {-1}' --bind 'enter:become(git checkout {-1})'"
 
 alias cat="bat --plain"
 alias ...="cd ../../"
+alias ....="cd ../../../"
 
 bind \e\[3\;3~ kill-word
 
@@ -118,4 +111,6 @@ set -x EDITOR 'vim'
 
 set -x CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
 set -x CC_aarch64_unknown_linux_gnu /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
+
+set -x RUSTC_WRAPPER sccache
 
