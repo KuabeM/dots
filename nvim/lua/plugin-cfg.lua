@@ -21,6 +21,10 @@ require('material').setup({
 require('bluloco').setup({
 
 })
+require('catppuccin').setup({
+    no_italic = true,
+})
+
 vim.g.material_style = "oceanic"
 vim.opt.termguicolors = true
 -- vim.cmd 'colorscheme material'

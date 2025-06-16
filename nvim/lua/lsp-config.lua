@@ -4,27 +4,6 @@
 -- nvim_lsp object
 local nvim_lsp = require 'lspconfig'
 
-local dap = require('dap')
-dap.adapters.lldb = {
-    type = 'executable',
-    command = '/usr/bin/lldb-vscode', -- adjust as needed, must be absolute path
-    name = 'lldb'
-}
-dap.configurations.cpp = {
-    {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
-    }
-}
-dap.configurations.c = dap.configurations.cpp
-
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
 local function add_document_highlight(client, bufnr)
@@ -116,13 +95,6 @@ local rust_opts = {
 }
 vim.g.rustaceanvim = rust_opts
 
-local on_attach = function(client, buff_nr)
-    if client.server_capabilities.documentSymbolProvider then
-        require('nvim-navic').attach(client, buff_nr)
-    end
-    add_document_highlight(client, buff_nr)
-end
-
 -- Enable clangd
 nvim_lsp.clangd.setup({
     -- capabilities = capabilities,
@@ -145,7 +117,7 @@ nvim_lsp.clangd.setup({
 })
 
 -- Enable json ls
-nvim_lsp.jsonls.setup({
+vim.lsp.config('jsonls', {
     commands = {
         Format = {
             function()
@@ -154,16 +126,18 @@ nvim_lsp.jsonls.setup({
         }
     }
 })
+vim.lsp.enable('jsonls')
 
 -- Enable cmake: pip install cmake-language-server
-nvim_lsp.cmake.setup {
+vim.lsp.config('cmake', {
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
-}
+})
+vim.lsp.enable('cmake')
 
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
-nvim_lsp.dockerls.setup {}
+vim.lsp.enable('dockerls')
 
 -- Groovy language server: https://github.com/GroovyLanguageServer/groovy-language-server
 nvim_lsp.groovyls.setup {
@@ -196,8 +170,27 @@ nvim_lsp.html.setup {
     end
 }
 
+-- python
+vim.lsp.enable('ruff')
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_format', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      -- Disable format in favor of Pyright
+      client.server_capabilities.formatProvider = false
+    end
+  end,
+  desc = 'LSP: Disable format capability from Ruff',
+})
+
+
 -- python: pip install python-lsp-server
-nvim_lsp.pylsp.setup {
+vim.lsp.config('pylsp', {
     settings = {
         pylsp = {
             plugins = {
@@ -211,9 +204,10 @@ nvim_lsp.pylsp.setup {
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
-}
+})
+vim.lsp.enable('pylsp')
 
-nvim_lsp.marksman.setup {}
+vim.lsp.enable('marksman')
 
 nvim_lsp.lua_ls.setup {
     on_init = function(client)
@@ -273,7 +267,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     {
-        pattern = { "*.rs", "*.py", "*.cmake", "CMakeLists.txt" },
+        pattern = { "*.rs", "*.cmake", "CMakeLists.txt" }, -- "*.py", 
         callback = function() vim.lsp.buf.format() end,
     }
 )
