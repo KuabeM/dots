@@ -36,10 +36,25 @@ require("lazy").setup({
         config = true,
     },
     {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+                markdown = true,
+                help = true,
+            },
+        },
+    },
+    {
         'saghen/blink.cmp',
-        dependencies = 'rafamadriz/friendly-snippets',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+            'fang2hou/blink-copilot',
+        },
         version = '*',
-
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -49,7 +64,7 @@ require("lazy").setup({
                 ['<Tab>'] = {
                     function(cmp)
                         if cmp.snippet_active() then
-                            return cmp.snipet_forward()
+                            return cmp.snippet_forward()
                         else
                             return cmp.select_next()
                         end
@@ -63,37 +78,87 @@ require("lazy").setup({
                 nerd_font_variant = 'mono'
             },
             completion = {
-                -- menu = { border = 'rounded' },
+                menu = {
+                    border = 'rounded',
+                    -- winhighlight = 'Normal:BlinkCmpMenuSelection,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenu,Search:None',
+                },
                 documentation = {
                     auto_show = true,
-                    auto_show_delay_ms = 500,
-                    window = { border = 'rounded' }
+                    auto_show_delay_ms = 200,
+                    window = {
+                        border = 'rounded',
+                        -- winhighlight = 'Normal:BlinkCmpMenuSelection,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenu,Search:None',
+                    }
                 },
+                keyword = { range = 'full' },
                 accept = {
                     auto_brackets = {
                         enabled = true,
                     }
                 },
-                -- ghost_text = { enabled = true, },
+                ghost_text = { enabled = false, },
                 list = {
                     selection = {
                         preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
                         auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
                     },
-                    cycle = { from_top = true, from_bottom = true }
+                    cycle = { from_top = true, from_bottom = true },
                 }
             },
             signature = { enabled = true, window = { border = 'rounded' } },
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer' },
+                default = { 'lsp', 'path', 'snippets', 'buffer'}, --, 'copilot' },
+                providers = {
+                    -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true }
+                },
             },
         },
         opts_extend = { "sources.default" }
     },
 
-    { 'mfussenegger/nvim-dap' }, -- Debug Adapter Protocol
+    {
+        'mfussenegger/nvim-dap', -- Debug Adapter Protocol
+        keys = {
+            {
+                "<leader>db",
+                function() require("dap").toggle_breakpoint() end,
+                desc = "Toggle Breakpoint"
+            },
+            {
+                "<leader>dc",
+                function() require("dap").continue() end,
+                desc = "Continue"
+            },
+            {
+                "<leader>di",
+                function() require("dap").step_into() end,
+                desc = "Continue"
+            },
+            {
+                "<leader>dn",
+                function() require("dap").step_over() end,
+                desc = "Continue"
+            },
+            {
+                "<leader>dC",
+                function() require("dap").run_to_cursor() end,
+                desc = "Run to Cursor"
+            },
+            {
+                "<leader>dT",
+                function() require("dap").terminate() end,
+                desc = "Terminate"
+            },
+        },
+    },
+    {
+        "igorlfs/nvim-dap-view",
+        ---@module 'dap-view'
+        ---@type dapview.Config
+        opts = {},
+    },
 
     { 'marko-cerovac/material.nvim' },
     {
@@ -105,7 +170,7 @@ require("lazy").setup({
         --     style = "dark",
         -- end,
     },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
 
     { 'nvim-lualine/lualine.nvim' },
     { 'nvim-tree/nvim-web-devicons' },
@@ -195,6 +260,16 @@ require("lazy").setup({
         config = true,
         event = "VeryLazy",
         opts = { minimumBufferNum = 6, }
+    },
+    {
+        "shortcuts/no-neck-pain.nvim",
+        opts = {
+            width = 160,
+            mappings = {
+                enabled = true,
+                toggleRightSide = "<Leader>nr",
+            }
+        }
     },
     -- {
     --     "chrisgrieser/nvim-lsp-endhints",

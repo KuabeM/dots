@@ -67,6 +67,7 @@ local rust_opts = {
                         enable = true,
                     },
                 },
+                rustfmt = { extraArgs = { '+nightly' } },
             }
         },
         on_attach = function(client, buff_nr)
@@ -174,18 +175,18 @@ nvim_lsp.html.setup {
 vim.lsp.enable('ruff')
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_format', { clear = true }),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-      return
-    end
-    if client.name == 'ruff' then
-      -- Disable format in favor of Pyright
-      client.server_capabilities.formatProvider = false
-    end
-  end,
-  desc = 'LSP: Disable format capability from Ruff',
+    group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_format', { clear = true }),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client == nil then
+            return
+        end
+        if client.name == 'ruff' then
+            -- Disable format in favor of Pyright
+            client.server_capabilities.formatProvider = false
+        end
+    end,
+    desc = 'LSP: Disable format capability from Ruff',
 })
 
 
@@ -267,7 +268,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 vim.api.nvim_create_autocmd(
     "BufWritePre",
     {
-        pattern = { "*.rs", "*.cmake", "CMakeLists.txt" }, -- "*.py", 
+        pattern = { "*.rs", "*.cmake", "CMakeLists.txt" }, -- "*.py",
         callback = function() vim.lsp.buf.format() end,
     }
 )
@@ -286,9 +287,9 @@ require('lspconfig.ui.windows').default_options = {
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or "rounded"
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or "rounded"
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- customize diagnostic signs

@@ -113,4 +113,5 @@ set -x CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER /opt/aarch64-brainlab-linux
 set -x CC_aarch64_unknown_linux_gnu /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
 
 set -x RUSTC_WRAPPER sccache
+set -x SCCACHE_IDLE_TIMEOUT 0
 

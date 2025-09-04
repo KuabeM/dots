@@ -137,6 +137,10 @@ input * {
     bindsym $mod+Shift+Ctrl+Left move workspace to output left
     bindsym $mod+Shift+Ctrl+Up move workspace to output up
     bindsym $mod+Shift+Ctrl+Down move workspace to output down
+    bindsym $mod+Shift+Ctrl+$right move workspace to output right
+    bindsym $mod+Shift+Ctrl+$left move workspace to output left
+    bindsym $mod+Shift+Ctrl+$up move workspace to output up
+    bindsym $mod+Shift+Ctrl+$down move workspace to output down
 #
 # Workspaces:
 #
