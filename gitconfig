@@ -1,6 +1,6 @@
 [user]
-	name = Korbinian Maier
-	email = korbinian.maier@brainlab.com
+	name = Korbinian Knott
+	email = korbinian.knott@brainlab.com
 	signingkey = 6ACF486262D19A7C
 [core]
 	excludesfile = /home/korbinian/.gitignore_global
