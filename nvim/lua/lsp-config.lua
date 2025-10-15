@@ -188,6 +188,9 @@ vim.lsp.enable('bashls')
 -- require 'lspconfig'.yamlls.setup {}
 vim.lsp.enable('yamlls')
 
+-- fish-shell https://github.com/ndonfris/fish-lsp
+vim.lsp.enable('fish_lsp')
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
