@@ -302,19 +302,32 @@ default_border pixel 2
 default_floating_border normal 4
 
 # floating windows
-for_window [app_id="thunar"] floating enable
+for_window [window_type="dialog"] floating enable, move position center
+for_window [window_type="utility"] floating enable
+for_window [window_role="pop-up"] floating enable
+
+for_window [app_id="thunar"] floating enable, border csd
 for_window [app_id="pavucontrol"] floating enable; resize set 800px 600px
 for_window [app_id="gnome-calculator"] floating enable;
 for_window [app_id="gnome.Calculator"] floating enable;
 for_window [app_id="org.kde.polkit-kde-authentication-agent-1"] floating enable; resize set 500px 260px
 for_window [app_id="nm-connection-editor"] floating enable; resize set 800px 600px
 for_window [app_id="zoom"] floating enable
-for_window [app_id="thunderbird"] floating enable
 for_window [app_id="org.kde.ark"] floating enable
 no_focus [title="Microsoft Teams Notification"]
 for_window [window_type="notification"] move absolute position 20 px 30 px
 for_window [app_id="^chrome-.*-.*$"] shortcuts_inhibitor disable
-for_window [title="Firefox - Sharing Indicator"] floating enable
 for_window [app_id="flameshot"] floating enable, fullscreen disable, move absolute position 0 0, border pixel 0
+
+# Mark first firefox window
+for_window [app_id="firefox" workspace="^(?!.*.*$)"] mark --add ff-first
+# Default: float Firefox windows...
+for_window [app_id="firefox"] floating enable, border normal
+# except the one we marked as first (keep it tiled)
+for_window [con_mark="^ff-first$"] floating disable, border none
+
+for_window [app_id="thunderbird" workspace="^(?!.*󰇮.*$)"] mark --add thunder-first
+for_window [app_id="thunderbird"] floating enable, border normal
+for_window [con_mark="^thunder-first$"] floating disable, border none
 
 include /etc/sway/config.d/*
