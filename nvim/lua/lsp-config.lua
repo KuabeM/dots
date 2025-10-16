@@ -97,7 +97,7 @@ local rust_opts = {
 vim.g.rustaceanvim = rust_opts
 
 -- Enable clangd
-nvim_lsp.clangd.setup({
+vim.lsp.config('clangd', {
     -- capabilities = capabilities,
     on_attach = function(client, buff_nr)
         vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader<CR>",
@@ -116,6 +116,7 @@ nvim_lsp.clangd.setup({
         },
     },
 })
+vim.lsp.enable('clangd')
 
 -- Enable json ls
 vim.lsp.config('jsonls', {
@@ -140,13 +141,8 @@ vim.lsp.enable('cmake')
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
 vim.lsp.enable('dockerls')
 
--- Groovy language server: https://github.com/GroovyLanguageServer/groovy-language-server
-nvim_lsp.groovyls.setup {
-    cmd = { "java", "-jar", "/home/maie_ko/.local/bin/groovy-language-server-all.jar" },
-}
-
 -- https://github.com/latex-lsp/texlab
-nvim_lsp.texlab.setup {
+vim.lsp.config('texlab', {
     settings = {
         texlab = {
             build = {
@@ -155,21 +151,16 @@ nvim_lsp.texlab.setup {
             }
         }
     }
-}
-
--- npm install -g vim-language-server
-nvim_lsp.vimls.setup {
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
-}
+})
+vim.lsp.enable('texlab')
 
 -- npm install -g vscode-langservers-extracted
-nvim_lsp.html.setup {
+vim.lsp.config('html', {
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
-}
+})
+vim.lsp.enable('html')
 
 -- python
 vim.lsp.enable('ruff')
@@ -210,7 +201,7 @@ vim.lsp.enable('pylsp')
 
 vim.lsp.enable('marksman')
 
-nvim_lsp.lua_ls.setup {
+vim.lsp.config('lua_ls', {
     on_init = function(client)
         local path = client.workspace_folders[1].name
         if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
@@ -243,17 +234,20 @@ nvim_lsp.lua_ls.setup {
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
-}
+})
+vim.lsp.enable('lua_ls')
 
 -- bashls
-nvim_lsp.bashls.setup {
+vim.lsp.config('bashls', {
     on_attach = function(client, bufnr)
         add_document_highlight(client, bufnr)
     end
-}
+})
+vim.lsp.enable('bashls')
 
 -- yaml https://github.com/redhat-developer/yaml-language-server
-require 'lspconfig'.yamlls.setup {}
+-- require 'lspconfig'.yamlls.setup {}
+vim.lsp.enable('yamlls')
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
