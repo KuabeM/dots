@@ -141,7 +141,7 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol",
+        "on-click": "flatpak run com.saivert.pwvucontrol",
         "max-length": 30
     },
     "custom/media": {

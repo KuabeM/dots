@@ -308,6 +308,7 @@ for_window [window_role="pop-up"] floating enable
 
 for_window [app_id="thunar"] floating enable, border csd
 for_window [app_id="pavucontrol"] floating enable; resize set 800px 600px
+for_window [app_id="com.saivert.pwvucontrol"] floating enable, border none; resize set 800px 600px
 for_window [app_id="gnome-calculator"] floating enable;
 for_window [app_id="gnome.Calculator"] floating enable;
 for_window [app_id="org.kde.polkit-kde-authentication-agent-1"] floating enable; resize set 500px 260px
