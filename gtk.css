@@ -1,0 +1,17 @@
+.window-frame, .window-frame:backdrop {
+    border: 10px solid #0000FF;
+}
+
+.header-bar {
+    border: 10px solid #0000FF;
+}
+
+/** Some apps use titlebar class and some window */
+.titlebar, decoration-overlay, window:focus-within {
+    border: 2px solid #285577;
+}
+
+window:not(:focus-within) {
+    border: 2px solid #FAFAFB;
+}
+

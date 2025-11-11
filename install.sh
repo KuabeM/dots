@@ -20,6 +20,11 @@ ln -nfs $src_dir/starship.toml $HOME/.config/starship.toml
 # fish only allows config.fish
 mkdir -p $HOME/.config/fish
 ln -nfs $src_dir/fish/config.fish $HOME/.config/fish/config.fish
+# gtk settings have untracked files in gtk-x.0/
+mkdir -p $HOME/.config/{gtk-3.0/,gtk-2.0}
+ln -nfs $src_dir/gtk.css $HOME/.config/gtk-2.0/gtk.css
+ln -nfs $src_dir/gtk.css $HOME/.config/gtk-3.0/gtk.css
+ln -nfs $src_dir/gtk.css $HOME/.config/gtk-4.0/gtk.css
 # Move nvim separately
 mkdir -p $HOME/.config/nvim
 ln -nfs $src_dir/nvim/init.lua $HOME/.config/nvim/init.lua
