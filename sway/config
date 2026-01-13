@@ -335,10 +335,10 @@ for_window [con_mark="^thunder-first$"] floating disable, border none
 set $gnome-schema org.gnome.desktop.interface
 
 exec_always {
-    gsettings set $gnome-schema gtk-theme ''
-    gsettings set $gnome-schema icon-theme 'Your icon theme'
-    gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
-    gsettings set $gnome-schema font-name 'Your font name'
+    gsettings set $gnome-schema gtk-theme 'Yaru'
+    gsettings set $gnome-schema icon-theme 'Papirus'
+    # gsettings set $gnome-schema cursor-theme 'Your cursor Theme'
+    # gsettings set $gnome-schema font-name 'Your font name'
 }
 
 include /etc/sway/config.d/*
