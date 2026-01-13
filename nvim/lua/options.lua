@@ -54,3 +54,6 @@ local cmd = vim.cmd
 cmd [[ highlight CursorLine term=bold cterm=bold gui=bold ]]
 cmd [[ syntax enable ]]
 cmd [[ filetype plugin indent on ]]
+
+-- UI borders
+vim.o.winborder = "rounded"

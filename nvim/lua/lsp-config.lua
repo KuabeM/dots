@@ -267,31 +267,7 @@ vim.api.nvim_create_autocmd(
     }
 )
 
--- add borders to all hover windows
-vim.diagnostic.config { float = { border = "rounded" } }
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded"
-})
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded"
-})
-require('lspconfig.ui.windows').default_options = {
-    border = "rounded"
-}
-
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
-    opts.border = opts.border or "rounded"
-    return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
-
 -- customize diagnostic signs
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
--- for type, icon in pairs(signs) do
---     local hl = "DiagnosticSign" .. type
---     -- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
---     local cfg = vim.diagnostic.config()
 vim.diagnostic.config({
     signs = {
         text = {
@@ -308,4 +284,3 @@ vim.diagnostic.config({
         },
     },
 })
--- end

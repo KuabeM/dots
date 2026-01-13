@@ -13,6 +13,14 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ";"
 
+-- vim.pack.add({
+--     'https://github.com/neovim/nvim-lspconfig', -- Configurations for Nvim LSP
+--     {
+--         src = 'https://github.com/nvim-treesitter/nvim-treesitter', -- syntax highlighting
+--         build = ':TSUpdate'
+--     }
+-- })
+
 require("lazy").setup({
     ui = {
         -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
@@ -23,7 +31,7 @@ require("lazy").setup({
     },
     {
         'mrcjkb/rustaceanvim',
-        version = '^6',
+        version = '^7',
         ft = { 'rust' },
     },
     {
@@ -109,7 +117,7 @@ require("lazy").setup({
             -- Default list of enabled providers defined so that you can extend it
             -- elsewhere in your config, without redefining it, due to `opts_extend`
             sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer'}, --, 'copilot' },
+                default = { 'lsp', 'path', 'snippets', 'buffer' }, --, 'copilot' },
                 providers = {
                     -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true }
                 },
@@ -172,8 +180,11 @@ require("lazy").setup({
     },
     { "catppuccin/nvim",            name = "catppuccin", priority = 1000 },
 
-    { 'nvim-lualine/lualine.nvim' },
-    { 'nvim-tree/nvim-web-devicons' },
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
+    -- { 'nvim-tree/nvim-web-devicons' },
     { 'lewis6991/gitsigns.nvim' }, -- git decorations
     {
         'f-person/git-blame.nvim', -- show git blame messages
