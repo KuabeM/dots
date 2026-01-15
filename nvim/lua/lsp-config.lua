@@ -1,9 +1,6 @@
 -- Debug log
 -- vim.lsp.set_log_level('Debug')
 
--- nvim_lsp object
-local nvim_lsp = require 'lspconfig'
-
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
 local function add_document_highlight(client, bufnr)
@@ -27,6 +24,19 @@ local function add_document_highlight(client, bufnr)
         })
     end
 end
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client_id = args.data.client_id
+        local client = assert(vim.lsp.get_client_by_id(client_id))
+        if client.name == 'clangd' then
+            vim.keymap.set("n", "<leader>p", ":LspClangdSwitchSourceHeader<CR>",
+                { silent = true, desc = ":LspClangdSwitchSourceHeader<CR>" })
+        end
+        if client.server_capabilities.documentHighlightProvider then
+            add_document_highlight(client, args.buf)
+        end
+    end,
+})
 
 -- rust-tools
 local rust_opts = {
@@ -71,18 +81,6 @@ local rust_opts = {
             }
         },
         on_attach = function(client, buff_nr)
-            vim.keymap.set("n", "<leader>p", function() vim.cmd.RustLsp('parentModule') end,
-                { silent = true, desc = "parentModule" })
-            vim.keymap.set("n", "fa", function() vim.cmd.RustLsp('codeAction') end,
-                { silent = true, desc = "codeAction" })
-            vim.keymap.set("n", "<leader>rm",
-                function()
-                    vim.cmd.RustLsp('rebuildProcMacros'); vim.cmd.RustLsp('expandMacro')
-                end, { silent = true, desc = "Rebuild and expand macro" })
-            vim.keymap.set("n", "K", function() vim.cmd.RustLsp { 'hover', 'actions' } end,
-                { silent = false, desc = "RustHoverAction" })
-            vim.keymap.set("n", "fl", function() vim.cmd.RustLsp('relatedDiagnostics') end,
-                { silent = false, desc = "relatedDiagnostics" })
             if client.server_capabilities.documentSymbolProvider then
                 require('nvim-navic').attach(client, buff_nr)
             end
@@ -90,7 +88,6 @@ local rust_opts = {
                 vim.lsp.inlay_hint.enable(true, { buffnr = buff_nr })
                 vim.api.nvim_set_hl(0, 'LspInlayHint', { link = 'Comment' })
             end
-            add_document_highlight(client, buff_nr)
         end,
     },
 }
@@ -98,12 +95,6 @@ vim.g.rustaceanvim = rust_opts
 
 -- Enable clangd
 vim.lsp.config('clangd', {
-    -- capabilities = capabilities,
-    on_attach = function(client, buff_nr)
-        vim.keymap.set("n", "<leader>p", ":ClangdSwitchSourceHeader<CR>",
-            { silent = true, desc = ":ClangdSwitchSourceHeader<CR>" })
-        add_document_highlight(client, buff_nr)
-    end,
     settings = {
         clangd = {
             InlayHints = {
@@ -131,11 +122,11 @@ vim.lsp.config('jsonls', {
 vim.lsp.enable('jsonls')
 
 -- Enable cmake: pip install cmake-language-server
-vim.lsp.config('cmake', {
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
-})
+-- vim.lsp.config('cmake', {
+--     on_attach = function(client, bufnr)
+--         add_document_highlight(client, bufnr)
+--     end
+-- })
 vim.lsp.enable('cmake')
 
 -- Enable docker: npm install -g dockerfile-language-server-nodejs
@@ -155,11 +146,11 @@ vim.lsp.config('texlab', {
 vim.lsp.enable('texlab')
 
 -- npm install -g vscode-langservers-extracted
-vim.lsp.config('html', {
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
-})
+-- vim.lsp.config('html', {
+--     on_attach = function(client, bufnr)
+--         add_document_highlight(client, bufnr)
+--     end
+-- })
 vim.lsp.enable('html')
 
 -- python
@@ -193,9 +184,9 @@ vim.lsp.config('pylsp', {
             }
         }
     },
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
+    -- on_attach = function(client, bufnr)
+    --     add_document_highlight(client, bufnr)
+    -- end
 })
 vim.lsp.enable('pylsp')
 
@@ -231,18 +222,18 @@ vim.lsp.config('lua_ls', {
     settings = {
         Lua = {}
     },
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
+    -- on_attach = function(client, bufnr)
+    --     add_document_highlight(client, bufnr)
+    -- end
 })
 vim.lsp.enable('lua_ls')
 
 -- bashls
-vim.lsp.config('bashls', {
-    on_attach = function(client, bufnr)
-        add_document_highlight(client, bufnr)
-    end
-})
+-- vim.lsp.config('bashls', {
+--     on_attach = function(client, bufnr)
+--         add_document_highlight(client, bufnr)
+--     end
+-- })
 vim.lsp.enable('bashls')
 
 -- yaml https://github.com/redhat-developer/yaml-language-server
