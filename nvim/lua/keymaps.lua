@@ -43,11 +43,16 @@ key.set("n", "gf", function() b.format({ async = true }) end, { silent = true, d
 key.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
 key.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
 
-key.set("n", "fj", function() vim.diagnostic.jump({ count = 1 }) end,
+local function jump_with_fallback(direction)
+    local opts = { count = direction, severity = vim.diagnostic.severity.ERROR }
+    if not vim.diagnostic.jump(opts) then
+        vim.diagnostic.jump({ count = direction })
+    end
+end
+key.set("n", "fj", function() jump_with_fallback(1) end,
     { silent = true, desc = "vim.diagnostics.goto_next" })
-key.set("n", "fk", function()
-    vim.diagnostic.jump({ count = -1 })
-end, { silent = true, desc = "vim.diagnostics.goto_prev" })
+key.set("n", "fk", function() jump_with_fallback(-1) end,
+    { silent = true, desc = "vim.diagnostics.goto_prev" })
 key.set("n", "J", vim.diagnostic.open_float, { silent = true, desc = "vim.diagnostics.open_float" })
 
 -- telescope
