@@ -69,17 +69,17 @@ require("lazy").setup({
             keymap = {
                 preset = 'enter',
                 -- ['<Tab>'] = { 'select_next', 'fallback' },
-                ['<Tab>'] = {
-                    function(cmp)
-                        if cmp.snippet_active() then
-                            return cmp.snippet_forward()
-                        else
-                            return cmp.select_next()
-                        end
-                    end,
-                    'select_next', 'fallback'
-                },
-                ['<S-Tab>'] = { 'select_prev', 'fallback' },
+                -- ['<Tab>'] = {
+                --     function(cmp)
+                --         if cmp.snippet_active() then
+                --             return cmp.snippet_forward()
+                --         else
+                --             return cmp.select_next()
+                --         end
+                --     end,
+                --     'select_next', 'fallback'
+                -- },
+                -- ['<S-Tab>'] = { 'select_prev', 'fallback' },
             },
             appearance = {
                 use_nvim_cmp_as_default = true,
