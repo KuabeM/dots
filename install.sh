@@ -29,7 +29,8 @@ ln -nfs $src_dir/gtk.css $HOME/.config/gtk-4.0/gtk.css
 mkdir -p $HOME/.config/nvim
 ln -nfs $src_dir/nvim/init.lua $HOME/.config/nvim/init.lua
 ln -nfs $src_dir/nvim/lua $HOME/.config/nvim/lua
-ln -nfs $src_dir/nvim/lua $HOME/.config/nvim/spell
+ln -nfs $src_dir/nvim/spell $HOME/.config/nvim/spell
+ln -nfs $src_dir/nvim/after $HOME/.config/nvim/after
 
 echo 'Install neovim plugin manager'
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
