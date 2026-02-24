@@ -53,6 +53,7 @@ opt.grepformat = "%f:%l%c:%m"
 local cmd = vim.cmd
 cmd [[ highlight CursorLine term=bold cterm=bold gui=bold ]]
 cmd [[ syntax enable ]]
+cmd [[ filetype on ]]
 cmd [[ filetype plugin indent on ]]
 
 -- UI borders

@@ -121,6 +121,8 @@ vim.lsp.config('jsonls', {
 })
 vim.lsp.enable('jsonls')
 
+vim.lsp.enable('vtsls')
+
 -- Enable cmake: pip install cmake-language-server
 -- vim.lsp.config('cmake', {
 --     on_attach = function(client, bufnr)
