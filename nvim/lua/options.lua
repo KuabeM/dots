@@ -58,3 +58,12 @@ cmd [[ filetype plugin indent on ]]
 
 -- UI borders
 vim.o.winborder = "rounded"
+
+vim.opt.termguicolors = true
+
+-- colorscheme
+require('catppuccin').setup({
+    no_italic = true,
+})
+
+vim.cmd 'colorscheme catppuccin-macchiato'
