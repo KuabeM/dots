@@ -1,5 +1,5 @@
 # path
-set PATH $PATH $HOME/.cargo/bin $HOME/.local/bin $XDG_CONFIG_HOME/sway/scripts $HOME/.local/share/fnm $HOME/repos/robotx/utils/scripts /opt/gcc-arm-none-eabi-9/bin
+set PATH $HOME/.cargo/bin $HOME/.local/bin $XDG_CONFIG_HOME/sway/scripts $HOME/.local/share/fnm $HOME/repos/robotx/utils/scripts /opt/gcc-arm-none-eabi-9/bin $PATH
 
 # prompt
 starship init fish | source
@@ -103,6 +103,13 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 
 bind \e\[3\;3~ kill-word
+
+# merge history on up
+# function sync_history_up
+#     history merge
+#     commandline -f up-line
+# end
+# bind \e\[A sync_history_up
 
 set -x CMAKE_BUILD_PARALLEL_LEVEL 8
 set -x MAKEFLAGS '-j 8'

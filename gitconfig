@@ -97,3 +97,5 @@
 	autoStash = true
 [rerere]
 	enabled = true
+[safe]
+	directory = /mnt/root/home/korbinian/home-assistant-cfg
