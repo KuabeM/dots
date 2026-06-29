@@ -2,17 +2,17 @@ vim.g.mapleader = ";"
 
 vim.pack.add({
     { src = 'https://github.com/neovim/nvim-lspconfig', }, -- Configurations for Nvim LSP
-    { src = 'https://github.com/mrcjkb/rustaceanvim',   version = vim.version.range('7.*') },
+    { src = 'https://github.com/mrcjkb/rustaceanvim',   version = vim.version.range('9.*') },
     { src = 'https://github.com/catppuccin/nvim',       name = 'catppuccin' },
     {
         src = 'https://github.com/nvim-treesitter/nvim-treesitter',
     },
-    -- { src = 'https://github.com/windwp/nvim-autopairs' }, -- check config with blink
-    { src = 'https://github.com/saghen/blink.lib' },
+    { src = 'https://github.com/windwp/nvim-autopairs' }, -- check config with blink
     { src = 'https://github.com/rafamadriz/friendly-snippets' },
+    {src = 'https://github.com/saghen/blink.lib' },
     {
         src = 'https://github.com/saghen/blink.cmp',
-        version = vim.version.range('*'),
+        version = 'main',
     },
     { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
     { src = 'https://github.com/nvim-lualine/lualine.nvim' },
@@ -32,6 +32,10 @@ vim.pack.add({
     { src = 'https://github.com/f-person/git-blame.nvim', },
     { src = 'https://github.com/kopischke/vim-fetch' }, -- Handle line numbers when opening files
     { src = 'https://github.com/cameron-wags/rainbow_csv.nvim', },
+    {
+        src = "https://www.github.com/olimorris/codecompanion.nvim",
+        version = vim.version.range("^19.0.0")
+    }
 })
 
 -- require("lazy").setup({

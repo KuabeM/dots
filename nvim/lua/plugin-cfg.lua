@@ -1,3 +1,9 @@
+-- colorscheme
+require('catppuccin').setup({
+    no_italic = true,
+})
+
+vim.cmd 'colorscheme catppuccin-macchiato'
 -- statusline with lualine
 local navic = require('nvim-navic')
 local custom_auto = require 'lualine.themes.auto'
@@ -15,7 +21,7 @@ require('lualine').setup {
             end },
         lualine_c = {
             { 'filename', path = 1, },
-            { function() return navic.get_location() end, cond = function() return navic.is_available() end }
+            -- { function() return navic.get_location() end, cond = function() return navic.is_available() end }
         },
         lualine_x = { 'branch', 'filetype' }, -- default: 'encoding', 'fileformat'
         lualine_y = { 'searchcount' },        -- default: 'progress'
@@ -64,30 +70,33 @@ require('qfc').setup({
 })
 
 -- auto-pairs
--- local npairs = require 'nvim-autopairs'
--- local Rule = require 'nvim-autopairs.rule'
--- local cond = require 'nvim-autopairs.conds'
---
--- npairs.setup({
---     enable_check_bracket_line = false,
---     check_ts = true,
--- })
---
--- npairs.add_rule(Rule('<', '>', {
---     -- if you use nvim-ts-autotag, you may want to exclude these filetypes from this rule
---     -- so that it doesn't conflict with nvim-ts-autotag
---     '-html',
---     '-javascriptreact',
---     '-typescriptreact',
--- }):with_pair(
--- -- regex will make it so that it will auto-pair on
--- -- `a<` but not `a <`
--- -- The `:?:?` part makes it also
--- -- work on Rust generics like `some_func::<T>()`
---     cond.before_regex('%a+:?:?$', 3)
--- ):with_move(function(opts)
---     return opts.char == '>'
--- end))
+local npairs = require 'nvim-autopairs'
+local Rule = require 'nvim-autopairs.rule'
+local cond = require 'nvim-autopairs.conds'
+
+npairs.setup({
+    enable_check_bracket_line = false,
+    check_ts = true,
+})
+npairs.add_rule(
+    Rule('<', '>', {
+        -- if you use nvim-ts-autotag, you may want to exclude these filetypes from this rule
+        -- so that it doesn't conflict with nvim-ts-autotag
+        '-html',
+        '-javascriptreact',
+        '-typescriptreact',
+        }
+    ):with_pair(
+        -- regex will make it so that it will auto-pair on
+        -- `a<` but not `a <`
+        -- The `:?:?` part makes it also
+        -- work on Rust generics like `some_func::<T>()`
+        cond.before_regex('%a+:?:?$', 3)
+    ):with_move(
+        function(opts)
+            return opts.char == '>'
+        end
+))
 
 
 -- nvim-treesitter auto update parsers
@@ -101,6 +110,17 @@ vim.api.nvim_create_autocmd('PackChanged', {
     end
 })
 
+require('nvim-treesitter').setup({
+    ensure_installed = {
+        'rust', 'python', 'lua', 'c', 'cpp',
+        'bash', 'yaml', 'cmake', 'toml',
+        -- always useful
+        'vim', 'vimdoc', 'query',
+    },
+    highlight        = { enable = true },
+    indent           = { enable = true },
+})
+
 require('no-neck-pain').setup {
     width = 160,
     mappings = {
@@ -112,7 +132,21 @@ require('no-neck-pain').setup {
 local cmp = require('blink.cmp')
 cmp.build():wait(60000)
 cmp.setup({
-    keymap = { preset = 'enter', },
+    keymap = {
+        preset = 'enter',
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        ['<C-Tab>'] = {
+            function(cmp)
+                if cmp.snippet_active() then return cmp.accept()
+            else
+                return cmp.select_and_accept() end
+            end,
+            'snippet_forward',
+            'fallback'
+        },
+        ['<S-C-Tab>'] = { 'snippet_backward', 'fallback' }
+    },
     appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono'
@@ -149,10 +183,13 @@ cmp.setup({
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },         --, 'copilot' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' }, --, 'copilot' },
         providers = {
             -- copilot = { name = "copilot", module = "blink-copilot", score_offset = 100, async = true }
         },
+        per_filetype = {
+            codecompanion = { "codecompanion" }
+        }
     },
 })
 

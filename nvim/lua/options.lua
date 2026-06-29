@@ -56,14 +56,12 @@ cmd [[ syntax enable ]]
 cmd [[ filetype on ]]
 cmd [[ filetype plugin indent on ]]
 
+-- folding via treesitter
+opt.foldmethod = 'expr'
+opt.foldexpr   = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldlevel  = 99 -- start with all folds open
+
 -- UI borders
 vim.o.winborder = "rounded"
 
 vim.opt.termguicolors = true
-
--- colorscheme
-require('catppuccin').setup({
-    no_italic = true,
-})
-
-vim.cmd 'colorscheme catppuccin-macchiato'

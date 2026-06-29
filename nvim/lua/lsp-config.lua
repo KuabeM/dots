@@ -3,6 +3,9 @@
 
 -- See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md for a list of LSPs
 
+-- vim.lsp.codelens.enable()
+vim.lsp.enable('rust-analyzer', false)
+
 local function add_document_highlight(client, bufnr)
     if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', {
@@ -186,19 +189,17 @@ vim.lsp.enable('bashls')
 
 -- yaml https://github.com/redhat-developer/yaml-language-server
 -- require 'lspconfig'.yamlls.setup {}
-vim.lsp.enable('yamlls')
+-- vim.lsp.enable('yamlls')
 
 -- fish-shell https://github.com/ndonfris/fish-lsp
 vim.lsp.enable('fish_lsp')
 
 -- Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        signs = true,
-        update_in_insert = true,
-    }
-)
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+})
 
 -- autoformatting on save
 vim.api.nvim_create_autocmd(

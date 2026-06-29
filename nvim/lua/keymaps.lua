@@ -44,7 +44,7 @@ key.set("n", "fn", b.rename, { silent = true, desc = "vim.lsp.buf.rename" })
 key.set("n", "fa", b.code_action, { silent = true, desc = "vim.lsp.buf.code_action" })
 
 local function jump_with_fallback(direction)
-    local opts = { count = direction, severity = vim.diagnostic.severity.ERROR }
+    local opts = { count = direction, severity = { min = vim.diagnostic.severity.INFO } }
     if not vim.diagnostic.jump(opts) then
         vim.diagnostic.jump({ count = direction })
     end
@@ -53,6 +53,8 @@ key.set("n", "fj", function() jump_with_fallback(1) end,
     { silent = true, desc = "vim.diagnostics.goto_next" })
 key.set("n", "fk", function() jump_with_fallback(-1) end,
     { silent = true, desc = "vim.diagnostics.goto_prev" })
+key.set("n", "<leader>fj", function() vim.diagnostic.jump({ count = 1 }) end, { silent = true, desc = "vim.diagnostics.goto_next" })
+key.set("n", "<leader>fk", function() vim.diagnostic.jump({ count = -1 }) end, { silent = true, desc = "vim.diagnostics.goto_prev" })
 key.set("n", "J", vim.diagnostic.open_float, { silent = true, desc = "vim.diagnostics.open_float" })
 
 -- telescope
@@ -75,7 +77,7 @@ key.set("n", "<leader>gst", t.git_status, { silent = true, desc = "telescope.git
 key.set("n", "<leader>gb", t.git_branches, { silent = true, desc = "telescope.git_branches()" })
 key.set("n", "<leader>gsta", t.git_stash, { silent = true, desc = "telescope.git_stash()" })
 
-key.set("n", "<leader>fd", t.diagnostics, {silent = true, desc = "telescope.diagnostic()" })
+key.set("n", "<leader>fd", t.diagnostics, { silent = true, desc = "telescope.diagnostic()" })
 
 -- close current buffer but not the split
 key.set("n", "<leader>d", ":b#<bar>bd#<CR>", { silent = true, desc = "close current buffer" })
