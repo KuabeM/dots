@@ -30,17 +30,17 @@ abbr gbnm 'git branch --no-merged'
 abbr gbr 'git branch --remote'
 
 abbr gc 'git commit -v'
-abbr gcb 'git checkout -b'
+alias gcb 'git checkout -b'
 abbr gco 'git checkout'
 abbr gcf 'git config --list'
 
-abbr gf 'git fetch'
-abbr gl 'git pull'
-abbr gp 'git push'
-abbr grs 'git restore'
-abbr gst 'git status'
-abbr gr 'git remote --verbose'
-abbr grt 'cd "$(git rev-parse --show-toplevel || echo .)"'
+alias gf 'git fetch'
+alias gl 'git pull'
+alias gp 'git push'
+alias grs 'git restore'
+alias gst 'git status'
+alias gr 'git remote --verbose'
+alias grt 'cd "$(git rev-parse --show-toplevel || echo .)"'
 
 function _git_default_branch -d "Use init.defaultBranch if it's set and exists, otherwise use main if it exists. Falls back to master"
   command git rev-parse --git-dir &>/dev/null; or return
@@ -120,3 +120,6 @@ set -x EDITOR 'vim'
 set -x RUSTC_WRAPPER sccache
 set -x SCCACHE_IDLE_TIMEOUT 0
 
+
+# opencode
+fish_add_path /home/korbinian/.opencode/bin
