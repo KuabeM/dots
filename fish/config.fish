@@ -123,3 +123,7 @@ set -x SCCACHE_IDLE_TIMEOUT 0
 
 # opencode
 fish_add_path /home/korbinian/.opencode/bin
+
+set -x CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
+set -x CC_aarch64_unknown_linux_gnu /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
+
