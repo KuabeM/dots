@@ -35,7 +35,8 @@ vim.pack.add({
     {
         src = "https://www.github.com/olimorris/codecompanion.nvim",
         version = vim.version.range("^19.0.0")
-    }
+    },
+    { src = 'https://github.com/dlyongemallo/diffview-plus.nvim' }
 })
 
 -- require("lazy").setup({

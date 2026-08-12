@@ -105,41 +105,42 @@ vim.lsp.enable('texlab')
 vim.lsp.enable('html')
 
 -- python
-vim.lsp.enable('ruff')
+-- vim.lsp.enable('ruff')
+vim.lsp.enable('pyright')
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_format', { clear = true }),
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client == nil then
-            return
-        end
-        if client.name == 'ruff' then
-            -- Disable format in favor of Pyright
-            client.server_capabilities.formatProvider = false
-        end
-    end,
-    desc = 'LSP: Disable format capability from Ruff',
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_format', { clear = true }),
+--     callback = function(args)
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--         if client == nil then
+--             return
+--         end
+--         if client.name == 'ruff' then
+--             -- Disable format in favor of Pyright
+--             client.server_capabilities.formatProvider = false
+--         end
+--     end,
+--     desc = 'LSP: Disable format capability from Ruff',
+-- })
 
 
 -- python: pip install python-lsp-server
-vim.lsp.config('pylsp', {
-    settings = {
-        pylsp = {
-            plugins = {
-                yapf = { enabled = true },
-                pycodestyle = {
-                    maxLineLength = 100,
-                }
-            }
-        }
-    },
-    -- on_attach = function(client, bufnr)
-    --     add_document_highlight(client, bufnr)
-    -- end
-})
-vim.lsp.enable('pylsp')
+-- vim.lsp.config('pylsp', {
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 yapf = { enabled = true },
+--                 pycodestyle = {
+--                     maxLineLength = 100,
+--                 }
+--             }
+--         }
+--     },
+--     -- on_attach = function(client, bufnr)
+--     --     add_document_highlight(client, bufnr)
+--     -- end
+-- })
+-- vim.lsp.enable('pylsp')
 
 vim.lsp.enable('marksman')
 
