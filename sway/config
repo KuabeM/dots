@@ -39,16 +39,13 @@ exec --no-startup-id $HOME/.cargo/bin/piow --syslog
 exec $HOME/.cargo/bin/oswod --syslog
 
 # set proper environment variables for xdg-desktop-portal
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND && \
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP && \
      dbus-update-activation-environment --systemd \
-        MOZ_ENABLE_WAYLAND=1 \
         QT_QPA_PLATFORMTHEME=qt5ct \
         XDG_CURRENT_DESKTOP=sway && \
      systemctl stop --user \
         xdg-desktop-portal \
-        xdg-desktop-portal-wlr \
-        wireplumber \
-        pipewire && \
+        xdg-desktop-portal-wlr && \
      systemctl start --user pipewire xdg-desktop-portal xdg-desktop-portal-wlr
 
 # Idle configuration
@@ -61,7 +58,7 @@ exec swayidle -w \
 exec nm-applet --indicator
 
 # flameshot screenshot
-exec XDG_CURRENT_DESKTOP=sway flameshot
+exec flameshot
 
 ### Input configuration
 #
