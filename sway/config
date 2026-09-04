@@ -24,6 +24,8 @@ set $term $HOME/.cargo/bin/alacritty
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu $HOME/.cargo/bin/yofi
 
+xwayland disable
+
 # Include proper settings
 #include thinkpad.config
 #include dell.config
