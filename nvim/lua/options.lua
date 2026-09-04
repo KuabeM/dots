@@ -65,3 +65,10 @@ opt.foldlevel  = 99 -- start with all folds open
 vim.o.winborder = "rounded"
 
 vim.opt.termguicolors = true
+
+vim.filetype.add({
+      extension = {
+        logs = "log",
+        log = "log",
+      },
+    })

@@ -21,7 +21,7 @@ require("vim._core.ui2").enable({
         --   "pager"  : Interactive pager window (focusable, scrollable, press 'q' to exit).
         --   "dialog" : Interactive modal prompt window.
         targets = {
-            default = "cmd",
+            default = "msg",
 
             -- Ephemeral notifications (floating toast messages, non-blocking)
             -- Using "msg" ensures errors and notices NEVER steal cursor focus!
@@ -29,7 +29,7 @@ require("vim._core.ui2").enable({
             wmsg = "msg", -- Warnings (e.g. "search hit BOTTOM")
             echoerr = "msg", -- :echoerr messages
             lua_error = "msg", -- Lua errors
-            bufwrite = "msg", -- "file written" notifications
+            -- bufwrite = "cmd", -- "file written" messages shown in cmdline area below lualine
             undo = "msg", -- Undo/redo messages
             quickfix = "msg", -- Quickfix navigation messages
             echo = "msg", -- :echo
