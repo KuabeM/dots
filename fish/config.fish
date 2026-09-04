@@ -127,3 +127,56 @@ fish_add_path /home/korbinian/.opencode/bin
 set -x CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
 set -x CC_aarch64_unknown_linux_gnu /opt/aarch64-brainlab-linux-gnu-13.2-kernel5.4/bin/aarch64-brainlab-linux-gnu-gcc
 
+# bubblwrap
+alias sbox='bwrap \
+  --dev-bind /dev /dev \
+  --dev-bind /sys /sys \
+  --ro-bind /etc /etc \
+  --bind /opt /opt \
+  --ro-bind /run/systemd /run/systemd \
+  --ro-bind /usr /usr \
+  --symlink /usr/bin /bin \
+  --symlink /usr/sbin /sbin \
+  --symlink /usr/lib /lib \
+  --symlink /usr/lib32 /lib32 \
+  --symlink /usr/libx32 /libx32 \
+  --symlink /usr/lib64 /lib64 \
+  --dir /tmp \
+  --proc /proc \
+  --unshare-ipc \
+  --unshare-pid \
+  --bind "$XDG_RUNTIME_DIR/gcr/ssh" "$XDG_RUNTIME_DIR/gcr/ssh" \
+  --bind "$XDG_RUNTIME_DIR/wayland-1" "$XDG_RUNTIME_DIR/wayland-1" \
+  --ro-bind ~/.bashrc ~/.bashrc \
+  --ro-bind ~/.profile ~/.profile \
+  --ro-bind ~/.gitconfig ~/.gitconfig \
+  --ro-bind ~/.gitignore_global ~/.gitignore_global \
+  --ro-bind ~/.rustup ~/.rustup \
+  --ro-bind ~/.ssh/known_hosts ~/.ssh/known_hosts \
+  --ro-bind ~/.ssh/config ~/.ssh/config \
+  --ro-bind ~/.ssh/allowed_signers ~/.ssh/allowed_signers \
+  --ro-bind ~/.ssh/id_ed25519.pub ~/.ssh/id_ed25519.pub \
+  --ro-bind ~/.config/ ~/.config \
+  --ro-bind ~/.dots/ ~/.dots \
+  --ro-bind ~/.fzf/ ~/.fzf \
+  --ro-bind ~/.local/bin ~/.local/bin \
+  --ro-bind ~/.local/share/pipx ~/.local/share/pipx \
+  --ro-bind ~/.local/share/fnm ~/.local/share/fnm \
+  --ro-bind /var/lib/aspell /var/lib/aspell \
+  --bind ~/.rustup/tmp ~/.rustup/tmp \
+  --bind ~/.local/share/nvim ~/.local/share/nvim \
+  --bind ~/.local/share/fish ~/.local/share/fish \
+  --bind ~/.local/share/zoxide ~/.local/share/zoxide \
+  --bind ~/.config/nvim/nvim-pack-lock.json ~/.config/nvim/nvim-pack-lock.json \
+  --bind ~/.cache/nvim ~/.cache/nvim \
+  --bind ~/.clangd ~/.clangd \
+  --bind ~/.cache/clangd ~/.cache/clangd \
+  --bind ~/.cache/sccache ~/.cache/sccache \
+  --bind ~/.cargo ~/.cargo \
+  --bind ~/repos/robotx ~/repos/robotx \
+  --tmpfs /etc/ssh/ssh_config.d \
+  --setenv DEVWRAP 🪎 \
+  --chdir "$PWD" \
+  fish
+'
+
