@@ -23,7 +23,7 @@ require('lualine').setup {
             { 'filename', path = 1, },
             -- { function() return navic.get_location() end, cond = function() return navic.is_available() end }
         },
-        lualine_x = { 'branch', 'filetype' }, -- default: 'encoding', 'fileformat'
+        lualine_x = { 'filetype' }, -- default: 'encoding', 'fileformat'
         lualine_y = { 'searchcount' },        -- default: 'progress'
         lualine_z = { 'progress', 'location', 'filesize' }
     },
@@ -32,6 +32,7 @@ require('lualine').setup {
     },
     tabline = {
         lualine_a = { 'buffers', },
+        lualine_z = { 'branch' },
     }
 }
 
