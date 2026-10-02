@@ -6,6 +6,10 @@
 -- Set to 1 if you prefer a persistent traditional bottom bar.
 vim.o.cmdheight = 0
 
+-- Message display timeout (for ephemeral floating messages via UI2).
+-- The timeout was moved from ui2's msg.msg config to this vim option.
+vim.o.messagesopt = "hit-enter,history:500,timeout:3500"
+
 -- Enable and configure UI2
 require("vim._core.ui2").enable({
     enable = true,
@@ -53,15 +57,12 @@ require("vim._core.ui2").enable({
         },
 
         -- Dimension & timeout options
-        cmd = {
-            height = 0.5, -- Maximum height when expanded for multiline messages (% of lines)
-        },
+        cmd = {},
         dialog = {
             height = 0.5,
         },
         msg = {
             height = 0.4, -- Max height of the floating notification window
-            timeout = 3500, -- Ephemeral notification display time in ms
         },
         pager = {
             height = 0.85, -- Max height for pager window
