@@ -45,5 +45,5 @@ disabled = true
 [env_var.DEVWRAP]
 default = ''
 style = "bold red"
-format = "in $env_value(bold red) "
+format = "$env_value(bold red) "
 
