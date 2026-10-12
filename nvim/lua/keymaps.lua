@@ -17,6 +17,11 @@ key.set("n", "<C-d>", "<C-d>zz", { silent = true, desc = "<C-d>zz" })
 key.set("n", "n", "nzzzv", { silent = true, desc = "nzz" })
 key.set("n", "N", "Nzzzv", { silent = true, desc = "Nzz" })
 
+key.set("n", "]c", "]czz", { silent = true, desc = "]c" })
+key.set("n", "[c", "[czz", { silent = true, desc = "[c" })
+key.set("n", "]x", "]xzz", { silent = true, desc = "]x" })
+key.set("n", "[x", "[xzz", { silent = true, desc = "[x" })
+
 -- vim maximizer
 key.set("n", "<C-f>", ":MaximizerToggle<CR>", { silent = true, desc = "MaximizerToggle" })
 key.set("v", "<C-f>", ":MaximizerToggle<CR>gv", { silent = true, desc = "MaximizerToggle" })
