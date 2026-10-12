@@ -295,8 +295,17 @@ for_window [app_id="^.*"] inhibit_idle fullscreen
 for_window [class="^.*"] inhibit_idle fullscreen
 
 # Borders
-default_border pixel 2
+default_border pixel 1
 default_floating_border normal 4
+
+# Catppuccin Macchiato window colors
+# class                 border  bground text    indicator child_border
+client.focused          #b7bdf8 #24273a #cad3f5 #b7bdf8   #b7bdf8
+client.focused_inactive #363a4f #1e2030 #8087a2 #363a4f   #363a4f
+client.unfocused        #1e2030 #181926 #6e738d #1e2030   #1e2030
+client.urgent           #ed8796 #181926 #cad3f5 #ed8796   #ed8796
+client.placeholder      #181926 #181926 #cad3f5 #181926   #181926
+client.background       #24273a
 
 # floating windows
 for_window [window_type="dialog"] floating enable, move position center

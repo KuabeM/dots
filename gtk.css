@@ -1,17 +1,8 @@
-.window-frame, .window-frame:backdrop {
-    border: 10px solid #0000FF;
-}
-
-.header-bar {
-    border: 10px solid #0000FF;
-}
-
-/** Some apps use titlebar class and some window */
+/** Catppuccin Macchiato GTK window borders **/
 .titlebar, decoration-overlay, window:focus-within {
-    border: 2px solid #285577;
+    border: 1px solid #b7bdf8;
 }
 
 window:not(:focus-within) {
-    border: 2px solid #FAFAFB;
+    border: 1px solid #363a4f;
 }
-

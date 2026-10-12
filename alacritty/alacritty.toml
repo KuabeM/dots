@@ -77,6 +77,6 @@ history = 100000
 save_to_clipboard = true
 
 [window.padding]
-x = 0
-y = 0
+x = 4
+y = 1
 

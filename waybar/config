@@ -61,9 +61,9 @@
                     "weeks-pos"     : "right",
                     "on-scroll"     : 1,
                     "format": {
-                              "weeks":      "<span color='#99ffdd'>W{:%V}</span>",
-                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                              "today":      "<span color='#ff6699'><b>{}</b></span>"
+                              "weeks":      "<span color='#8bd5ca'>W{:%V}</span>",
+                              "weekdays":   "<span color='#eed49f'><b>{}</b></span>",
+                              "today":      "<span color='#f5bde6'><b>{}</b></span>"
                               }
                     },
         "actions":  {
