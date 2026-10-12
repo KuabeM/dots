@@ -148,6 +148,7 @@ function dev
       --unshare-pid \
       --bind "$XDG_RUNTIME_DIR/gcr/ssh" "$XDG_RUNTIME_DIR/gcr/ssh" \
       --bind "$XDG_RUNTIME_DIR/wayland-1" "$XDG_RUNTIME_DIR/wayland-1" \
+      --ro-bind "$XDG_RUNTIME_DIR/bus" "$XDG_RUNTIME_DIR/bus" \
       --ro-bind ~/.bashrc ~/.bashrc \
       --ro-bind ~/.profile ~/.profile \
       --ro-bind ~/.gitconfig ~/.gitconfig \
@@ -170,11 +171,16 @@ function dev
       --bind ~/.local/share/zoxide ~/.local/share/zoxide \
       --bind ~/.config/nvim/nvim-pack-lock.json ~/.config/nvim/nvim-pack-lock.json \
       --bind ~/.cache/nvim ~/.cache/nvim \
-      --bind ~/.clangd ~/.clangd \
       --bind ~/.cache/clangd ~/.cache/clangd \
       --bind ~/.cache/sccache ~/.cache/sccache \
+      --bind ~/.cache/opencode/ ~/.cache/opencode/ \
       --bind ~/.cargo ~/.cargo \
       --bind ~/repos/ ~/repos/ \
+      --bind ~/.clangd ~/.clangd \
+      --bind ~/.opencode/ ~/.opencode \
+      --bind ~/.local/share/opencode/ ~/.local/share/opencode/ \
+      --bind ~/.local/state/opencode/ ~/.local/state/opencode/ \
+      --bind ~/.config/opencode/ ~/.config/opencode/ \
       --tmpfs /etc/ssh/ssh_config.d \
       --setenv DEVWRAP  \
       --setenv IN_BWRAP 1 \
