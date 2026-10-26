@@ -113,7 +113,7 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "interface": "wlp*", // (Optional) To force the use of this interface
         "max-length": 30,
         "interval": 1,
         "format-wifi": "  ({signalStrength}%) {essid}",
