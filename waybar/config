@@ -114,8 +114,8 @@
     },
     "network": {
         "interface": "wlp*", // (Optional) To force the use of this interface
-        "max-length": 30,
-        "interval": 1,
+        "max-length": 25,
+        "interval": 2,
         "format-wifi": "  ({signalStrength}%) {essid}",
         "format-ethernet": "  {ipaddr}/{cidr}",
         "format-linked": "{ifname} (No IP)",
