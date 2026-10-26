@@ -57,9 +57,6 @@ exec swayidle -w \
 # nm-applet
 exec nm-applet --indicator
 
-# flameshot screenshot
-exec flameshot
-
 ### Input configuration
 #
 # Example configuration:
@@ -324,7 +321,6 @@ for_window [app_id="org.kde.ark"] floating enable
 no_focus [title="Microsoft Teams Notification"]
 for_window [window_type="notification"] move absolute position 20 px 30 px
 for_window [app_id="^chrome-.*-.*$"] shortcuts_inhibitor disable
-for_window [app_id="flameshot"] floating enable, fullscreen disable, move absolute position 0 0, border pixel 0
 
 # Mark first firefox window
 for_window [app_id="firefox" workspace="^(?!.*.*$)"] mark --add ff-first
